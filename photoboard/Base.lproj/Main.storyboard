@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
-        <!--Home Controller-->
+        <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="photoboard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" userLabel="Home View Controller" customClass="ViewController" customModule="photoboard" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -17,28 +17,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KGZ-DV-pY4">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGZ-DV-pY4">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" red="1" green="0.9701743253042483" blue="0.2648596533392128" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="KGZ-DV-pY4" secondAttribute="bottom" id="Aqp-jw-fXo"/>
+                            <constraint firstItem="KGZ-DV-pY4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Iqu-X9-ayc"/>
+                            <constraint firstItem="KGZ-DV-pY4" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="64" id="X15-ch-vvD"/>
+                            <constraint firstAttribute="trailing" secondItem="KGZ-DV-pY4" secondAttribute="trailing" id="gWi-gh-uU3"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Home Controller" id="fT9-NC-LYq">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="5dn-BW-AVN">
+                    <navigationItem key="navigationItem" title="Home Controller" id="Vjf-o3-Dfz" userLabel="Home Navigation Controller">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="iiZ-Ty-J1O">
                             <connections>
-                                <segue destination="6KZ-WD-M2a" kind="show" id="mrG-h8-oD4"/>
+                                <segue destination="6KZ-WD-M2a" kind="show" id="vtE-cc-4oM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="943" y="982"/>
+            <point key="canvasLocation" x="1151" y="1064"/>
         </scene>
-        <!--Board Controller-->
+        <!--Board View Controller-->
         <scene sceneID="CnF-IZ-9cg">
             <objects>
-                <viewController id="6KZ-WD-M2a" userLabel="Board Controller" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="board" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6KZ-WD-M2a" userLabel="Board View Controller" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hiH-6O-f7S"/>
                         <viewControllerLayoutGuide type="bottom" id="rfJ-uC-Yg9"/>
@@ -47,39 +54,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2YW-Gd-vT5">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
-                            </scrollView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MCO-k7-Vqp" userLabel="Input View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MCO-k7-Vqp" userLabel="Input View">
                                 <rect key="frame" x="0.0" y="549" width="600" height="51"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUm-vU-mvg">
-                                        <rect key="frame" x="8" y="11" width="62" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUm-vU-mvg">
+                                        <rect key="frame" x="8" y="11" width="54" height="30"/>
                                         <state key="normal" title="Camera"/>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J8f-vF-o8u">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J8f-vF-o8u">
                                         <rect key="frame" x="103" y="11" width="430" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="YUm-vU-mvg" firstAttribute="top" secondItem="MCO-k7-Vqp" secondAttribute="top" constant="11" id="HBo-Di-LO0"/>
+                                    <constraint firstAttribute="trailing" secondItem="YUm-vU-mvg" secondAttribute="trailing" constant="530" id="LCZ-OP-cpX"/>
+                                    <constraint firstItem="J8f-vF-o8u" firstAttribute="top" secondItem="MCO-k7-Vqp" secondAttribute="top" constant="11" id="LWC-19-oNk"/>
+                                    <constraint firstAttribute="trailing" secondItem="J8f-vF-o8u" secondAttribute="trailing" constant="67" id="NQI-he-j3O"/>
+                                    <constraint firstAttribute="height" constant="51" id="O6z-f3-lgr"/>
+                                    <constraint firstItem="YUm-vU-mvg" firstAttribute="leading" secondItem="MCO-k7-Vqp" secondAttribute="leading" constant="8" id="XUa-j6-mKv"/>
+                                    <constraint firstAttribute="bottom" secondItem="YUm-vU-mvg" secondAttribute="bottom" constant="10" id="cG2-Wl-Tsa"/>
+                                    <constraint firstItem="J8f-vF-o8u" firstAttribute="leading" secondItem="MCO-k7-Vqp" secondAttribute="leading" constant="103" id="uHT-Gy-B6t"/>
+                                    <constraint firstAttribute="bottom" secondItem="J8f-vF-o8u" secondAttribute="bottom" constant="10" id="ysF-Zu-9u4"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="LCZ-OP-cpX"/>
+                                    </mask>
+                                </variation>
                             </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2YW-Gd-vT5">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <color key="backgroundColor" red="0.29754026115860921" green="1" blue="0.29106826904214012" alpha="1" colorSpace="calibratedRGB"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="2YW-Gd-vT5" secondAttribute="trailing" id="INp-bl-vww"/>
+                            <constraint firstItem="MCO-k7-Vqp" firstAttribute="leading" secondItem="9wu-z9-VXe" secondAttribute="leading" id="MTs-cZ-691"/>
+                            <constraint firstAttribute="trailing" secondItem="MCO-k7-Vqp" secondAttribute="trailing" id="WBU-Xe-NUm"/>
+                            <constraint firstItem="2YW-Gd-vT5" firstAttribute="top" secondItem="9wu-z9-VXe" secondAttribute="top" constant="64" id="gWl-8i-fUx"/>
+                            <constraint firstItem="MCO-k7-Vqp" firstAttribute="top" secondItem="9wu-z9-VXe" secondAttribute="top" constant="549" id="grc-gb-ltJ"/>
+                            <constraint firstItem="2YW-Gd-vT5" firstAttribute="leading" secondItem="9wu-z9-VXe" secondAttribute="leading" id="lgo-2S-lZR"/>
+                            <constraint firstAttribute="bottom" secondItem="2YW-Gd-vT5" secondAttribute="bottom" constant="49" id="mfc-DA-HKf"/>
+                            <constraint firstItem="rfJ-uC-Yg9" firstAttribute="top" secondItem="MCO-k7-Vqp" secondAttribute="bottom" id="wgO-AR-wic"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="grc-gb-ltJ"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Boad Controller" id="qcK-6S-o6f">
+                    <navigationItem key="navigationItem" title="Boad Controller" id="qcK-6S-o6f" userLabel="Boad Navigation Controller">
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="RWN-Fn-n2y"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d2t-0M-S7T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1690" y="1048"/>
+            <point key="canvasLocation" x="1926" y="1059"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="F3U-pE-KHT">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hNW-w4-iCB" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hNW-w4-iCB" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8c9-HR-9dq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
