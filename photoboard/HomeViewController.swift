@@ -1,14 +1,14 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  photoboard
 //
 //  Created by tohrinagi on 2015/12/31.
-//  Copyright © 2015年 tohrinagi. All rights reserved.
+//  Copyright © 2016 tohrinagi. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

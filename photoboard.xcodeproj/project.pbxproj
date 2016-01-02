@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		E4F9FA2F1C35260B0016F0AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA2E1C35260B0016F0AC /* AppDelegate.swift */; };
-		E4F9FA311C35260B0016F0AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA301C35260B0016F0AC /* ViewController.swift */; };
+		E4F9FA311C35260B0016F0AC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA301C35260B0016F0AC /* HomeViewController.swift */; };
 		E4F9FA341C35260B0016F0AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4F9FA321C35260B0016F0AC /* Main.storyboard */; };
 		E4F9FA361C35260B0016F0AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4F9FA351C35260B0016F0AC /* Assets.xcassets */; };
 		E4F9FA391C35260B0016F0AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4F9FA371C35260B0016F0AC /* LaunchScreen.storyboard */; };
 		E4F9FA441C35260B0016F0AC /* photoboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA431C35260B0016F0AC /* photoboardTests.swift */; };
 		E4F9FA4F1C35260B0016F0AC /* photoboardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA4E1C35260B0016F0AC /* photoboardUITests.swift */; };
+		E4F9FA5D1C366E380016F0AC /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA5C1C366E380016F0AC /* BoardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +37,7 @@
 /* Begin PBXFileReference section */
 		E4F9FA2B1C35260B0016F0AC /* photoboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F9FA2E1C35260B0016F0AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E4F9FA301C35260B0016F0AC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E4F9FA301C35260B0016F0AC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E4F9FA331C35260B0016F0AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E4F9FA351C35260B0016F0AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4F9FA381C35260B0016F0AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +48,7 @@
 		E4F9FA4A1C35260B0016F0AC /* photoboardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photoboardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F9FA4E1C35260B0016F0AC /* photoboardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoboardUITests.swift; sourceTree = "<group>"; };
 		E4F9FA501C35260B0016F0AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E4F9FA5C1C366E380016F0AC /* BoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +100,12 @@
 			isa = PBXGroup;
 			children = (
 				E4F9FA2E1C35260B0016F0AC /* AppDelegate.swift */,
-				E4F9FA301C35260B0016F0AC /* ViewController.swift */,
+				E4F9FA301C35260B0016F0AC /* HomeViewController.swift */,
 				E4F9FA321C35260B0016F0AC /* Main.storyboard */,
 				E4F9FA351C35260B0016F0AC /* Assets.xcassets */,
 				E4F9FA371C35260B0016F0AC /* LaunchScreen.storyboard */,
 				E4F9FA3A1C35260B0016F0AC /* Info.plist */,
+				E4F9FA5C1C366E380016F0AC /* BoardViewController.swift */,
 			);
 			path = photoboard;
 			sourceTree = "<group>";
@@ -256,8 +259,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4F9FA311C35260B0016F0AC /* ViewController.swift in Sources */,
+				E4F9FA311C35260B0016F0AC /* HomeViewController.swift in Sources */,
 				E4F9FA2F1C35260B0016F0AC /* AppDelegate.swift in Sources */,
+				E4F9FA5D1C366E380016F0AC /* BoardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
