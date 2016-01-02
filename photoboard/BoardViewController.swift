@@ -8,18 +8,15 @@
 
 import UIKit
 
-class BoardViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class BoardViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, BoardPresenterEventHandler {
+    
+    var boardPresenter = PresenterContainer.sharedInstance.boardPresenter
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        boardPresenter.eventHandler = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print(segue.debugDescription)
     }
