@@ -10,10 +10,6 @@ import UIKit
 
 class BoardViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
-    @IBAction func cameraTouchUpInsideHandler(sender: AnyObject) {
-        showUIImagePicker();
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -24,28 +20,22 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate, UII
         // Dispose of any resources that can be recreated.
     }
     
-    private func showUIImagePicker() {
-        // カメラが使用可能かどうか判定する
-        if( !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) ){
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print(segue.debugDescription)
+    }
+
+    @IBAction func cameraTouchUpInsideHandler(sender: AnyObject) {
+        guard !CameraControllerFactory.isAvailable() else {
             return
         }
         
-        // UIImagePickerControllerのインスタンスを生成
-        let imagePickerController = UIImagePickerController()
-        
-        // デリゲートを設定
-        imagePickerController.delegate = self
-        
-        // 画像の取得先をカメラに設定
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        
-        // 画像取得後に編集するかどうか（デフォルトはNO）
-        imagePickerController.allowsEditing = false
-        
+        let cameraController = CameraControllerFactory.Generate()
+        cameraController.delegate = self
         // 撮影画面をモーダルビューとして表示する
-        self.presentViewController(imagePickerController, animated: true, completion: nil)
+        self.presentViewController(cameraController, animated: true, completion: nil)
     }
-
+    
+    
     // 画像が選択された時に呼ばれるデリゲートメソッド
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]){
         // モーダルビューを閉じる
@@ -63,6 +53,5 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate, UII
         self.dismissViewControllerAnimated(true, completion: nil)
         // キャンセルされたときの処理を記述・・・
     }
-    
 }
 

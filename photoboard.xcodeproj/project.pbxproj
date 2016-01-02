@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E46D4DCD1C37EA9000A8E12A /* CameraControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DCC1C37EA9000A8E12A /* CameraControllerFactory.swift */; };
 		E4F9FA2F1C35260B0016F0AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA2E1C35260B0016F0AC /* AppDelegate.swift */; };
 		E4F9FA311C35260B0016F0AC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA301C35260B0016F0AC /* HomeViewController.swift */; };
 		E4F9FA341C35260B0016F0AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4F9FA321C35260B0016F0AC /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E46D4DCC1C37EA9000A8E12A /* CameraControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraControllerFactory.swift; sourceTree = "<group>"; };
 		E4F9FA2B1C35260B0016F0AC /* photoboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F9FA2E1C35260B0016F0AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4F9FA301C35260B0016F0AC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +78,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E44E2D941C37CAEF00456E0E /* data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = data;
+			sourceTree = "<group>";
+		};
+		E44E2D951C37CAF500456E0E /* domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = domain;
+			sourceTree = "<group>";
+		};
+		E44E2D961C37CAFF00456E0E /* presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E4F9FA5C1C366E380016F0AC /* BoardViewController.swift */,
+				E4F9FA301C35260B0016F0AC /* HomeViewController.swift */,
+				E46D4DCC1C37EA9000A8E12A /* CameraControllerFactory.swift */,
+			);
+			name = presentation;
+			sourceTree = "<group>";
+		};
 		E4F9FA221C35260B0016F0AC = {
 			isa = PBXGroup;
 			children = (
@@ -99,13 +125,14 @@
 		E4F9FA2D1C35260B0016F0AC /* photoboard */ = {
 			isa = PBXGroup;
 			children = (
+				E44E2D961C37CAFF00456E0E /* presentation */,
+				E44E2D951C37CAF500456E0E /* domain */,
+				E44E2D941C37CAEF00456E0E /* data */,
 				E4F9FA2E1C35260B0016F0AC /* AppDelegate.swift */,
-				E4F9FA301C35260B0016F0AC /* HomeViewController.swift */,
 				E4F9FA321C35260B0016F0AC /* Main.storyboard */,
 				E4F9FA351C35260B0016F0AC /* Assets.xcassets */,
 				E4F9FA371C35260B0016F0AC /* LaunchScreen.storyboard */,
 				E4F9FA3A1C35260B0016F0AC /* Info.plist */,
-				E4F9FA5C1C366E380016F0AC /* BoardViewController.swift */,
 			);
 			path = photoboard;
 			sourceTree = "<group>";
@@ -261,6 +288,7 @@
 			files = (
 				E4F9FA311C35260B0016F0AC /* HomeViewController.swift in Sources */,
 				E4F9FA2F1C35260B0016F0AC /* AppDelegate.swift in Sources */,
+				E46D4DCD1C37EA9000A8E12A /* CameraControllerFactory.swift in Sources */,
 				E4F9FA5D1C366E380016F0AC /* BoardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,6 +516,7 @@
 				E4F9FA551C35260B0016F0AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E4F9FA561C35260B0016F0AC /* Build configuration list for PBXNativeTarget "photoboardTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +525,7 @@
 				E4F9FA581C35260B0016F0AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E4F9FA591C35260B0016F0AC /* Build configuration list for PBXNativeTarget "photoboardUITests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +534,7 @@
 				E4F9FA5B1C35260B0016F0AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

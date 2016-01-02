@@ -33,7 +33,7 @@
                     <navigationItem key="navigationItem" title="Home Controller" id="Vjf-o3-Dfz" userLabel="Home Navigation Controller">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="iiZ-Ty-J1O">
                             <connections>
-                                <segue destination="6KZ-WD-M2a" kind="show" id="vtE-cc-4oM"/>
+                                <segue destination="6KZ-WD-M2a" kind="show" identifier="Add" id="vtE-cc-4oM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
