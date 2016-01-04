@@ -21,6 +21,5 @@ class HomeViewController: UIViewController, HomePresenterEventHandler {
     func OnLoadedBoards(){
         
     }
-
 }
 

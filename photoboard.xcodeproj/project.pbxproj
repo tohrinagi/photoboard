@@ -11,10 +11,11 @@
 		E46D4DCF1C37F10000A8E12A /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DCE1C37F10000A8E12A /* HomePresenter.swift */; };
 		E46D4DD11C37F2DE00A8E12A /* BoardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DD01C37F2DE00A8E12A /* BoardPresenter.swift */; };
 		E46D4DD61C37FB3300A8E12A /* PresenterContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DD51C37FB3300A8E12A /* PresenterContainer.swift */; };
+		E48BB2731C39444800CE518A /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48BB2721C39444800CE518A /* BoardCollectionViewCell.swift */; };
+		E48BB2751C39468A00CE518A /* BoardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48BB2741C39468A00CE518A /* BoardCollectionView.swift */; };
 		E4F9FA2F1C35260B0016F0AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA2E1C35260B0016F0AC /* AppDelegate.swift */; };
 		E4F9FA311C35260B0016F0AC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA301C35260B0016F0AC /* HomeViewController.swift */; };
 		E4F9FA341C35260B0016F0AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4F9FA321C35260B0016F0AC /* Main.storyboard */; };
-		E4F9FA361C35260B0016F0AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4F9FA351C35260B0016F0AC /* Assets.xcassets */; };
 		E4F9FA391C35260B0016F0AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4F9FA371C35260B0016F0AC /* LaunchScreen.storyboard */; };
 		E4F9FA441C35260B0016F0AC /* photoboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA431C35260B0016F0AC /* photoboardTests.swift */; };
 		E4F9FA4F1C35260B0016F0AC /* photoboardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA4E1C35260B0016F0AC /* photoboardUITests.swift */; };
@@ -39,21 +40,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E41DD3DB1C3A86F600FA6F93 /* photoboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = photoboard.app; path = "/Users/tohrinagi/works/photoboard/build/Debug-iphoneos/photoboard.app"; sourceTree = "<absolute>"; };
+		E41DD3DC1C3A86F600FA6F93 /* photoboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = photoboardTests.xctest; path = "/Users/tohrinagi/works/photoboard/build/Debug-iphoneos/photoboardTests.xctest"; sourceTree = "<absolute>"; };
+		E41DD3DD1C3A86F600FA6F93 /* photoboardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = photoboardUITests.xctest; path = "/Users/tohrinagi/works/photoboard/build/Debug-iphoneos/photoboardUITests.xctest"; sourceTree = "<absolute>"; };
 		E46D4DCC1C37EA9000A8E12A /* CameraControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraControllerFactory.swift; sourceTree = "<group>"; };
 		E46D4DCE1C37F10000A8E12A /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		E46D4DD01C37F2DE00A8E12A /* BoardPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardPresenter.swift; sourceTree = "<group>"; };
 		E46D4DD51C37FB3300A8E12A /* PresenterContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterContainer.swift; sourceTree = "<group>"; };
-		E4F9FA2B1C35260B0016F0AC /* photoboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E48BB2721C39444800CE518A /* BoardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewCell.swift; sourceTree = "<group>"; };
+		E48BB2741C39468A00CE518A /* BoardCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionView.swift; sourceTree = "<group>"; };
 		E4F9FA2E1C35260B0016F0AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4F9FA301C35260B0016F0AC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E4F9FA331C35260B0016F0AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E4F9FA351C35260B0016F0AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4F9FA381C35260B0016F0AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E4F9FA3A1C35260B0016F0AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E4F9FA3F1C35260B0016F0AC /* photoboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photoboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F9FA431C35260B0016F0AC /* photoboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoboardTests.swift; sourceTree = "<group>"; };
 		E4F9FA451C35260B0016F0AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E4F9FA4A1C35260B0016F0AC /* photoboardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photoboardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F9FA4E1C35260B0016F0AC /* photoboardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoboardUITests.swift; sourceTree = "<group>"; };
 		E4F9FA501C35260B0016F0AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4F9FA5C1C366E380016F0AC /* BoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		E44E2D941C37CAEF00456E0E /* data */ = {
 			isa = PBXGroup;
 			children = (
+				E46D4DD81C38015C00A8E12A /* entity */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -94,6 +97,9 @@
 		E44E2D951C37CAF500456E0E /* domain */ = {
 			isa = PBXGroup;
 			children = (
+				E46D4DDA1C38018A00A8E12A /* repository */,
+				E46D4DD91C38016F00A8E12A /* usecase */,
+				E46D4DD71C38014F00A8E12A /* modle */,
 			);
 			name = domain;
 			sourceTree = "<group>";
@@ -122,9 +128,39 @@
 			children = (
 				E4F9FA301C35260B0016F0AC /* HomeViewController.swift */,
 				E4F9FA5C1C366E380016F0AC /* BoardViewController.swift */,
+				E48BB2741C39468A00CE518A /* BoardCollectionView.swift */,
 				E46D4DCC1C37EA9000A8E12A /* CameraControllerFactory.swift */,
+				E48BB2721C39444800CE518A /* BoardCollectionViewCell.swift */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		E46D4DD71C38014F00A8E12A /* modle */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = modle;
+			sourceTree = "<group>";
+		};
+		E46D4DD81C38015C00A8E12A /* entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = entity;
+			sourceTree = "<group>";
+		};
+		E46D4DD91C38016F00A8E12A /* usecase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = usecase;
+			sourceTree = "<group>";
+		};
+		E46D4DDA1C38018A00A8E12A /* repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = repository;
 			sourceTree = "<group>";
 		};
 		E4F9FA221C35260B0016F0AC = {
@@ -133,18 +169,7 @@
 				E4F9FA2D1C35260B0016F0AC /* photoboard */,
 				E4F9FA421C35260B0016F0AC /* photoboardTests */,
 				E4F9FA4D1C35260B0016F0AC /* photoboardUITests */,
-				E4F9FA2C1C35260B0016F0AC /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		E4F9FA2C1C35260B0016F0AC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E4F9FA2B1C35260B0016F0AC /* photoboard.app */,
-				E4F9FA3F1C35260B0016F0AC /* photoboardTests.xctest */,
-				E4F9FA4A1C35260B0016F0AC /* photoboardUITests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		E4F9FA2D1C35260B0016F0AC /* photoboard */ = {
@@ -155,7 +180,6 @@
 				E44E2D941C37CAEF00456E0E /* data */,
 				E4F9FA2E1C35260B0016F0AC /* AppDelegate.swift */,
 				E4F9FA321C35260B0016F0AC /* Main.storyboard */,
-				E4F9FA351C35260B0016F0AC /* Assets.xcassets */,
 				E4F9FA371C35260B0016F0AC /* LaunchScreen.storyboard */,
 				E4F9FA3A1C35260B0016F0AC /* Info.plist */,
 			);
@@ -197,7 +221,7 @@
 			);
 			name = photoboard;
 			productName = photoboard;
-			productReference = E4F9FA2B1C35260B0016F0AC /* photoboard.app */;
+			productReference = E41DD3DB1C3A86F600FA6F93 /* photoboard.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E4F9FA3E1C35260B0016F0AC /* photoboardTests */ = {
@@ -215,7 +239,7 @@
 			);
 			name = photoboardTests;
 			productName = photoboardTests;
-			productReference = E4F9FA3F1C35260B0016F0AC /* photoboardTests.xctest */;
+			productReference = E41DD3DC1C3A86F600FA6F93 /* photoboardTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		E4F9FA491C35260B0016F0AC /* photoboardUITests */ = {
@@ -233,7 +257,7 @@
 			);
 			name = photoboardUITests;
 			productName = photoboardUITests;
-			productReference = E4F9FA4A1C35260B0016F0AC /* photoboardUITests.xctest */;
+			productReference = E41DD3DD1C3A86F600FA6F93 /* photoboardUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -268,7 +292,7 @@
 				Base,
 			);
 			mainGroup = E4F9FA221C35260B0016F0AC;
-			productRefGroup = E4F9FA2C1C35260B0016F0AC /* Products */;
+			productRefGroup = E4F9FA221C35260B0016F0AC;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -285,7 +309,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4F9FA391C35260B0016F0AC /* LaunchScreen.storyboard in Resources */,
-				E4F9FA361C35260B0016F0AC /* Assets.xcassets in Resources */,
 				E4F9FA341C35260B0016F0AC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,8 +334,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E48BB2751C39468A00CE518A /* BoardCollectionView.swift in Sources */,
 				E4F9FA311C35260B0016F0AC /* HomeViewController.swift in Sources */,
 				E46D4DD11C37F2DE00A8E12A /* BoardPresenter.swift in Sources */,
+				E48BB2731C39444800CE518A /* BoardCollectionViewCell.swift in Sources */,
 				E46D4DD61C37FB3300A8E12A /* PresenterContainer.swift in Sources */,
 				E4F9FA2F1C35260B0016F0AC /* AppDelegate.swift in Sources */,
 				E46D4DCD1C37EA9000A8E12A /* CameraControllerFactory.swift in Sources */,
@@ -458,7 +483,6 @@
 		E4F9FA541C35260B0016F0AC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = photoboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tohrinagi.photoboard;
@@ -469,7 +493,6 @@
 		E4F9FA551C35260B0016F0AC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = photoboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tohrinagi.photoboard;
