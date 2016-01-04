@@ -8,22 +8,22 @@
 
 import UIKit
 
-class BoardViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, BoardPresenterEventHandler {
+class BoardViewController: UIViewController, UINavigationControllerDelegate {
     
     var boardPresenter = PresenterContainer.sharedInstance.boardPresenter
     var images : [UIImage] = []
-
+    
     @IBOutlet weak var boardCollectionView: BoardCollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         boardPresenter.eventHandler = self
     }
-
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print(segue.debugDescription)
     }
-
+    
     @IBAction func cameraTouchUpInsideHandler(sender: AnyObject) {
         guard !CameraControllerFactory.isAvailable() else {
             return
@@ -36,6 +36,10 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate, UII
     }
     
     
+    
+}
+
+extension BoardViewController : UIImagePickerControllerDelegate {
     // 画像が選択された時に呼ばれるデリゲートメソッド
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]){
         // モーダルビューを閉じる
@@ -55,10 +59,20 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate, UII
         }
     }
     
+    
+    // 画像の選択がキャンセルされた時に呼ばれるデリゲートメソッド
+    func imagePickerControllerDidCancel(picker: UIImagePickerController){
+        // モーダルビューを閉じる
+        self.dismissViewControllerAnimated(true, completion: nil)
+        // キャンセルされたときの処理を記述・・・
+    }
+}
+
+extension BoardViewController : UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
-
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = boardCollectionView.dequeueReusableCellWithReuseIdentifier("BoardCell", forIndexPath: indexPath) as! BoardCollectionViewCell
         
@@ -66,15 +80,12 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate, UII
         NSLog( String(indexPath.row) )
         return cell
     }
-
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
     }
+}
 
-    // 画像の選択がキャンセルされた時に呼ばれるデリゲートメソッド
-    func imagePickerControllerDidCancel(picker: UIImagePickerController){
-        // モーダルビューを閉じる
-        self.dismissViewControllerAnimated(true, completion: nil)
-        // キャンセルされたときの処理を記述・・・
-    }
+extension BoardViewController : BoardPresenterEventHandler {
+    
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, HomePresenterEventHandler {
+class HomeViewController: UIViewController {
     var presenter = PresenterContainer.sharedInstance.homePresenter
 
     override func viewDidLoad() {
@@ -17,7 +17,10 @@ class HomeViewController: UIViewController, HomePresenterEventHandler {
         presenter.loadBoards()
     }
 
-    // HomePresenterEventHandler 
+}
+
+extension HomeViewController : HomePresenterEventHandler {
+    
     func OnLoadedBoards(){
         
     }
