@@ -85,12 +85,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="10" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="thq-Z3-R9f" customClass="BoardCollectionView" customModule="photoboard">
                                 <rect key="frame" x="0.0" y="64" width="600" height="484"/>
                                 <color key="backgroundColor" red="0.0" green="0.14250775490000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="SfZ-8l-lCg" customClass="BoardCollectionViewFlowLayout" customModule="photoboard">
-                                    <size key="itemSize" width="100" height="100"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
+                                <collectionViewLayout key="collectionViewLayout" id="ffT-8W-FoY" customClass="BoardCollectionViewLayout" customModule="photoboard"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="BoardCell" reuseIdentifier="BoardCell" id="i0T-DR-pS5" customClass="BoardCollectionViewCell" customModule="photoboard">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
@@ -112,6 +107,7 @@
                                             <constraint firstItem="mDl-lb-G0x" firstAttribute="leading" secondItem="i0T-DR-pS5" secondAttribute="leading" id="hif-gv-MLH"/>
                                             <constraint firstAttribute="bottom" secondItem="mDl-lb-G0x" secondAttribute="bottom" id="rc0-M1-SUw"/>
                                         </constraints>
+                                        <size key="customSize" width="100" height="100"/>
                                         <connections>
                                             <outlet property="imageView" destination="mDl-lb-G0x" id="Sau-7Z-miR"/>
                                         </connections>
@@ -119,6 +115,7 @@
                                 </cells>
                                 <connections>
                                     <outlet property="dataSource" destination="6KZ-WD-M2a" id="IBY-fU-IJj"/>
+                                    <outlet property="delegate" destination="6KZ-WD-M2a" id="E6Z-Xb-9hg"/>
                                 </connections>
                             </collectionView>
                         </subviews>

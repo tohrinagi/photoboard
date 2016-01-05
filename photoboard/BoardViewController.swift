@@ -11,7 +11,7 @@ import UIKit
 class BoardViewController: UIViewController, UINavigationControllerDelegate {
     
     var boardPresenter = PresenterContainer.sharedInstance.boardPresenter
-    var images : [UIImage] = []
+    var images : [[UIImage]] = [[]]
     
     @IBOutlet weak var boardCollectionView: BoardCollectionView!
     
@@ -35,8 +35,8 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
         self.presentViewController(cameraController, animated: true, completion: nil)
     }
     
-    
-    
+    //TODO 確認用コード
+    var a = 0
 }
 
 extension BoardViewController : UIImagePickerControllerDelegate {
@@ -54,7 +54,12 @@ extension BoardViewController : UIImagePickerControllerDelegate {
             //UIImageWriteToSavedPhotosAlbum(image, self, @selector(targetImage:didFinishSavingWithError:contextInfo:), NULL);
             
             //TODO 本来はpresenterに投げてそのコールバックを受けて、CollectionView に通知
-            images.append(image)
+            //TODO 確認用コード
+            if images.count <= a {
+                images.append([])
+            }
+            images[a].append(image)
+            a ^= 1
             boardCollectionView.reloadData()
         }
     }
@@ -70,19 +75,19 @@ extension BoardViewController : UIImagePickerControllerDelegate {
 
 extension BoardViewController : UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return images.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = boardCollectionView.dequeueReusableCellWithReuseIdentifier("BoardCell", forIndexPath: indexPath) as! BoardCollectionViewCell
         
-        cell.imageView.image = images[indexPath.row]
+        cell.imageView.image = images[indexPath.section][indexPath.row]
         NSLog( String(indexPath.row) )
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return images[section].count
     }
 }
 
