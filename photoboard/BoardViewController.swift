@@ -11,6 +11,7 @@ import UIKit
 class BoardViewController: UIViewController, UINavigationControllerDelegate {
     
     var boardPresenter = PresenterContainer.sharedInstance.boardPresenter
+    var dragModule : DragModule? = nil
     var images : [[UIImage]] = [[]]
     
     @IBOutlet weak var boardCollectionView: BoardCollectionView!
@@ -18,6 +19,7 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         boardPresenter.eventHandler = self
+        dragModule = DragModule(collectionView: boardCollectionView)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
