@@ -14,7 +14,7 @@
 		E46D4DD61C37FB3300A8E12A /* PresenterContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DD51C37FB3300A8E12A /* PresenterContainer.swift */; };
 		E48BB2731C39444800CE518A /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48BB2721C39444800CE518A /* BoardCollectionViewCell.swift */; };
 		E48BB2751C39468A00CE518A /* BoardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48BB2741C39468A00CE518A /* BoardCollectionView.swift */; };
-		E492FE661C3C1A7300BA9784 /* DragModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492FE651C3C1A7300BA9784 /* DragModule.swift */; };
+		E492FE661C3C1A7300BA9784 /* DragCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492FE651C3C1A7300BA9784 /* DragCollectionView.swift */; };
 		E4F9FA2F1C35260B0016F0AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA2E1C35260B0016F0AC /* AppDelegate.swift */; };
 		E4F9FA311C35260B0016F0AC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA301C35260B0016F0AC /* HomeViewController.swift */; };
 		E4F9FA341C35260B0016F0AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4F9FA321C35260B0016F0AC /* Main.storyboard */; };
@@ -52,7 +52,7 @@
 		E492FE621C3BF56F00BA9784 /* photoboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E492FE631C3BF56F00BA9784 /* photoboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photoboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E492FE641C3BF56F00BA9784 /* photoboardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photoboardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E492FE651C3C1A7300BA9784 /* DragModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragModule.swift; sourceTree = "<group>"; };
+		E492FE651C3C1A7300BA9784 /* DragCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragCollectionView.swift; sourceTree = "<group>"; };
 		E4F9FA2E1C35260B0016F0AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4F9FA301C35260B0016F0AC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E4F9FA331C35260B0016F0AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 				E46D4DCC1C37EA9000A8E12A /* CameraControllerFactory.swift */,
 				E48BB2721C39444800CE518A /* BoardCollectionViewCell.swift */,
 				E41DD3E01C3AB33400FA6F93 /* BoardCollectionViewLayout.swift */,
-				E492FE651C3C1A7300BA9784 /* DragModule.swift */,
+				E492FE651C3C1A7300BA9784 /* DragCollectionView.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -350,7 +350,7 @@
 				E48BB2731C39444800CE518A /* BoardCollectionViewCell.swift in Sources */,
 				E46D4DD61C37FB3300A8E12A /* PresenterContainer.swift in Sources */,
 				E4F9FA2F1C35260B0016F0AC /* AppDelegate.swift in Sources */,
-				E492FE661C3C1A7300BA9784 /* DragModule.swift in Sources */,
+				E492FE661C3C1A7300BA9784 /* DragCollectionView.swift in Sources */,
 				E46D4DCD1C37EA9000A8E12A /* CameraControllerFactory.swift in Sources */,
 				E46D4DCF1C37F10000A8E12A /* HomePresenter.swift in Sources */,
 				E4F9FA5D1C366E380016F0AC /* BoardViewController.swift in Sources */,

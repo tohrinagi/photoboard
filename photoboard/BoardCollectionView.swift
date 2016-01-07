@@ -8,5 +8,5 @@
 
 import UIKit
 
-class BoardCollectionView : UICollectionView {
+class BoardCollectionView : DragCollectionView {
 }
