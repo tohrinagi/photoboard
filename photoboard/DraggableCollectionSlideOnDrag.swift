@@ -23,9 +23,6 @@ class DraggableCollectionSlideOnDrag {
                 return
             }
             
-            if attribute.indexPath.isEqual(collectionView.hiddenIndexPath!) {
-                attribute.hidden = true
-            }
             if attribute.indexPath.isEqual(collectionView.toIndexPath!) {
                 attribute.indexPath = NSIndexPath(forRow: collectionView.fromIndexPath!.row, inSection: collectionView.fromIndexPath!.section)
             } else if attribute.indexPath.section == collectionView.fromIndexPath!.section {
@@ -56,10 +53,6 @@ class DraggableCollectionSlideOnDrag {
                     attribute.center = collectionView.collectionViewLayout.layoutAttributesForItemAtIndexPath( attribute.indexPath)!.center
                 }
             }
-            //ダミーセルでドラッグしているため、元のセルは隠す
-            if attribute.indexPath.isEqual(collectionView.hiddenIndexPath!) {
-                attribute.hidden = true
-            }
             if attribute.indexPath.isEqual(collectionView.toIndexPath!) {
                 attribute.indexPath = NSIndexPath(forRow: collectionView.fromIndexPath!.row, inSection: collectionView.fromIndexPath!.section)
             } else if attribute.indexPath.section == collectionView.fromIndexPath!.section {
@@ -76,8 +69,18 @@ class DraggableCollectionSlideOnDrag {
             print("moveOnDragForOtherSection end row:\(attribute.indexPath.row) sec:\(attribute.indexPath.section)")
         }
         
+        //ドラッグはダミーのセルで行うので、元のセルを消す
+        //下記のtoIndex, fromIndexのガードの外なのは、長押しキャンセル時のanimateWithDurationのときセルが二重に見えるのを防ぐため
+        if collectionView.hiddenIndexPath != nil {
+            attributes.forEach({ (attribute:UICollectionViewLayoutAttributes) -> () in
+                if attribute.indexPath.isEqual(collectionView.hiddenIndexPath!) {
+                    attribute.hidden = true
+                }
+            })
+        }
         //ドラッグ中でなければ何もしない
-        guard collectionView.toIndexPath != nil && collectionView.fromIndexPath != nil && collectionView.hiddenIndexPath != nil else {
+        guard collectionView.toIndexPath != nil && collectionView.fromIndexPath != nil else {
+                print("noTo,From")
             return attributes
         }
         

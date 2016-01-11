@@ -73,7 +73,7 @@ extension BoardViewController : UIImagePickerControllerDelegate {
     }
 }
 
-extension BoardViewController : UICollectionViewDataSource, UICollectionViewDelegate {
+extension BoardViewController : DraggableCollectionDataSource, UICollectionViewDelegate {
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return images.count
     }
@@ -87,6 +87,15 @@ extension BoardViewController : UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images[section].count
+    }
+    
+    func collectionView(collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+    
+        //TODO モデルに入れ替え通知
+        let sourceImage = images[sourceIndexPath.section].removeAtIndex(sourceIndexPath.row)
+        images[destinationIndexPath.section].insert(sourceImage, atIndex: destinationIndexPath.row)
+        
+        print("srcSec:\(sourceIndexPath.section) srcRow:\(sourceIndexPath.row) -> dstSec:\(destinationIndexPath.section) dstRow:\(destinationIndexPath.row)")
     }
 }
 
