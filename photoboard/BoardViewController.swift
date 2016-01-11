@@ -21,7 +21,7 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print(segue.debugDescription)
+        //print(segue.debugDescription)
     }
     
     @IBAction func cameraTouchUpInsideHandler(sender: AnyObject) {
@@ -82,7 +82,6 @@ extension BoardViewController : UICollectionViewDataSource, UICollectionViewDele
         let cell = boardCollectionView.dequeueReusableCellWithReuseIdentifier("BoardCell", forIndexPath: indexPath) as! BoardCollectionViewCell
         
         cell.imageView.image = images[indexPath.section][indexPath.row]
-        NSLog( String(indexPath.row) )
         return cell
     }
     

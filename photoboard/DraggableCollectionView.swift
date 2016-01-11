@@ -1,5 +1,5 @@
 //
-//  DragCollectionView.swift
+//  DraggableCollectionView.swift
 //  photoboard
 //
 //  Created by tohrinagi on 2016/01/06.
@@ -8,14 +8,15 @@
 
 import UIKit
 
-class DragCollectionView : UICollectionView, UIGestureRecognizerDelegate {
+class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
     
     private var dummyCell : UIImageView?
     private var dummyCellCenter : CGPoint = CGPointZero
-    private var srcIndexPath : NSIndexPath?
-    private var dstIndexPath : NSIndexPath?
-    private var longPressGestureRecognizer : UILongPressGestureRecognizer?
-    private var panPressGestureRecognizer : UIPanGestureRecognizer?
+    var fromIndexPath : NSIndexPath?
+    var toIndexPath : NSIndexPath?
+    var hiddenIndexPath : NSIndexPath?
+    private var longPressGestureRecognizer : UILongPressGestureRecognizer!
+    private var panPressGestureRecognizer : UIPanGestureRecognizer!
     private var scrollDirection = ScrollDirection.UNKNOWN
     private var timer : CADisplayLink? = nil
     private var fingerTranslation : CGPoint = CGPointZero
@@ -30,8 +31,8 @@ class DragCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         }
         set {
             self.enabled = newValue
-            longPressGestureRecognizer!.enabled = newValue
-            panPressGestureRecognizer!.enabled = newValue
+            longPressGestureRecognizer.enabled = newValue
+            panPressGestureRecognizer.enabled = newValue
         }
     }
     
@@ -55,12 +56,20 @@ class DragCollectionView : UICollectionView, UIGestureRecognizerDelegate {
     
     private func setup() {
         longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action:"updateLongPressGesture:")
-        longPressGestureRecognizer!.delegate = self
+        longPressGestureRecognizer.delegate = self
         panPressGestureRecognizer = UIPanGestureRecognizer(target: self, action: "updatePanPressGesture:")
-        panPressGestureRecognizer!.delegate = self
+        panPressGestureRecognizer.delegate = self
         
-        self.addGestureRecognizer(longPressGestureRecognizer!)
-        self.addGestureRecognizer(panPressGestureRecognizer!)
+        self.addGestureRecognizer(longPressGestureRecognizer)
+        self.addGestureRecognizer(panPressGestureRecognizer)
+        /*
+        for gestureRecognizer in self.gestureRecognizers! {
+            if gestureRecognizer.isKindOfClass(UILongPressGestureRecognizer.self) {
+                gestureRecognizer.requireGestureRecognizerToFail(longPressGestureRecognizer)
+                break;
+            }
+        }*/
+       
     }
     
     private func createDummyCell(cell:UICollectionViewCell) -> UIImageView {
@@ -82,7 +91,7 @@ class DragCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         let numSection = self.numberOfSections() ?? 0
         for section in 0..<numSection {
             let numCell = self.numberOfItemsInSection(section) ?? 0
-            for cell in 0..<numCell {
+            for cell in 0..<numCell + 1 {
                 let indexPath = NSIndexPath(forItem: cell, inSection: section)
                 if let attribute = self.collectionViewLayout.layoutAttributesForItemAtIndexPath(indexPath) {
                     let rect = CGRect(x: attribute.center.x - attribute.size.width/2, y: attribute.center.y - attribute.size.height/2, width: attribute.size.width, height: attribute.size.height )
@@ -97,7 +106,7 @@ class DragCollectionView : UICollectionView, UIGestureRecognizerDelegate {
     
     override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer.isEqual(self.panPressGestureRecognizer) {
-            return srcIndexPath != nil
+            return fromIndexPath != nil
         }
         return true
     }
@@ -114,8 +123,9 @@ class DragCollectionView : UICollectionView, UIGestureRecognizerDelegate {
  
     func updateLongPressGesture(recognizer : UILongPressGestureRecognizer) {
         
-        let point: CGPoint = recognizer.locationInView(self)
-        guard let indexPath = calculateIndexPath(point) else {
+        //let point: CGPoint = recognizer.locationInView(self)
+        //guard let indexPath = calculateIndexPath(point) else {
+        guard let indexPath = self.indexPathForItemAtPoint(recognizer.locationInView(self)) else {
             return
         }
         
@@ -124,35 +134,45 @@ class DragCollectionView : UICollectionView, UIGestureRecognizerDelegate {
             guard let pressedCell = self.cellForItemAtIndexPath(indexPath) else {
                 return
             }
+            
+            //ダミーセル作成
             pressedCell.highlighted = false
             dummyCell?.removeFromSuperview()
             dummyCell = createDummyCell(pressedCell)
             dummyCellCenter = (dummyCell?.center)!
-            
-            UIView.animateWithDuration(0.1, animations: { ()->Void in self.dummyCell!.transform = CGAffineTransformMakeScale(1.1, 1.1) })
             self.addSubview(dummyCell!)
+            UIView.animateWithDuration(0.1, animations: {
+                ()->Void in self.dummyCell!.transform = CGAffineTransformMakeScale(1.1, 1.1) }
+            )
             
+            fromIndexPath = indexPath
+            toIndexPath = indexPath
+            hiddenIndexPath = indexPath
             self.collectionViewLayout.invalidateLayout()
-            srcIndexPath = indexPath
             break
         case .Ended, .Cancelled:
-            guard srcIndexPath != nil else {
+            guard fromIndexPath != nil else {
                 return
             }
-            let layoutAttribute = self.layoutAttributesForItemAtIndexPath(indexPath)
-            
+            self.performBatchUpdates({
+                    ()->Void in
+                    //self.moveItemAtIndexPath(self.fromIndexPath!, toIndexPath: self.toIndexPath!)
+                    self.fromIndexPath = nil
+                    self.toIndexPath = nil
+                }, completion: nil)
+            //ダミーセルが狙ったセルに移動する処理
             UIView.animateWithDuration(0.1, animations: {
                     ()->Void in
-                    self.dummyCell!.center = (layoutAttribute?.center)!
+                    let fromAttribute = self.layoutAttributesForItemAtIndexPath(self.hiddenIndexPath!)
+                    self.dummyCell!.center = fromAttribute!.center
                     self.dummyCell!.transform = CGAffineTransformMakeScale(1.0, 1.0)
                 }, completion: {
                     (finished:Bool)->Void in
                     self.dummyCell?.removeFromSuperview()
                     self.dummyCell = nil
-                    self.srcIndexPath = nil
+                    self.hiddenIndexPath = nil
                     self.collectionViewLayout.invalidateLayout()
                 } )
-            
             self.invalidatesScrollTimer()
             break
         default:
@@ -160,7 +180,7 @@ class DragCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         }
     }
     
-    func updatePanPressGesture(recognizer:UIPanGestureRecognizer){
+    func updatePanPressGesture(recognizer:UIPanGestureRecognizer) {
         if recognizer.state == UIGestureRecognizerState.Changed {
             fingerTranslation = recognizer.translationInView(self)
             self.dummyCell?.center.x = dummyCellCenter.x + fingerTranslation.x
@@ -178,10 +198,24 @@ class DragCollectionView : UICollectionView, UIGestureRecognizerDelegate {
                 invalidatesScrollTimer()
             }
         }
-    // Avoid warping a second time while scrolling
-//        if (scrollingDirection > _ScrollingDirectionUnknown) {
-//            return
-//        }
+
+        if scrollDirection != .UNKNOWN {
+            return
+        }
+
+        if let nextToIndexPath = self.calculateIndexPath(dummyCell!.center) {
+            reflectIndexPath( nextToIndexPath)
+        }
+    }
+    
+    private func reflectIndexPath( indexPath : NSIndexPath ) {
+        
+        if toIndexPath?.isEqual( indexPath ) == false {
+            self.performBatchUpdates({()->Void in
+                self.toIndexPath = indexPath
+                self.hiddenIndexPath = indexPath
+                }, completion:nil)
+        }
     }
     
     private func invalidatesScrollTimer() {
@@ -251,8 +285,8 @@ class DragCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         self.contentOffset.x += translation.x
         self.contentOffset.y += translation.y
         
-        // Warp items while scrolling
-//        var indexPath = self.calculateIndexPath(dummyCell!.center)
-        //[self warpToIndexPath:indexPath]
+        if let nextToIndexPath = self.calculateIndexPath(dummyCell!.center) {
+            reflectIndexPath( nextToIndexPath)
+        }
     }
 }

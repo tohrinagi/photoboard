@@ -12,9 +12,11 @@
 		E46D4DCF1C37F10000A8E12A /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DCE1C37F10000A8E12A /* HomePresenter.swift */; };
 		E46D4DD11C37F2DE00A8E12A /* BoardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DD01C37F2DE00A8E12A /* BoardPresenter.swift */; };
 		E46D4DD61C37FB3300A8E12A /* PresenterContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DD51C37FB3300A8E12A /* PresenterContainer.swift */; };
+		E47657ED1C40142400B10A7E /* DraggableCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47657EC1C40142400B10A7E /* DraggableCollectionDataSource.swift */; };
+		E47657EF1C411B1F00B10A7E /* DraggableCollectionSlideOnDrag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47657EE1C411B1F00B10A7E /* DraggableCollectionSlideOnDrag.swift */; };
 		E48BB2731C39444800CE518A /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48BB2721C39444800CE518A /* BoardCollectionViewCell.swift */; };
 		E48BB2751C39468A00CE518A /* BoardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48BB2741C39468A00CE518A /* BoardCollectionView.swift */; };
-		E492FE661C3C1A7300BA9784 /* DragCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492FE651C3C1A7300BA9784 /* DragCollectionView.swift */; };
+		E492FE661C3C1A7300BA9784 /* DraggableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492FE651C3C1A7300BA9784 /* DraggableCollectionView.swift */; };
 		E4F9FA2F1C35260B0016F0AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA2E1C35260B0016F0AC /* AppDelegate.swift */; };
 		E4F9FA311C35260B0016F0AC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA301C35260B0016F0AC /* HomeViewController.swift */; };
 		E4F9FA341C35260B0016F0AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4F9FA321C35260B0016F0AC /* Main.storyboard */; };
@@ -47,12 +49,14 @@
 		E46D4DCE1C37F10000A8E12A /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		E46D4DD01C37F2DE00A8E12A /* BoardPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardPresenter.swift; sourceTree = "<group>"; };
 		E46D4DD51C37FB3300A8E12A /* PresenterContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterContainer.swift; sourceTree = "<group>"; };
+		E47657EC1C40142400B10A7E /* DraggableCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableCollectionDataSource.swift; sourceTree = "<group>"; };
+		E47657EE1C411B1F00B10A7E /* DraggableCollectionSlideOnDrag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableCollectionSlideOnDrag.swift; sourceTree = "<group>"; };
 		E48BB2721C39444800CE518A /* BoardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionViewCell.swift; sourceTree = "<group>"; };
 		E48BB2741C39468A00CE518A /* BoardCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCollectionView.swift; sourceTree = "<group>"; };
 		E492FE621C3BF56F00BA9784 /* photoboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E492FE631C3BF56F00BA9784 /* photoboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photoboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E492FE641C3BF56F00BA9784 /* photoboardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photoboardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E492FE651C3C1A7300BA9784 /* DragCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragCollectionView.swift; sourceTree = "<group>"; };
+		E492FE651C3C1A7300BA9784 /* DraggableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableCollectionView.swift; sourceTree = "<group>"; };
 		E4F9FA2E1C35260B0016F0AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4F9FA301C35260B0016F0AC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E4F9FA331C35260B0016F0AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -90,6 +94,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E400E37F1C435FD20042A08F /* DraggableCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				E492FE651C3C1A7300BA9784 /* DraggableCollectionView.swift */,
+				E47657EC1C40142400B10A7E /* DraggableCollectionDataSource.swift */,
+				E47657EE1C411B1F00B10A7E /* DraggableCollectionSlideOnDrag.swift */,
+			);
+			name = DraggableCollectionView;
+			sourceTree = "<group>";
+		};
 		E44E2D941C37CAEF00456E0E /* data */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,13 +144,13 @@
 		E46D4DD41C37F93600A8E12A /* view */ = {
 			isa = PBXGroup;
 			children = (
+				E400E37F1C435FD20042A08F /* DraggableCollectionView */,
 				E4F9FA301C35260B0016F0AC /* HomeViewController.swift */,
 				E4F9FA5C1C366E380016F0AC /* BoardViewController.swift */,
 				E48BB2741C39468A00CE518A /* BoardCollectionView.swift */,
 				E46D4DCC1C37EA9000A8E12A /* CameraControllerFactory.swift */,
 				E48BB2721C39444800CE518A /* BoardCollectionViewCell.swift */,
 				E41DD3E01C3AB33400FA6F93 /* BoardCollectionViewLayout.swift */,
-				E492FE651C3C1A7300BA9784 /* DragCollectionView.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -344,13 +358,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				E48BB2751C39468A00CE518A /* BoardCollectionView.swift in Sources */,
+				E47657EF1C411B1F00B10A7E /* DraggableCollectionSlideOnDrag.swift in Sources */,
+				E47657ED1C40142400B10A7E /* DraggableCollectionDataSource.swift in Sources */,
 				E4F9FA311C35260B0016F0AC /* HomeViewController.swift in Sources */,
 				E41DD3E11C3AB33400FA6F93 /* BoardCollectionViewLayout.swift in Sources */,
 				E46D4DD11C37F2DE00A8E12A /* BoardPresenter.swift in Sources */,
 				E48BB2731C39444800CE518A /* BoardCollectionViewCell.swift in Sources */,
 				E46D4DD61C37FB3300A8E12A /* PresenterContainer.swift in Sources */,
 				E4F9FA2F1C35260B0016F0AC /* AppDelegate.swift in Sources */,
-				E492FE661C3C1A7300BA9784 /* DragCollectionView.swift in Sources */,
+				E492FE661C3C1A7300BA9784 /* DraggableCollectionView.swift in Sources */,
 				E46D4DCD1C37EA9000A8E12A /* CameraControllerFactory.swift in Sources */,
 				E46D4DCF1C37F10000A8E12A /* HomePresenter.swift in Sources */,
 				E4F9FA5D1C366E380016F0AC /* BoardViewController.swift in Sources */,

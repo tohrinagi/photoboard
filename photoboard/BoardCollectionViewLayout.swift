@@ -12,6 +12,11 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
     
     var minimumInteritemSpacing: CGSize = CGSize(width: 0, height: 0)
     var itemSize: CGSize = CGSize(width: 200, height: 200)
+    lazy var moveOnDrag : DraggableCollectionSlideOnDrag? = {
+        ()->DraggableCollectionSlideOnDrag in
+        let draggableCollectionView = self.collectionView as! DraggableCollectionView
+        return DraggableCollectionSlideOnDrag(collectionView: draggableCollectionView)
+    }()
     
     override init() {
         super.init()
@@ -80,6 +85,6 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
                 }
             }
         }
-        return attributes
+        return moveOnDrag?.layoutAttributesForElementsInRectOnDrag( attributes ) ?? attributes
     }
 }
