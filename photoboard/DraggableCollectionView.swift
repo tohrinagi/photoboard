@@ -15,6 +15,7 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
     var fromIndexPath : NSIndexPath?
     var toIndexPath : NSIndexPath?
     var hiddenIndexPath : NSIndexPath?
+    var isEmptySection : Bool = false
     private var longPressGestureRecognizer : UILongPressGestureRecognizer!
     private var panPressGestureRecognizer : UIPanGestureRecognizer!
     private var scrollDirection = ScrollDirection.UNKNOWN
@@ -87,12 +88,29 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         return imageView
     }
     
-    private func calculateIndexPath( point : CGPoint ) -> NSIndexPath? {
+    private func indexPathForExistingItemAtPoint( point : CGPoint ) -> NSIndexPath? {
         let numSection = self.numberOfSections() ?? 0
         for section in 0..<numSection {
             let numCell = self.numberOfItemsInSection(section) ?? 0
             for cell in 0..<numCell {
                 let indexPath = NSIndexPath(forItem: cell, inSection: section)
+                if let attribute = self.collectionViewLayout.layoutAttributesForItemAtIndexPath(indexPath) {
+                    let rect = CGRect(x: attribute.center.x - attribute.size.width/2, y: attribute.center.y - attribute.size.height/2, width: attribute.size.width, height: attribute.size.height )
+                    if CGRectContainsPoint( rect, point ) {
+                        return indexPath
+                    }
+                }
+            }
+        }
+        return nil
+    }
+    
+    private func indexPathForEmptySectionAtPoint( point : CGPoint ) -> NSIndexPath? {
+        let numSection = self.numberOfSections() ?? 0
+        for section in 0..<numSection {
+            let numCell = self.numberOfItemsInSection(section) ?? 0
+            if numCell == 0 {
+                let indexPath = NSIndexPath(forItem: 0, inSection: section)
                 if let attribute = self.collectionViewLayout.layoutAttributesForItemAtIndexPath(indexPath) {
                     let rect = CGRect(x: attribute.center.x - attribute.size.width/2, y: attribute.center.y - attribute.size.height/2, width: attribute.size.width, height: attribute.size.height )
                     if CGRectContainsPoint( rect, point ) {
@@ -153,7 +171,7 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
             }
             // Tell the data source to move the item
             if let dataSource = self.dataSource as? DraggableCollectionDataSource {
-                dataSource.collectionView(self, moveItemAtIndexPath: fromIndexPath!, toIndexPath:toIndexPath!)
+                dataSource.collectionView!(self, moveItemAtIndexPath: fromIndexPath!, toIndexPath:toIndexPath!)
             }
             
             self.performBatchUpdates({
@@ -207,14 +225,17 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
             return
         }
 
-        if let nextToIndexPath = self.calculateIndexPath(dummyCell!.center) {
-            reflectIndexPath( nextToIndexPath)
+        if let nextToIndexPath = self.indexPathForExistingItemAtPoint(dummyCell!.center) {
+            reflectIndexPath( nextToIndexPath, isEmptySection: false)
+        } else if let nextToIndexPath = self.indexPathForEmptySectionAtPoint(dummyCell!.center) {
+            reflectIndexPath( nextToIndexPath, isEmptySection: true)
         }
     }
     
-    private func reflectIndexPath( indexPath : NSIndexPath ) {
+    private func reflectIndexPath( indexPath : NSIndexPath, isEmptySection : Bool ) {
         
         if toIndexPath?.isEqual( indexPath ) == false {
+            self.isEmptySection = isEmptySection
             self.performBatchUpdates({()->Void in
                 self.toIndexPath = indexPath
                 self.hiddenIndexPath = indexPath
@@ -289,8 +310,10 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         self.contentOffset.x += translation.x
         self.contentOffset.y += translation.y
         
-        if let nextToIndexPath = self.calculateIndexPath(dummyCell!.center) {
-            reflectIndexPath( nextToIndexPath)
+        if let nextToIndexPath = self.indexPathForExistingItemAtPoint(dummyCell!.center) {
+            reflectIndexPath( nextToIndexPath, isEmptySection: false)
+        } else if let nextToIndexPath = self.indexPathForEmptySectionAtPoint(dummyCell!.center) {
+            reflectIndexPath( nextToIndexPath, isEmptySection: true)
         }
     }
 }

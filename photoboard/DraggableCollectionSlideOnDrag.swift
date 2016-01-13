@@ -68,6 +68,41 @@ class DraggableCollectionSlideOnDrag {
             }
             print("moveOnDragForOtherSection end row:\(attribute.indexPath.row) sec:\(attribute.indexPath.section)")
         }
+        func moveOnDragForEmptySection( attribute :UICollectionViewLayoutAttributes, lastFromIndexPath :NSIndexPath ) {
+        
+            guard attribute.representedElementCategory == UICollectionElementCategory.Cell else {
+                return
+            }
+            print("to row:\(collectionView.toIndexPath!.row) sec:\(collectionView.toIndexPath!.section)")
+            print("from row:\(collectionView.fromIndexPath!.row) sec:\(collectionView.fromIndexPath!.section)")
+            print("hide row:\(collectionView.hiddenIndexPath!.row) sec:\(collectionView.hiddenIndexPath!.section)")
+            print("last row:\(lastFromIndexPath.row) sec:\(lastFromIndexPath.section)")
+            print("moveOnDragForOtherSection row:\(attribute.indexPath.row) sec:\(attribute.indexPath.section)")
+            //単純にIndexPathを書き換えるとSectionごとのアイテム数が合わなくなりエラーになる。
+            //そのため移動元セクションのセルを移動先セクションへ移動する
+            if attribute.indexPath.isEqual(lastFromIndexPath) {
+                let numRowOfToIndex = collectionView.numberOfItemsInSection( collectionView.toIndexPath!.section )
+                attribute.indexPath = NSIndexPath(forRow: numRowOfToIndex, inSection: collectionView.toIndexPath!.section)
+                attribute.hidden = true
+                if attribute.indexPath.row != 0 {
+                    attribute.center = collectionView.collectionViewLayout.layoutAttributesForItemAtIndexPath( attribute.indexPath)!.center
+                }
+            }
+            if attribute.indexPath.isEqual(collectionView.toIndexPath!) {
+                attribute.indexPath = NSIndexPath(forRow: collectionView.fromIndexPath!.row, inSection: collectionView.fromIndexPath!.section)
+            } else if attribute.indexPath.section == collectionView.fromIndexPath!.section {
+            //移動元のセクションはそこを詰める
+                if attribute.indexPath.row >= collectionView.fromIndexPath!.row {
+                    attribute.indexPath = NSIndexPath(forItem: attribute.indexPath.row+1, inSection: attribute.indexPath.section)
+                }
+            } else if attribute.indexPath.section == collectionView.toIndexPath!.section {
+            //移動先のセクションは挿入するため１つずつずらす
+                if attribute.indexPath.row >= collectionView.toIndexPath!.row {
+                    attribute.indexPath = NSIndexPath(forRow: attribute.indexPath.row-1, inSection: attribute.indexPath.section)
+                }
+            }
+            print("moveOnDragForOtherSection end row:\(attribute.indexPath.row) sec:\(attribute.indexPath.section)")
+        }
         
         //ドラッグはダミーのセルで行うので、元のセルを消す
         //下記のtoIndex, fromIndexのガードの外なのは、長押しキャンセル時のanimateWithDurationのときセルが二重に見えるのを防ぐため
@@ -89,13 +124,23 @@ class DraggableCollectionSlideOnDrag {
             attributes.forEach(moveOnDragForSameSection)
             return attributes
         } else {
-            //別セクションでドラッグ
-            let lastFromIndexRow = collectionView.numberOfItemsInSection(collectionView.fromIndexPath!.section)-1
-            let lastFromIndexPath = NSIndexPath(forRow: lastFromIndexRow, inSection: collectionView.fromIndexPath!.section )
-            for attribute in attributes {
-                moveOnDragForOtherSection(attribute, lastFromIndexPath: lastFromIndexPath)
+            if collectionView.isEmptySection {
+                //別セクションでドラッグ
+                let lastFromIndexRow = collectionView.numberOfItemsInSection(collectionView.fromIndexPath!.section)-1
+                let lastFromIndexPath = NSIndexPath(forRow: lastFromIndexRow, inSection: collectionView.fromIndexPath!.section )
+                for attribute in attributes {
+                    moveOnDragForEmptySection(attribute, lastFromIndexPath: lastFromIndexPath)
+                }
+                return attributes
+            } else {
+                //別セクションでドラッグ
+                let lastFromIndexRow = collectionView.numberOfItemsInSection(collectionView.fromIndexPath!.section)-1
+                let lastFromIndexPath = NSIndexPath(forRow: lastFromIndexRow, inSection: collectionView.fromIndexPath!.section )
+                for attribute in attributes {
+                    moveOnDragForOtherSection(attribute, lastFromIndexPath: lastFromIndexPath)
+                }
+                return attributes
             }
-            return attributes
         }
     }
 }

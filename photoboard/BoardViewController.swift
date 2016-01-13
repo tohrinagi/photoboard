@@ -94,7 +94,18 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
         //TODO モデルに入れ替え通知
         let sourceImage = images[sourceIndexPath.section].removeAtIndex(sourceIndexPath.row)
         images[destinationIndexPath.section].insert(sourceImage, atIndex: destinationIndexPath.row)
-        
+/*
+        if destinationIndexPath.section == images.count - 1 {
+            if images[ images.count-1].count > 0 {
+                images.append([])
+            }
+        }
+        if sourceIndexPath.section == images.count - 1 {
+            if images[ images.count-1].count == 0 {
+                images.removeAtIndex(images.count-1)
+            }
+        }
+  */      
         print("srcSec:\(sourceIndexPath.section) srcRow:\(sourceIndexPath.row) -> dstSec:\(destinationIndexPath.section) dstRow:\(destinationIndexPath.row)")
     }
 }
