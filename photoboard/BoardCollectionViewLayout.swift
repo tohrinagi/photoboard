@@ -33,7 +33,18 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
         let height = itemSize.height + minimumInteritemSpacing.height
         
         let numSection = collectionView?.numberOfSections() ?? 0
+        var sectionLength = numSection
         
+        //後ろから長さが０のセクションは詰める。
+        for section in (0..<numSection).reverse() {
+            let numCell = collectionView?.numberOfItemsInSection(section) ?? 0
+            if numCell != 0 {
+                break
+            }
+            sectionLength--
+        }
+        
+        //一番長いROWに合わせる
         var mostNumCell = 0
         for section in 0..<numSection {
             let numCell = collectionView?.numberOfItemsInSection(section) ?? 0
@@ -42,18 +53,24 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
             }
         }
         
-        var contentWidth = width * CGFloat(numSection)
+        var contentWidth = width * CGFloat(sectionLength)
         var contentHeight = height * CGFloat(mostNumCell)
         
         let bounds = collectionView?.bounds ?? CGRectZero
+        var dragHeight = height
+        var dragWidth = width
         if contentWidth < bounds.width {
             contentWidth = bounds.width
+            dragWidth = 0
         }
         if contentHeight < bounds.height {
             contentHeight = bounds.height
+            dragHeight = 0
         }
         
-        return CGSize(width: contentWidth, height: contentHeight)
+        let sizeOnNormal = CGSize(width: contentWidth, height: contentHeight)
+        let sizeOnDrag = CGSize(width: contentWidth + dragWidth, height: contentHeight + dragHeight )
+        return moveOnDrag?.collectionViewContentSizeOnDrag( sizeOnNormal, sizeOnDrag: sizeOnDrag ) ?? sizeOnNormal
     }
 
     override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {

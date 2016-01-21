@@ -15,6 +15,14 @@ class DraggableCollectionSlideOnDrag {
         self.collectionView = collectionView
     }
     
+    func collectionViewContentSizeOnDrag( sizeOnNormal :CGSize, sizeOnDrag :CGSize ) -> CGSize {
+        //ドラッグ中でなければ何もしない
+        guard collectionView.toIndexPath != nil && collectionView.fromIndexPath != nil else {
+            return sizeOnNormal
+        }
+        return sizeOnDrag
+    }
+    
     func layoutAttributesForElementsInRectOnDrag( attributes : [UICollectionViewLayoutAttributes]) -> [UICollectionViewLayoutAttributes]? {
  
         func moveOnDragForSameSection( attribute :UICollectionViewLayoutAttributes ) {
@@ -85,7 +93,6 @@ class DraggableCollectionSlideOnDrag {
         }
         //ドラッグ中でなければ何もしない
         guard collectionView.toIndexPath != nil && collectionView.fromIndexPath != nil else {
-                print("noTo,From")
             return attributes
         }
         print("toIndexPath row:\(collectionView.toIndexPath!.row) sec:\(collectionView.toIndexPath!.section)")
