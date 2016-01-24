@@ -108,6 +108,23 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
   */      
         print("srcSec:\(sourceIndexPath.section) srcRow:\(sourceIndexPath.row) -> dstSec:\(destinationIndexPath.section) dstRow:\(destinationIndexPath.row)")
     }
+    
+    func finishedMove(collectionView: UICollectionView ) {
+        print("finishedMove")
+        //TODO モデルでセクションを増やす処理
+        let last = images.count - 1
+        if images[last].count != 0 {
+            images.append([])
+        } else {
+            if last > 0 {
+                if images[last-1].count == 0 {
+                    images.removeAtIndex(last)
+                }
+            }
+        }
+        //セクションを増減させたので、リロード
+        collectionView.reloadData()
+    }
 }
 
 extension BoardViewController : BoardPresenterEventHandler {

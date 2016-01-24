@@ -157,7 +157,6 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
             guard fromIndexPath != nil else {
                 return
             }
-            // Tell the data source to move the item
             if let dataSource = self.dataSource as? DraggableCollectionDataSource {
                 dataSource.collectionView!(self, moveItemAtIndexPath: fromIndexPath!, toIndexPath:toIndexPath!)
             }
@@ -168,7 +167,7 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
                     self.fromIndexPath = nil
                     self.toIndexPath = nil
                 print("performBatchUpdates")
-                }, completion: nil)
+                }, completion:nil)
             //ダミーセルが狙ったセルに移動する処理
             UIView.animateWithDuration(0.1, animations: {
                     ()->Void in
@@ -181,7 +180,11 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
                     self.dummyCell = nil
                     self.hiddenIndexPath = nil
                     self.collectionViewLayout.invalidateLayout()
-                print("animateWithDuration")
+                    print("end animateWithDuration")
+                    if let dataSource = self.dataSource as? DraggableCollectionDataSource {
+                        dataSource.finishedMove(self)
+                    }
+                    self.collectionViewLayout.invalidateLayout()
                 } )
             self.invalidatesScrollTimer()
             break

@@ -12,4 +12,6 @@ protocol DraggableCollectionDataSource : UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+    
+    func finishedMove(collectionView: UICollectionView )
 }
