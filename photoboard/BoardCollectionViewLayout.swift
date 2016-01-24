@@ -12,10 +12,13 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
     
     var minimumInteritemSpacing: CGSize = CGSize(width: 0, height: 0)
     var itemSize: CGSize = CGSize(width: 200, height: 200)
+    lazy var draggableCollectionView : DraggableCollectionView = {
+        ()->DraggableCollectionView in
+        return self.collectionView as! DraggableCollectionView
+    }()
     lazy var moveOnDrag : DraggableCollectionSlideOnDrag? = {
         ()->DraggableCollectionSlideOnDrag in
-        let draggableCollectionView = self.collectionView as! DraggableCollectionView
-        return DraggableCollectionSlideOnDrag(collectionView: draggableCollectionView)
+        return DraggableCollectionSlideOnDrag(collectionView: self.draggableCollectionView)
     }()
     
     override init() {
@@ -26,11 +29,17 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
         super.init(coder: aDecoder)
     }
     
+    func GetSizeForItem () -> CGSize {
+        //return itemSize
+        return CGSize(width: itemSize.width * draggableCollectionView.currentScale, height: itemSize.height * draggableCollectionView.currentScale)
+    }
+    
+    
     override func collectionViewContentSize() -> CGSize {
         
         //TODO 毎回計算してくてもよい？
-        let width = itemSize.width + minimumInteritemSpacing.width
-        let height = itemSize.height + minimumInteritemSpacing.height
+        let width = GetSizeForItem().width + minimumInteritemSpacing.width
+        let height = GetSizeForItem().height + minimumInteritemSpacing.height
         
         let numSection = collectionView?.numberOfSections() ?? 0
         var sectionLength = numSection
@@ -76,12 +85,12 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
     override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
         let attributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
         
-        let width = itemSize.width + minimumInteritemSpacing.width
-        let height = itemSize.height + minimumInteritemSpacing.height
+        let width = GetSizeForItem().width + minimumInteritemSpacing.width
+        let height = GetSizeForItem().height + minimumInteritemSpacing.height
         let x = Int(width/2) + Int(width * CGFloat(indexPath.section))
         let y = Int(height/2) + Int(height * CGFloat(indexPath.row))
         attributes.center = CGPoint(x: x, y: y)
-        attributes.size = CGSize(width: itemSize.width, height: itemSize.height)
+        attributes.size = CGSize(width: GetSizeForItem().width, height: GetSizeForItem().height)
         return attributes
     }
 
@@ -95,9 +104,9 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
             for cell in 0..<numCell {
                 let indexPath = NSIndexPath(forItem: cell, inSection: section)
                 let attribute = layoutAttributesForItemAtIndexPath(indexPath)
-                let origin = CGPoint( x :attribute!.center.x - attribute!.size.width/2, y: attribute!.center.x - attribute!.size.height/2 )
+                let origin = CGPoint( x :attribute!.center.x - attribute!.size.width/2, y: attribute!.center.y - attribute!.size.height/2 )
                 let itemRect = CGRect(origin: origin, size: attribute!.size)
-                if CGRectIntersectsRect( rect, itemRect ) {
+                if rect.contains(itemRect) || rect.intersects(itemRect) {
                     attributes.append(attribute!)
                 }
             }

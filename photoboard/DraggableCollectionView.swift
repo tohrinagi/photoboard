@@ -16,23 +16,38 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
     var toIndexPath : NSIndexPath?
     var hiddenIndexPath : NSIndexPath?
     private var longPressGestureRecognizer : UILongPressGestureRecognizer!
-    private var panPressGestureRecognizer : UIPanGestureRecognizer!
+    private var dragGestureRecognizer : UIPanGestureRecognizer!
+    private var scaleRecognizer : UIPinchGestureRecognizer!
     private var scrollDirection = ScrollDirection.UNKNOWN
     private var timer : CADisplayLink? = nil
     private var fingerTranslation : CGPoint = CGPointZero
     var scrollEdgeInsets : UIEdgeInsets = UIEdgeInsetsMake(50, 50, 50, 50)
     var scrollSpeed : CGFloat = 400
+    var currentScale : CGFloat = 1.0
+    private var startedScale : CGFloat = 0
+    private var startContentOffset : CGPoint = CGPoint()
     
     
-    var enabled : Bool
+    var draggable : Bool
     {
         get {
-            return self.enabled
+            return self.draggable
         }
         set {
-            self.enabled = newValue
+            self.draggable = newValue
             longPressGestureRecognizer.enabled = newValue
-            panPressGestureRecognizer.enabled = newValue
+            dragGestureRecognizer.enabled = newValue
+        }
+    }
+    
+    var zoomable : Bool
+    {
+        get {
+            return self.zoomable
+        }
+        set {
+            self.zoomable = newValue
+            scaleRecognizer.enabled = newValue
         }
     }
     
@@ -57,11 +72,14 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
     private func setup() {
         longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action:"updateLongPressGesture:")
         longPressGestureRecognizer.delegate = self
-        panPressGestureRecognizer = UIPanGestureRecognizer(target: self, action: "updatePanPressGesture:")
-        panPressGestureRecognizer.delegate = self
+        dragGestureRecognizer = UIPanGestureRecognizer(target: self, action: "updatePanPressGesture:")
+        dragGestureRecognizer.delegate = self
+        scaleRecognizer = UIPinchGestureRecognizer(target: self, action: "updateScaleGesture:")
+        scaleRecognizer.delegate = self
         
         self.addGestureRecognizer(longPressGestureRecognizer)
-        self.addGestureRecognizer(panPressGestureRecognizer)
+        self.addGestureRecognizer(dragGestureRecognizer)
+        self.addGestureRecognizer(scaleRecognizer)
         /*
         for gestureRecognizer in self.gestureRecognizers! {
             if gestureRecognizer.isKindOfClass(UILongPressGestureRecognizer.self) {
@@ -111,7 +129,7 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
     }
     
     override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if gestureRecognizer.isEqual(self.panPressGestureRecognizer) {
+        if gestureRecognizer.isEqual(self.dragGestureRecognizer) {
             return fromIndexPath != nil
         }
         return true
@@ -119,9 +137,9 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer.isEqual(self.longPressGestureRecognizer) {
-            return otherGestureRecognizer.isEqual(self.panPressGestureRecognizer)
+            return otherGestureRecognizer.isEqual(self.dragGestureRecognizer)
         }
-        if gestureRecognizer.isEqual(self.panPressGestureRecognizer) {
+        if gestureRecognizer.isEqual(self.dragGestureRecognizer) {
             return otherGestureRecognizer.isEqual(self.longPressGestureRecognizer)
         }
         return false
@@ -218,6 +236,47 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
 
         if let nextToIndexPath = self.indexPathAtPoint(dummyCell!.center) {
             reflectIndexPath( nextToIndexPath)
+        }
+    }
+    
+    func updateScaleGesture(recognizer:UIPinchGestureRecognizer){
+        switch recognizer.state {
+        case .Began:
+            startedScale = currentScale
+            startContentOffset = contentOffset
+            print("start sclae:\(startedScale)")
+            print("start content x:\(startContentOffset.x) y:\(startContentOffset.y)")
+            return
+        case .Changed:
+            //print("contentSize w:\(contentSize.width) h:\(contentSize.height)")
+            //print("bounds w:\(bounds.size.width) h:\(bounds.size.height)")
+            let nextScale = startedScale * recognizer.scale
+            if nextScale >= 0.5 {
+                currentScale = nextScale
+                
+                //拡縮時、注視点を画面の中心にするため、
+                //contentOrigin から画面の中心へのベクトルを拡大させ、contentOffsetを求める
+                let width = (startContentOffset.x + self.bounds.size.width/2) * recognizer.scale
+                let height = (startContentOffset.y + self.bounds.size.height/2) * recognizer.scale
+                contentOffset.x = width - self.bounds.size.width/2
+                if contentOffset.x < 0 {
+                    contentOffset.x = 0
+                }
+                contentOffset.y = height - self.bounds.size.height/2
+                if contentOffset.y < 0 {
+                    contentOffset.y = 0
+                }
+                //print("sclae:\(currentScale)")
+                //print("content x:\(contentOffset.x) y:\(contentOffset.y)")
+                
+                //TODO 最小サイズ
+                self.collectionViewLayout.invalidateLayout()
+            }
+            break
+        case .Cancelled,.Ended:
+            break
+        default:
+            break
         }
     }
     
