@@ -20,7 +20,7 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
         ()->DraggableCollectionSlideOnDrag in
         return DraggableCollectionSlideOnDrag(collectionView: self.draggableCollectionView)
     }()
-    
+ 
     override init() {
         super.init()
     }
@@ -29,14 +29,24 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
         super.init(coder: aDecoder)
     }
     
+    /**
+     アイテムのサイズを返す
+     
+     - returns: アイテムのサイズ
+     */
     func GetSizeForItem () -> CGSize {
         //return itemSize
         return CGSize(width: itemSize.width * draggableCollectionView.currentScale, height: itemSize.height * draggableCollectionView.currentScale)
     }
     
     
+    /**
+     collection View のコンテンツのサイズを返す
+     override UICollectionViewLayout
+     
+     - returns: コンテンツサイズ
+     */
     override func collectionViewContentSize() -> CGSize {
-        
         //TODO 毎回計算してくてもよい？
         let width = GetSizeForItem().width + minimumInteritemSpacing.width
         let height = GetSizeForItem().height + minimumInteritemSpacing.height
@@ -82,6 +92,15 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
         return moveOnDrag?.collectionViewContentSizeOnDrag( sizeOnNormal, sizeOnDrag: sizeOnDrag ) ?? sizeOnNormal
     }
 
+    /**
+     
+     インデックスパスで指定されたCellのレイアウト情報を返す
+     override UICollectionViewLayout
+     
+     - parameter indexPath: インデックスパス
+     
+     - returns: レイアウト情報
+     */
     override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
         let attributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
         
@@ -94,6 +113,14 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
         return attributes
     }
 
+    /**
+     引数のRectで指定されたエリアに存在するCell群のレイアウト情報を返す
+     override UICollectionViewFlowLayout
+     
+     - parameter rect: 表示するセルのエリア
+     
+     - returns: 表示するセルのレイアウト情報
+     */
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var attributes: [UICollectionViewLayoutAttributes] = []
         

@@ -27,7 +27,7 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
     private var startedScale : CGFloat = 0
     private var startContentOffset : CGPoint = CGPoint()
     
-    
+    /// ドラッグ可能にするかどうか
     var draggable : Bool
     {
         get {
@@ -39,6 +39,7 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         }
     }
     
+    /// 拡大縮小可能にするかどうか
     var zoomable : Bool
     {
         get {
@@ -67,6 +68,9 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         setup()
     }
     
+    /**
+     初期化
+     */
     private func setup() {
         longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action:"updateLongPressGesture:")
         longPressGestureRecognizer.delegate = self
@@ -88,6 +92,13 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
        
     }
     
+    /**
+     ドラッグ中に動かすセルを作成する（実際の選んだセルは消えていてドラッグ中はダミーセルを動かす）
+     
+     - parameter cell: ダミーセルを作るための、コピー元
+     
+     - returns: ダミーセル
+     */
     private func createDummyCell(cell:UICollectionViewCell) -> UIImageView {
         let imageView = UIImageView(frame: cell.frame)
         
@@ -103,6 +114,15 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         return imageView
     }
     
+    /**
+     画面座標からセルのインデックスパスを取得する
+        (移動先のインデックスパスを取得するため、存在しているセル以外にも、
+        セクションの後尾＋１を見ている)
+     
+     - parameter point: 画面座標
+     
+     - returns: インデックスパス
+     */
     private func indexPathAtPoint( point : CGPoint ) -> NSIndexPath? {
         let numSection = self.numberOfSections() ?? 0
         for section in 0..<numSection {
@@ -126,6 +146,13 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         return nil
     }
     
+    /**
+     ジェスチャが認識するかを設定する
+     
+     - parameter gestureRecognizer: ジェスチャ
+     
+     - returns: trueなら動作、falseならば動かない
+     */
     override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer.isEqual(self.dragGestureRecognizer) {
             return fromIndexPath != nil
@@ -133,6 +160,14 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         return true
     }
     
+    /**
+     複数のジェスチャ動作時の競合を解消する
+     
+     - parameter gestureRecognizer:      ジェスチャ
+     - parameter otherGestureRecognizer: もう一つのジェスチャ
+     
+     - returns: trueなら動作、falseならば動かない
+     */
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer.isEqual(self.longPressGestureRecognizer) {
             return otherGestureRecognizer.isEqual(self.dragGestureRecognizer)
@@ -143,6 +178,11 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         return false
     }
  
+    /**
+     長押し時の動作
+     
+     - parameter recognizer: ジェスチャ
+     */
     func updateLongPressGesture(recognizer : UILongPressGestureRecognizer) {
         
         switch recognizer.state {
@@ -209,6 +249,11 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         }
     }
     
+    /**
+     ドラッグ時の動作
+     
+     - parameter recognizer: ジェスチャ
+     */
     func updatePanPressGesture(recognizer:UIPanGestureRecognizer) {
         if recognizer.state == UIGestureRecognizerState.Changed {
             fingerTranslation = recognizer.translationInView(self)
@@ -237,6 +282,11 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         }
     }
     
+    /**
+     ピンチ時の動作
+     
+     - parameter recognizer: ジェスチャ
+     */
     func updateScaleGesture(recognizer:UIPinchGestureRecognizer){
         switch recognizer.state {
         case .Began:
@@ -278,6 +328,11 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         }
     }
     
+    /**
+     移動先のインデックスパスを反映する
+     
+     - parameter indexPath: 移動先のインデックスパス
+     */
     private func reflectIndexPath( indexPath : NSIndexPath ) {
         
         if toIndexPath?.isEqual( indexPath ) == false {
@@ -288,6 +343,9 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         }
     }
     
+    /**
+     ドラッグ中のスクロール動作処理を停止する
+     */
     private func invalidatesScrollTimer() {
         if (timer != nil) {
             timer!.invalidate()
@@ -296,6 +354,11 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         scrollDirection = .UNKNOWN
     }
 
+    /**
+     ドラッグ中のスクロール処理を開始する
+     
+     - parameter direction: スクロール方向
+     */
     private func setupScrollTimerInDirection(direction : ScrollDirection ) {
         scrollDirection = direction
         if (timer == nil) {
@@ -304,6 +367,11 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
         }
     }
     
+    /**
+     ドラッグ中のスクロール処理
+     
+     - parameter timer: timer
+     */
     func moveScroll(timer:NSTimer) {
         guard scrollDirection != .UNKNOWN else {
             return

@@ -15,15 +15,24 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var boardCollectionView: BoardCollectionView!
     
+    /**
+     開始読み込み
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
         boardPresenter.eventHandler = self
     }
     
+    //TODO
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //print(segue.debugDescription)
     }
     
+    /**
+     「Camera」ボタンをタッチした時の呼ばれる
+     
+     - parameter sender:
+     */
     @IBAction func cameraTouchUpInsideHandler(sender: AnyObject) {
         guard !CameraControllerFactory.isAvailable() else {
             return
@@ -40,7 +49,12 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
 }
 
 extension BoardViewController : UIImagePickerControllerDelegate {
-    // 画像が選択された時に呼ばれるデリゲートメソッド
+    /**
+    画像が選択されたときによばれる
+    
+    - parameter picker: イメージ選択コントローラ
+    - parameter info: 選択したメディア情報
+    */
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]){
         // モーダルビューを閉じる
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -64,8 +78,11 @@ extension BoardViewController : UIImagePickerControllerDelegate {
         }
     }
     
+    /**
+    画像の選択がキャンセルされた時に呼ばれるデリゲートメソッド
     
-    // 画像の選択がキャンセルされた時に呼ばれるデリゲートメソッド
+    - parameter picker: イメージ選択コントローラ
+    */
     func imagePickerControllerDidCancel(picker: UIImagePickerController){
         // モーダルビューを閉じる
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -74,10 +91,27 @@ extension BoardViewController : UIImagePickerControllerDelegate {
 }
 
 extension BoardViewController : DraggableCollectionDataSource, UICollectionViewDelegate {
+    
+    /**
+     セクションの数を返す protocol DraggableCollectionDataSource
+     
+     - parameter collectionView: collectionView
+     
+     - returns: セクション数
+     */
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return images.count
     }
     
+    /**
+     インデックスパスに応じたセルを作成して返す
+     protocol DraggableCollectionDataSource
+     
+     - parameter collectionView: collectionView
+     - parameter indexPath:      セルの位置のインデックスパス
+     
+     - returns: 作成したセル
+     */
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = boardCollectionView.dequeueReusableCellWithReuseIdentifier("BoardCell", forIndexPath: indexPath) as! BoardCollectionViewCell
         
@@ -85,10 +119,27 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
         return cell
     }
     
+    /**
+     セクションに応じたアイテム数を返す
+     protocol DraggableCollectionDataSource
+    
+     - parameter collectionView: collectionView
+     - parameter section:        セクション
+     
+     - returns: 指定したセクションごとのアイテム数
+     */
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images[section].count
     }
     
+    /**
+     アイテムを移動させた時に呼ばれる
+     protocol DraggableCollectionDataSource
+     
+     - parameter collectionView:       collectionView
+     - parameter sourceIndexPath:      移動元
+     - parameter destinationIndexPath: 移動先
+     */
     func collectionView(collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
     
         //TODO モデルに入れ替え通知
@@ -108,7 +159,13 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
   */      
         print("srcSec:\(sourceIndexPath.section) srcRow:\(sourceIndexPath.row) -> dstSec:\(destinationIndexPath.section) dstRow:\(destinationIndexPath.row)")
     }
-    
+ 
+    /**
+     移動完了した時に呼ばれる
+     protocol DraggableCollectionDataSource
+     
+     - parameter collectionView: collectionView
+     */
     func finishedMove(collectionView: UICollectionView ) {
         print("finishedMove")
         //TODO モデルでセクションを増やす処理

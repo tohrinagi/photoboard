@@ -15,6 +15,15 @@ class DraggableCollectionSlideOnDrag {
         self.collectionView = collectionView
     }
     
+    /**
+     ドラッグ中のコンテンツサイズを修正する処理
+        UICollectionViewLayoutなどのcollectionViewContentSize中で呼ぶ必要がある
+     
+     - parameter sizeOnNormal: 通常時のサイズ
+     - parameter sizeOnDrag:   ドラッグ時のサイズ
+     
+     - returns: 状況に応じたサイズ
+     */
     func collectionViewContentSizeOnDrag( sizeOnNormal :CGSize, sizeOnDrag :CGSize ) -> CGSize {
         //ドラッグ中でなければ何もしない
         guard collectionView.toIndexPath != nil && collectionView.fromIndexPath != nil else {
@@ -22,7 +31,15 @@ class DraggableCollectionSlideOnDrag {
         }
         return sizeOnDrag
     }
-    
+
+    /**
+     ドラッグ処理のために、セルの位置を入れ替えたる処理を追加する
+        UICollectionViewLayoutなどのlayoutAttributesForElementsInRect中で呼ぶ必要がある
+     
+     - parameter attributes: 通常のアトリビュート
+     
+     - returns: ドラッグ処理用のアトリビュート
+     */
     func layoutAttributesForElementsInRectOnDrag( attributes : [UICollectionViewLayoutAttributes]) -> [UICollectionViewLayoutAttributes]? {
  
         func moveOnDragForSameSection( attribute :UICollectionViewLayoutAttributes ) {

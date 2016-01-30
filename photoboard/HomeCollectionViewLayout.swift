@@ -26,6 +26,9 @@ class HomeCollectionViewLayout : UICollectionViewFlowLayout {
         super.init(coder: aDecoder)
     }
     
+    /**
+     レイアウト計算準備に呼ばれる override UICollectionViewFlowLayout
+     */
     override func prepareLayout() {
         self.itemSize.height = 100;
         self.itemSize.width = draggableCollectionView.bounds.width
@@ -33,6 +36,14 @@ class HomeCollectionViewLayout : UICollectionViewFlowLayout {
         draggableCollectionView.zoomable = false
     }
     
+    /**
+     引数のRectで指定されたエリアに存在するCell群のレイアウト情報を返す
+     override UICollectionViewFlowLayout
+     
+     - parameter rect: 表示するセルのエリア
+     
+     - returns: 表示するセルのレイアウト情報
+     */
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let attributes = super.layoutAttributesForElementsInRect(rect)
         return moveOnDrag?.layoutAttributesForElementsInRectOnDrag( attributes! ) ?? attributes

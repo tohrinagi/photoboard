@@ -10,7 +10,11 @@ import UIKit
 
 class CameraControllerFactory {
     
-    // カメラが使用可能か調べる
+    /**
+    カメラが使用可能が調べる
+    
+    - returns: trueで使用可能、falseで不可
+    */
     class func isAvailable() -> Bool {
         if( !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) ){
             return true
@@ -18,6 +22,11 @@ class CameraControllerFactory {
         return false
     }
 
+    /**
+     UiImagePickerController を設定して返す
+     
+     - returns: UIImagePickerController
+     */
     class func Generate() -> UIImagePickerController {
         // UIImagePickerControllerのインスタンスを生成
         let imagePickerController = UIImagePickerController()

@@ -6,6 +6,7 @@
 //  Copyright © 2016年 tohrinagi. All rights reserved.
 //
 
+/// Presenterを格納しておくクラス
 class PresenterContainer {
     class var sharedInstance : PresenterContainer {
         struct Static {

@@ -14,7 +14,9 @@ protocol HomePresenterEventHandler: class {
 class HomePresenter {
     weak var eventHandler: HomePresenterEventHandler?
     
-    ///ボードを複数読み込む
+    /**
+     ボード情報を読み込む
+     */
     func loadBoards(){
         //todo
         eventHandler?.OnLoadedBoards()
