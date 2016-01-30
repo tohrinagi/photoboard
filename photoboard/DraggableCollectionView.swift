@@ -31,10 +31,9 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
     var draggable : Bool
     {
         get {
-            return self.draggable
+            return longPressGestureRecognizer.enabled
         }
         set {
-            self.draggable = newValue
             longPressGestureRecognizer.enabled = newValue
             dragGestureRecognizer.enabled = newValue
         }
@@ -43,10 +42,9 @@ class DraggableCollectionView : UICollectionView, UIGestureRecognizerDelegate {
     var zoomable : Bool
     {
         get {
-            return self.zoomable
+            return scaleRecognizer.enabled
         }
         set {
-            self.zoomable = newValue
             scaleRecognizer.enabled = newValue
         }
     }

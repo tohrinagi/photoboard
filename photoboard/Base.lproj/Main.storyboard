@@ -8,7 +8,7 @@
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" userLabel="Home View Controller" customClass="HomeViewController" customModule="photoboard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="home" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" userLabel="Home View Controller" customClass="HomeViewController" customModule="photoboard" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -17,17 +17,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGZ-DV-pY4">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GVQ-Xc-dqQ" customClass="HomeCollectionView" customModule="photoboard">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                                <color key="backgroundColor" red="1" green="0.9701743253042483" blue="0.2648596533392128" alpha="1" colorSpace="calibratedRGB"/>
-                            </scrollView>
+                                <collectionViewLayout key="collectionViewLayout" id="Ziz-zq-U08" customClass="HomeCollectionViewLayout" customModule="photoboard"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="HomeCell" reuseIdentifier="HomeCell" id="SV1-gy-ffp" userLabel="Home Collection View Cell" customClass="HomeCollectionViewCell" customModule="photoboard">
+                                        <rect key="frame" x="2" y="0.0" width="596" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="596" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S1Z-u0-sbE">
+                                                    <rect key="frame" x="0.0" y="0.0" width="596" height="100"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="S1Z-u0-sbE" firstAttribute="leading" secondItem="SV1-gy-ffp" secondAttribute="leading" id="FZw-jj-hx8"/>
+                                            <constraint firstAttribute="trailing" secondItem="S1Z-u0-sbE" secondAttribute="trailing" id="JOc-I0-Nfs"/>
+                                            <constraint firstAttribute="bottom" secondItem="S1Z-u0-sbE" secondAttribute="bottom" id="aNj-nc-fwh"/>
+                                            <constraint firstItem="S1Z-u0-sbE" firstAttribute="top" secondItem="SV1-gy-ffp" secondAttribute="top" id="i04-rn-TqX"/>
+                                        </constraints>
+                                        <size key="customSize" width="596" height="100"/>
+                                        <connections>
+                                            <outlet property="imageView" destination="S1Z-u0-sbE" id="57E-JX-pxF"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Z38-38-BQJ"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="2Q1-xZ-9xa"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="KGZ-DV-pY4" secondAttribute="bottom" id="Aqp-jw-fXo"/>
-                            <constraint firstItem="KGZ-DV-pY4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Iqu-X9-ayc"/>
-                            <constraint firstItem="KGZ-DV-pY4" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="64" id="X15-ch-vvD"/>
-                            <constraint firstAttribute="trailing" secondItem="KGZ-DV-pY4" secondAttribute="trailing" id="gWi-gh-uU3"/>
+                            <constraint firstAttribute="trailing" secondItem="GVQ-Xc-dqQ" secondAttribute="trailing" id="Dgq-q0-SxD"/>
+                            <constraint firstItem="GVQ-Xc-dqQ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="M4M-AZ-dO2"/>
+                            <constraint firstItem="GVQ-Xc-dqQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Vl4-E8-KYT"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="GVQ-Xc-dqQ" secondAttribute="bottom" id="ewf-0G-7QV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home Controller" id="Vjf-o3-Dfz" userLabel="Home Navigation Controller">
@@ -37,6 +67,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="homeCollectionView" destination="GVQ-Xc-dqQ" id="ry1-Dz-p9W"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -45,7 +78,7 @@
         <!--Board View Controller-->
         <scene sceneID="CnF-IZ-9cg">
             <objects>
-                <viewController storyboardIdentifier="board" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6KZ-WD-M2a" userLabel="Board View Controller" customClass="BoardViewController" customModule="photoboard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="board" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6KZ-WD-M2a" userLabel="Board View Controller" customClass="BoardViewController" customModule="photoboard" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hiH-6O-f7S"/>
                         <viewControllerLayoutGuide type="bottom" id="rfJ-uC-Yg9"/>
