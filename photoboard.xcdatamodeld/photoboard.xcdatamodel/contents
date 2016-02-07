@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
     <entity name="BoardBodyEntity" representedClassName=".BoardBodyEntity" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="boardPhotos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BoardPhotoEntity" inverseName="boardbody" inverseEntity="BoardPhotoEntity" syncable="YES"/>
+        <relationship name="info" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BoardInfoEntity" inverseName="body" inverseEntity="BoardInfoEntity" syncable="YES"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BoardPhotoEntity" inverseName="body" inverseEntity="BoardPhotoEntity" syncable="YES"/>
     </entity>
     <entity name="BoardInfoEntity" representedClassName=".BoardInfoEntity" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" defaultDateTimeInterval="476531700" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="row" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" maxValueString="32" defaultValueString="&quot;&quot;" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" defaultDateTimeInterval="476531700" syncable="YES"/>
+        <relationship name="body" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BoardBodyEntity" inverseName="info" inverseEntity="BoardBodyEntity" syncable="YES"/>
     </entity>
     <entity name="BoardPhotoEntity" representedClassName=".BoardPhotoEntity" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="row" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="section" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="boardbody" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BoardBodyEntity" inverseName="boardPhotos" inverseEntity="BoardBodyEntity" syncable="YES"/>
+        <relationship name="body" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BoardBodyEntity" inverseName="photos" inverseEntity="BoardBodyEntity" syncable="YES"/>
     </entity>
     <elements>
         <element name="BoardBodyEntity" positionX="-2448" positionY="-1089" width="128" height="73"/>
-        <element name="BoardInfoEntity" positionX="-2484" positionY="-1270" width="128" height="120"/>
-        <element name="BoardPhotoEntity" positionX="-2241" positionY="-1128" width="171" height="118"/>
+        <element name="BoardInfoEntity" positionX="-2484" positionY="-1270" width="128" height="118"/>
+        <element name="BoardPhotoEntity" positionX="-2241" positionY="-1128" width="171" height="103"/>
     </elements>
 </model>
