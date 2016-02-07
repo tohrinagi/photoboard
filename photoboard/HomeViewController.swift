@@ -21,7 +21,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.eventHandler = self
-        presenter.loadBoards()
+        //TODO ここで読むと戻ってきた時も読み込むのでは
+        presenter.loadBoardInfoList()
         
         //TODO
         if let image = UIImage(named: "cat.jpg") {
@@ -29,6 +30,19 @@ class HomeViewController: UIViewController {
         }
     }
 
+    /**
+     次 ViewController の準備
+     
+     - parameter segue:  セグエ
+     - parameter sender: sender
+     */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //Segueの特定
+        if segue.identifier == "Add" {
+            let nextViewController = segue.destinationViewController as! BoardViewController;
+            nextViewController.setupForNew()
+        }
+    }
 }
 
 extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDelegate {
@@ -98,6 +112,11 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
 
 extension HomeViewController : HomePresenterEventHandler {
     
-    func OnLoadedBoards(){
+    func OnLoadedBoards(boardInfList: BoardInfoList) {
+        //images = []
+        for _ in boardInfList.items {
+            //let image = UIImage(named: item.)
+            //images.append(image)
+        }
     }
 }

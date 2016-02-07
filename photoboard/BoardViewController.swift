@@ -15,12 +15,29 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var boardCollectionView: BoardCollectionView!
     
+    
     /**
      開始読み込み
      */
     override func viewDidLoad() {
         super.viewDidLoad()
         boardPresenter.eventHandler = self
+        print("viewDidLoad")
+    }
+    
+    /**
+     新しく作成した時のセットアップ
+     */
+    func setupForNew(){
+        print("setupForNew")
+    }
+    
+    /**
+     データを読み込む時のセットアップ
+     
+     - parameter boardId: ロードするboardId
+     */
+    func setupForLoad( dataId : Int ) {
     }
     
     //TODO

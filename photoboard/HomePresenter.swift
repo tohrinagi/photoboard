@@ -6,19 +6,26 @@
 //  Copyright © 2016年 tohrinagi. All rights reserved.
 //
 
-protocol HomePresenterEventHandler: class {
-    func OnLoadedBoards() -> Void
-}
+import Foundation
 
+protocol HomePresenterEventHandler: class {
+    func OnLoadedBoards(boards : BoardInfoList) -> Void
+}
 
 class HomePresenter {
     weak var eventHandler: HomePresenterEventHandler?
     
+    init(){
+    }
+    
     /**
      ボード情報を読み込む
      */
-    func loadBoards(){
-        //todo
-        eventHandler?.OnLoadedBoards()
+    func loadBoardInfoList(){
+        let task = GetBoardInfoListUseCase()
+        TaskManager.startBackground(task) {
+            (task) -> Void in
+            self.eventHandler?.OnLoadedBoards(task.boardInfoList!)
+        }
     }
 }
