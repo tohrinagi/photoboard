@@ -147,7 +147,7 @@
 				E47657EC1C40142400B10A7E /* DraggableCollectionDataSource.swift */,
 				E47657EE1C411B1F00B10A7E /* DraggableCollectionSlideOnDrag.swift */,
 			);
-			name = DraggableCollectionView;
+			path = DraggableCollectionView;
 			sourceTree = "<group>";
 		};
 		E424B0B71C5C65C100F47235 /* BoardView */ = {
@@ -158,7 +158,7 @@
 				E48BB2721C39444800CE518A /* BoardCollectionViewCell.swift */,
 				E41DD3E01C3AB33400FA6F93 /* BoardCollectionViewLayout.swift */,
 			);
-			name = BoardView;
+			path = BoardView;
 			sourceTree = "<group>";
 		};
 		E424B0B81C5C65CA00F47235 /* HomeView */ = {
@@ -169,7 +169,7 @@
 				E424B0BD1C5C6BCB00F47235 /* HomeCollectionViewLayout.swift */,
 				E424B0BF1C5C6DB200F47235 /* HomeCollectionView.swift */,
 			);
-			name = HomeView;
+			path = HomeView;
 			sourceTree = "<group>";
 		};
 		E44E2D941C37CAEF00456E0E /* data */ = {
@@ -180,7 +180,7 @@
 				E4F5087B1C63B4DE007E8065 /* mapper */,
 				E46D4DD81C38015C00A8E12A /* entity */,
 			);
-			name = data;
+			path = data;
 			sourceTree = "<group>";
 		};
 		E44E2D951C37CAF500456E0E /* domain */ = {
@@ -190,7 +190,7 @@
 				E46D4DD91C38016F00A8E12A /* usecase */,
 				E46D4DD71C38014F00A8E12A /* model */,
 			);
-			name = domain;
+			path = domain;
 			sourceTree = "<group>";
 		};
 		E44E2D961C37CAFF00456E0E /* presentation */ = {
@@ -199,7 +199,7 @@
 				E46D4DD41C37F93600A8E12A /* view */,
 				E46D4DD31C37F93000A8E12A /* presenter */,
 			);
-			name = presentation;
+			path = presentation;
 			sourceTree = "<group>";
 		};
 		E46D4DD31C37F93000A8E12A /* presenter */ = {
@@ -209,7 +209,7 @@
 				E46D4DD01C37F2DE00A8E12A /* BoardPresenter.swift */,
 				E46D4DD51C37FB3300A8E12A /* PresenterContainer.swift */,
 			);
-			name = presenter;
+			path = presenter;
 			sourceTree = "<group>";
 		};
 		E46D4DD41C37F93600A8E12A /* view */ = {
@@ -220,7 +220,7 @@
 				E400E37F1C435FD20042A08F /* DraggableCollectionView */,
 				E46D4DCC1C37EA9000A8E12A /* CameraControllerFactory.swift */,
 			);
-			name = view;
+			path = view;
 			sourceTree = "<group>";
 		};
 		E46D4DD71C38014F00A8E12A /* model */ = {
@@ -231,7 +231,7 @@
 				E48FA0321C5D208C00C88CB2 /* BoardInfo.swift */,
 				E48FA0381C5D211600C88CB2 /* BoardInfoList.swift */,
 			);
-			name = model;
+			path = model;
 			sourceTree = "<group>";
 		};
 		E46D4DD81C38015C00A8E12A /* entity */ = {
@@ -241,7 +241,7 @@
 				E42CA7A11C660E5900CA3D4C /* BoardInfoEntity.swift */,
 				E42CA7A21C660E5900CA3D4C /* BoardPhotoEntity.swift */,
 			);
-			name = entity;
+			path = entity;
 			sourceTree = "<group>";
 		};
 		E46D4DD91C38016F00A8E12A /* usecase */ = {
@@ -251,7 +251,7 @@
 				E4167ECC1C5E5FEE00BF563A /* GetBoardBodyUseCase.swift */,
 				E42CA7A61C660EA700CA3D4C /* UseCase.swift */,
 			);
-			name = usecase;
+			path = usecase;
 			sourceTree = "<group>";
 		};
 		E46D4DDA1C38018A00A8E12A /* repository */ = {
@@ -260,7 +260,7 @@
 				E4F508811C64D28C007E8065 /* BoardInfoRepository.swift */,
 				E42CA7AA1C66278100CA3D4C /* RepositoryContainer.swift */,
 			);
-			name = repository;
+			path = repository;
 			sourceTree = "<group>";
 		};
 		E48175FD1C64F3E10005AF19 /* util */ = {
@@ -268,7 +268,7 @@
 			children = (
 				E48175FE1C64F3ED0005AF19 /* task */,
 			);
-			name = util;
+			path = util;
 			sourceTree = "<group>";
 		};
 		E48175FE1C64F3ED0005AF19 /* task */ = {
@@ -277,7 +277,7 @@
 				E48FA03F1C5DC0AF00C88CB2 /* Task.swift */,
 				E48175FF1C64F4090005AF19 /* TaskManager.swift */,
 			);
-			name = task;
+			path = task;
 			sourceTree = "<group>";
 		};
 		E4AEC1391C5E5A290084F8F5 /* dataStore */ = {
@@ -286,7 +286,7 @@
 				E4B64FD31C5F9E2C0091D9DC /* BoardInfoListDataStore.swift */,
 				E4B64FD71C5FA1300091D9DC /* CoreDataManager.swift */,
 			);
-			name = dataStore;
+			path = dataStore;
 			sourceTree = "<group>";
 		};
 		E4F5087B1C63B4DE007E8065 /* mapper */ = {
@@ -294,7 +294,7 @@
 			children = (
 				E4F5087C1C63B50D007E8065 /* BoardInfoMapper.swift */,
 			);
-			name = mapper;
+			path = mapper;
 			sourceTree = "<group>";
 		};
 		E4F5087E1C64CDE7007E8065 /* repository */ = {
@@ -303,7 +303,7 @@
 				E4AEC1391C5E5A290084F8F5 /* dataStore */,
 				E4F5087F1C64D218007E8065 /* BoardInfoDataRepository.swift */,
 			);
-			name = repository;
+			path = repository;
 			sourceTree = "<group>";
 		};
 		E4F9FA221C35260B0016F0AC = {
