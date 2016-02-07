@@ -12,6 +12,7 @@ import UIKit
 class HomeViewController: UIViewController {
     var presenter = PresenterContainer.sharedInstance.homePresenter
     var images : [UIImage] = []
+    var boardInfoList : BoardInfoList? = nil
     
     @IBOutlet weak var homeCollectionView: HomeCollectionView!
     
@@ -21,13 +22,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.eventHandler = self
-        //TODO ここで読むと戻ってきた時も読み込むのでは
         presenter.loadBoardInfoList()
-        
-        //TODO
-        if let image = UIImage(named: "cat.jpg") {
-            images.append(image)
-        }
     }
 
     /**
@@ -46,17 +41,6 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDelegate {
-    
-    /**
-     セクション数を返す DraggableCollectionDataSource protocol 実装
-     
-     - parameter collectionView: collectionView
-     
-     - returns: セクション数
-     */
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
  
     /**
      インデックスパスに対応するセルを作る DraggableCollectionDataSource protocol 実装
@@ -82,7 +66,7 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
      - returns: セクションのアイテム数
      */
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return boardInfoList?.items.count ?? 0
     }
     
     /**
@@ -112,11 +96,16 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
 
 extension HomeViewController : HomePresenterEventHandler {
     
-    func OnLoadedBoards(boardInfList: BoardInfoList) {
-        //images = []
-        for _ in boardInfList.items {
+    func OnLoadedBoards(boardInfoList: BoardInfoList) {
+        //TODO
+        images = []
+        for _ in boardInfoList.items {
             //let image = UIImage(named: item.)
-            //images.append(image)
+            if let image = UIImage(named: "cat.jpg") {
+                images.append(image)
+            }
         }
+        self.boardInfoList = boardInfoList
+        self.homeCollectionView.reloadData()
     }
 }

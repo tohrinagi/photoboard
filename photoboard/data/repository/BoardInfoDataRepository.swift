@@ -23,13 +23,7 @@ class BoardInfoDataRepository : BoardInfoRepository {
             if success {
                 completion( self.mapper.ToListModel(boardInfoEntities!) )
             } else {
-                self.dataSource.createEntity {
-                    (boardInfoEntity) -> Void in
-                    var list = [BoardInfoEntity]()
-                    list.append(boardInfoEntity)
-                    NSLog("getBoardInfoList\(list.count)")
-                    completion( self.mapper.ToListModel(list) )
-                }
+                completion( self.mapper.ToListModel([]))
             }
         }
     }
