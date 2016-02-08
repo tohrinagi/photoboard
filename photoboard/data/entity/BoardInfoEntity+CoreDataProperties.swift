@@ -19,5 +19,4 @@ extension BoardInfoEntity {
     @NSManaged var title: String?
     @NSManaged var updatedAt: NSDate?
     @NSManaged var body: BoardBodyEntity?
-
 }

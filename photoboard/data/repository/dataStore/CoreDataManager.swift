@@ -46,7 +46,7 @@ class CoreDataManager {
     }
     
     // MARK: - Core Data Saving support
-    func saveContext () ->Bool {
+    private func saveContext () ->Bool {
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()

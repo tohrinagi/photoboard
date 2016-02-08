@@ -22,7 +22,6 @@ class BoardInfoListDataStore: NSObject {
     }
     
     func updateEntity( entity : BoardInfoEntity, completion : (Bool)->Void ) {
-        //TODO
         let success = CoreDataManager.sharedInstance.update()
         completion(success)
     }

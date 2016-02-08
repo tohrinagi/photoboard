@@ -19,7 +19,7 @@ class BoardInfoMapper : NSObject {
      - returns: model
      */
     func ToModel( info : BoardInfoEntity ) -> BoardInfo {
-        return BoardInfo(title: info.title!, createdAt: info.createdAt!, updatedAt: info.updatedAt!)
+        return BoardInfo(id: info.id, title: info.title!, row: info.row!, createdAt: info.createdAt!, updatedAt: info.updatedAt!)
     }
     
     /**
@@ -35,5 +35,16 @@ class BoardInfoMapper : NSObject {
             list.append(ToModel(info))
         }
         return BoardInfoList(boardInfos: list)
+    }
+    
+    
+    func ToEntity( entity : BoardInfoEntity, info : BoardInfo ){
+        if entity.objectID.URIRepresentation() != info.id {
+            assert(false)
+        }
+        entity.row = info.row
+        entity.title = info.title
+        entity.updatedAt = info.updatedAt
+        entity.createdAt = info.createdAt
     }
 }

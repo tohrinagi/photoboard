@@ -13,17 +13,23 @@ class BoardInfo : NSObject {
     private(set) var title : String
     private(set) var updatedAt : NSDate
     private(set) var createdAt : NSDate
+    private(set) var row : NSNumber
     private(set) var headerPhoto : Int = 0//TODO
+    var id : String
     
     override init() {
+        self.id = ""
         self.title = ""
+        self.row = 0
         self.updatedAt = NSDate()
         self.createdAt = NSDate()
         super.init()
     }
     
-    init( title : String, createdAt : NSDate, updatedAt : NSDate) {
+    init( id : String, title : String, row : NSNumber, createdAt : NSDate, updatedAt : NSDate) {
+        self.id = ""
         self.title = title
+        self.row = 0
         self.updatedAt = updatedAt
         self.createdAt = createdAt
         super.init()
