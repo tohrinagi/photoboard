@@ -40,6 +40,8 @@
 		E4F1F48E1C678D1F006A06EF /* BoardBodyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4881C678D1F006A06EF /* BoardBodyEntity.swift */; };
 		E4F1F48F1C678D1F006A06EF /* BoardPhotoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4891C678D1F006A06EF /* BoardPhotoEntity+CoreDataProperties.swift */; };
 		E4F1F4901C678D1F006A06EF /* BoardPhotoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F48A1C678D1F006A06EF /* BoardPhotoEntity.swift */; };
+		E4F1F4AF1C6A1AF4006A06EF /* CoreDataManagerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4AE1C6A1AF4006A06EF /* CoreDataManagerTestCase.swift */; };
+		E4F1F4BA1C6A3589006A06EF /* BoardInfoListDataStoreTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4B91C6A3589006A06EF /* BoardInfoListDataStoreTestCase.swift */; };
 		E4F5087D1C63B50D007E8065 /* BoardInfoMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F5087C1C63B50D007E8065 /* BoardInfoMapper.swift */; };
 		E4F508801C64D218007E8065 /* BoardInfoDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F5087F1C64D218007E8065 /* BoardInfoDataRepository.swift */; };
 		E4F508821C64D28C007E8065 /* BoardInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F508811C64D28C007E8065 /* BoardInfoRepository.swift */; };
@@ -95,8 +97,6 @@
 		E48FA03F1C5DC0AF00C88CB2 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		E48FA0491C5E2BF000C88CB2 /* photoboard.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = photoboard.xcdatamodel; sourceTree = "<group>"; };
 		E492FE621C3BF56F00BA9784 /* photoboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E492FE631C3BF56F00BA9784 /* photoboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photoboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E492FE641C3BF56F00BA9784 /* photoboardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photoboardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E492FE651C3C1A7300BA9784 /* DraggableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableCollectionView.swift; sourceTree = "<group>"; };
 		E4B64FD31C5F9E2C0091D9DC /* BoardInfoListDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoListDataStore.swift; sourceTree = "<group>"; };
 		E4B64FD71C5FA1300091D9DC /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -106,6 +106,10 @@
 		E4F1F4881C678D1F006A06EF /* BoardBodyEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardBodyEntity.swift; sourceTree = "<group>"; };
 		E4F1F4891C678D1F006A06EF /* BoardPhotoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BoardPhotoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E4F1F48A1C678D1F006A06EF /* BoardPhotoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardPhotoEntity.swift; sourceTree = "<group>"; };
+		E4F1F4AE1C6A1AF4006A06EF /* CoreDataManagerTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTestCase.swift; sourceTree = "<group>"; };
+		E4F1F4B71C6A2554006A06EF /* photoboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photoboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4F1F4B81C6A2570006A06EF /* photoboardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photoboardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4F1F4B91C6A3589006A06EF /* BoardInfoListDataStoreTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoListDataStoreTestCase.swift; sourceTree = "<group>"; };
 		E4F5087C1C63B50D007E8065 /* BoardInfoMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoMapper.swift; sourceTree = "<group>"; };
 		E4F5087F1C64D218007E8065 /* BoardInfoDataRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoDataRepository.swift; sourceTree = "<group>"; };
 		E4F508811C64D28C007E8065 /* BoardInfoRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoRepository.swift; sourceTree = "<group>"; };
@@ -298,6 +302,62 @@
 			path = dataStore;
 			sourceTree = "<group>";
 		};
+		E4F1F4911C6A1653006A06EF /* data */ = {
+			isa = PBXGroup;
+			children = (
+				E4F1F4971C6A177A006A06EF /* repository */,
+				E4F1F4961C6A1770006A06EF /* mapper */,
+				E4F1F4951C6A1762006A06EF /* entity */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		E4F1F4921C6A1724006A06EF /* domain */ = {
+			isa = PBXGroup;
+			children = (
+				E4F1F4941C6A1744006A06EF /* usecase */,
+				E4F1F4931C6A1737006A06EF /* model */,
+			);
+			path = domain;
+			sourceTree = "<group>";
+		};
+		E4F1F4931C6A1737006A06EF /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		E4F1F4941C6A1744006A06EF /* usecase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = usecase;
+			sourceTree = "<group>";
+		};
+		E4F1F4951C6A1762006A06EF /* entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = entity;
+			sourceTree = "<group>";
+		};
+		E4F1F4961C6A1770006A06EF /* mapper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = mapper;
+			sourceTree = "<group>";
+		};
+		E4F1F4971C6A177A006A06EF /* repository */ = {
+			isa = PBXGroup;
+			children = (
+				E4F1F4AE1C6A1AF4006A06EF /* CoreDataManagerTestCase.swift */,
+				E4F1F4B91C6A3589006A06EF /* BoardInfoListDataStoreTestCase.swift */,
+			);
+			path = repository;
+			sourceTree = "<group>";
+		};
 		E4F5087B1C63B4DE007E8065 /* mapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,8 +383,8 @@
 				E4F9FA421C35260B0016F0AC /* photoboardTests */,
 				E4F9FA4D1C35260B0016F0AC /* photoboardUITests */,
 				E492FE621C3BF56F00BA9784 /* photoboard.app */,
-				E492FE631C3BF56F00BA9784 /* photoboardTests.xctest */,
-				E492FE641C3BF56F00BA9784 /* photoboardUITests.xctest */,
+				E4F1F4B71C6A2554006A06EF /* photoboardTests.xctest */,
+				E4F1F4B81C6A2570006A06EF /* photoboardUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -346,6 +406,8 @@
 		E4F9FA421C35260B0016F0AC /* photoboardTests */ = {
 			isa = PBXGroup;
 			children = (
+				E4F1F4921C6A1724006A06EF /* domain */,
+				E4F1F4911C6A1653006A06EF /* data */,
 				E4F9FA431C35260B0016F0AC /* photoboardTests.swift */,
 				E4F9FA451C35260B0016F0AC /* Info.plist */,
 			);
@@ -396,7 +458,7 @@
 			);
 			name = photoboardTests;
 			productName = photoboardTests;
-			productReference = E492FE631C3BF56F00BA9784 /* photoboardTests.xctest */;
+			productReference = E4F1F4B71C6A2554006A06EF /* photoboardTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		E4F9FA491C35260B0016F0AC /* photoboardUITests */ = {
@@ -414,7 +476,7 @@
 			);
 			name = photoboardUITests;
 			productName = photoboardUITests;
-			productReference = E492FE641C3BF56F00BA9784 /* photoboardUITests.xctest */;
+			productReference = E4F1F4B81C6A2570006A06EF /* photoboardUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -539,6 +601,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4F9FA441C35260B0016F0AC /* photoboardTests.swift in Sources */,
+				E4F1F4BA1C6A3589006A06EF /* BoardInfoListDataStoreTestCase.swift in Sources */,
+				E4F1F4AF1C6A1AF4006A06EF /* CoreDataManagerTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +649,104 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E4F1F4B31C6A22D5006A06EF /* Test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Test;
+		};
+		E4F1F4B41C6A22D5006A06EF /* Test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+					"TESTING=1",
+				);
+				INFOPLIST_FILE = photoboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D DEBUG -D TESTING";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tohrinagi.photoboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Test;
+		};
+		E4F1F4B51C6A22D5006A06EF /* Test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"TESTING=1",
+				);
+				INFOPLIST_FILE = photoboardTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tohrinagi.photoboardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/photoboard.app/photoboard";
+			};
+			name = Test;
+		};
+		E4F1F4B61C6A22D5006A06EF /* Test */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"TESTING=1",
+				);
+				INFOPLIST_FILE = photoboardUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tohrinagi.photoboardUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = photoboard;
+				USES_XCTRUNNER = YES;
+			};
+			name = Test;
+		};
 		E4F9FA511C35260B0016F0AC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -675,6 +837,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = photoboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tohrinagi.photoboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -749,6 +912,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4F9FA511C35260B0016F0AC /* Debug */,
+				E4F1F4B31C6A22D5006A06EF /* Test */,
 				E4F9FA521C35260B0016F0AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -758,6 +922,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4F9FA541C35260B0016F0AC /* Debug */,
+				E4F1F4B41C6A22D5006A06EF /* Test */,
 				E4F9FA551C35260B0016F0AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -767,6 +932,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4F9FA571C35260B0016F0AC /* Debug */,
+				E4F1F4B51C6A22D5006A06EF /* Test */,
 				E4F9FA581C35260B0016F0AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -776,6 +942,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4F9FA5A1C35260B0016F0AC /* Debug */,
+				E4F1F4B61C6A22D5006A06EF /* Test */,
 				E4F9FA5B1C35260B0016F0AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

@@ -22,7 +22,6 @@ class CoreDataManager {
     }
     
     func create<DataType:NSManagedObject>() -> DataType {
-        NSLog(NSStringFromClass(DataType))
         let managedObject: AnyObject = NSEntityDescription.insertNewObjectForEntityForName(
             NSStringFromClass(DataType).componentsSeparatedByString(".").last! as String, inManagedObjectContext: managedObjectContext)
         return managedObject as! DataType
@@ -46,7 +45,7 @@ class CoreDataManager {
     }
     
     // MARK: - Core Data Saving support
-    private func saveContext () ->Bool {
+    func saveContext () ->Bool {
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()
@@ -78,7 +77,13 @@ class CoreDataManager {
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("SingleViewCoreData.sqlite")
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
+#if TESTING
+            try coordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: url, options: nil)
+            NSLog("CoreData InMemoryMode")
+#else
             try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+            NSLog("CoreData SQLiteMode")
+#endif
         } catch {
             // Report any error we got.
             var dict = [String: AnyObject]()

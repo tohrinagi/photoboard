@@ -18,7 +18,7 @@ class BoardInfoListDataStore: NSObject {
     func readAllEntity( completion :(Bool,[BoardInfoEntity]?)->Void ) {
         let request = NSFetchRequest(entityName: "BoardInfoEntity")
         let result = CoreDataManager.sharedInstance.read(request) as [BoardInfoEntity]?
-        completion( result == nil, result )
+        completion( result != nil, result )
     }
     
     func updateEntity( entity : BoardInfoEntity, completion : (Bool)->Void ) {
