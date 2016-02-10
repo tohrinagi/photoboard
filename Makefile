@@ -1,10 +1,12 @@
 PROJECT = photoboard.xcodeproj
-TEST_TARGET = photoboardTests
-SDK = iphonesimulator
-CONFIGURATION = Debug
+
+.PHONY: build clean test
 
 clean:
 	xcodebuild -project $(PROJECT) clean
 
+build:
+	xcodebuild -project $(PROJECT) -scheme photoboard -configuration Debug build
+
 test:
-	xcodebuild -project $(PROJECT) -target $(TEST_TARGET) -sdk $(SDK) -configuration $(CONFIGURATION) TEST_AFTER_BUILD=YES
+	xcodebuild -project $(PROJECT) -scheme photoboardTests -destination 'platform=iOS Simulator,name=iPhone 6' test
