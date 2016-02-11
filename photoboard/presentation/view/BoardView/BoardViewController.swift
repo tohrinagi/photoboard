@@ -28,8 +28,8 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
     /**
      新しく作成した時のセットアップ
      */
-    func setupForNew(){
-        print("setupForNew")
+    func setup( boardInfo : BoardInfo){
+        print("setupForNew:"+boardInfo.title)
     }
     
     /**

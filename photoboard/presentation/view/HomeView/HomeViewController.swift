@@ -33,10 +33,21 @@ class HomeViewController: UIViewController {
      */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //Segueの特定
-        if segue.identifier == "Add" {
+        if segue.identifier == "HomeToBoard" {
+            let info = sender as! BoardInfo
             let nextViewController = segue.destinationViewController as! BoardViewController;
-            nextViewController.setupForNew()
+            nextViewController.setup( info )
         }
+    }
+    
+    /**
+     追加ボタン時のアクション
+     
+     - parameter sender: sender
+     */
+    @IBAction func addButtonAction(sender: AnyObject) {
+        //モデルを作成する
+        self.presenter.createNewBoard()
     }
 }
 
@@ -107,5 +118,10 @@ extension HomeViewController : HomePresenterEventHandler {
         }
         self.boardInfoList = boardInfoList
         self.homeCollectionView.reloadData()
+    }
+    
+    func OnCreatedNewBoard(board: BoardInfo) {
+        //新規作成終わったら移動
+        self.performSegueWithIdentifier("HomeToBoard", sender: board)
     }
 }

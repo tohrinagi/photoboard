@@ -63,12 +63,13 @@
                     <navigationItem key="navigationItem" title="Home Controller" id="Vjf-o3-Dfz" userLabel="Home Navigation Controller">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="iiZ-Ty-J1O">
                             <connections>
-                                <segue destination="6KZ-WD-M2a" kind="show" identifier="Add" id="vtE-cc-4oM"/>
+                                <action selector="addButtonAction:" destination="BYZ-38-t0r" id="lgK-1I-l1d"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="homeCollectionView" destination="GVQ-Xc-dqQ" id="ry1-Dz-p9W"/>
+                        <segue destination="6KZ-WD-M2a" kind="show" identifier="HomeToBoard" id="VuA-bZ-W9N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

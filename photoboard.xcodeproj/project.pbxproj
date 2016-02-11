@@ -15,6 +15,7 @@
 		E424B0C01C5C6DB200F47235 /* HomeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E424B0BF1C5C6DB200F47235 /* HomeCollectionView.swift */; };
 		E42CA7A71C660EA700CA3D4C /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42CA7A61C660EA700CA3D4C /* UseCase.swift */; };
 		E42CA7AB1C66278100CA3D4C /* RepositoryContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42CA7AA1C66278100CA3D4C /* RepositoryContainer.swift */; };
+		E45B9B3A1C6C8D2700299141 /* CreateNewBoardUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45B9B391C6C8D2700299141 /* CreateNewBoardUseCase.swift */; };
 		E46D4DCD1C37EA9000A8E12A /* CameraControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DCC1C37EA9000A8E12A /* CameraControllerFactory.swift */; };
 		E46D4DCF1C37F10000A8E12A /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DCE1C37F10000A8E12A /* HomePresenter.swift */; };
 		E46D4DD11C37F2DE00A8E12A /* BoardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DD01C37F2DE00A8E12A /* BoardPresenter.swift */; };
@@ -82,6 +83,7 @@
 		E424B0BF1C5C6DB200F47235 /* HomeCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionView.swift; sourceTree = "<group>"; };
 		E42CA7A61C660EA700CA3D4C /* UseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		E42CA7AA1C66278100CA3D4C /* RepositoryContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryContainer.swift; sourceTree = "<group>"; };
+		E45B9B391C6C8D2700299141 /* CreateNewBoardUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewBoardUseCase.swift; sourceTree = "<group>"; };
 		E46D4DCC1C37EA9000A8E12A /* CameraControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraControllerFactory.swift; sourceTree = "<group>"; };
 		E46D4DCE1C37F10000A8E12A /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		E46D4DD01C37F2DE00A8E12A /* BoardPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardPresenter.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				E48FA03B1C5DBDD300C88CB2 /* GetBoardInfoListUseCase.swift */,
 				E4167ECC1C5E5FEE00BF563A /* GetBoardBodyUseCase.swift */,
 				E42CA7A61C660EA700CA3D4C /* UseCase.swift */,
+				E45B9B391C6C8D2700299141 /* CreateNewBoardUseCase.swift */,
 			);
 			path = usecase;
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 				E4F5087D1C63B50D007E8065 /* BoardInfoMapper.swift in Sources */,
 				E4B64FD81C5FA1300091D9DC /* CoreDataManager.swift in Sources */,
 				E492FE661C3C1A7300BA9784 /* DraggableCollectionView.swift in Sources */,
+				E45B9B3A1C6C8D2700299141 /* CreateNewBoardUseCase.swift in Sources */,
 				E46D4DCD1C37EA9000A8E12A /* CameraControllerFactory.swift in Sources */,
 				E48FA0331C5D208C00C88CB2 /* BoardInfo.swift in Sources */,
 				E46D4DCF1C37F10000A8E12A /* HomePresenter.swift in Sources */,

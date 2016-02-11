@@ -81,6 +81,18 @@ class BoardInfoDataRepository : BoardInfoRepository {
     }
     
     /**
+     BoardInfo を新規作成する処理
+     
+     - parameter completion: 処理完了ブロック
+     */
+    func createNewBoard( completion : (BoardInfo)->Void ) {
+        //TODO List にいれる…？
+        dataSource.createEntity { (boardInfoEntity) -> Void in
+            completion(self.mapper.ToModel(boardInfoEntity))
+        }
+    }
+    
+    /**
      BoardInfo から BoardInfoEntity を取得する処理
      
      - parameter model: BoardInfoモデル
