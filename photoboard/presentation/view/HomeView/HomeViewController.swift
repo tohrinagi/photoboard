@@ -107,6 +107,18 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
     func finishedMove(collectionView: UICollectionView ) {
         print("finishedMove")
     }
+    
+    /**
+     セル選択時
+     
+     - parameter collectionView: コレクションビュー
+     - parameter indexPath:      選択した場所のインデックスパス
+     */
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        NSLog("selected Sec:\(indexPath.section) Row:\(indexPath.row)")
+        let board = boardInfoList?.items[indexPath.row]
+        self.performSegueWithIdentifier("HomeToBoard", sender: board)
+    }
 }
 
 extension HomeViewController : HomePresenterEventHandler {
