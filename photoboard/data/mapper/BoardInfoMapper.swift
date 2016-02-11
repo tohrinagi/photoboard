@@ -39,7 +39,8 @@ class BoardInfoMapper : NSObject {
     
     
     func ToEntity( entity : BoardInfoEntity, info : BoardInfo ){
-        if entity.objectID.URIRepresentation() != info.id {
+        NSLog("\(entity.objectID.URIRepresentation())=\(info.id)")
+        if entity.objectID.URIRepresentation().absoluteString != info.id {
             assert(false)
         }
         entity.row = info.row

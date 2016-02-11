@@ -42,6 +42,8 @@
 		E4F1F4901C678D1F006A06EF /* BoardPhotoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F48A1C678D1F006A06EF /* BoardPhotoEntity.swift */; };
 		E4F1F4AF1C6A1AF4006A06EF /* CoreDataManagerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4AE1C6A1AF4006A06EF /* CoreDataManagerTestCase.swift */; };
 		E4F1F4BA1C6A3589006A06EF /* BoardInfoListDataStoreTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4B91C6A3589006A06EF /* BoardInfoListDataStoreTestCase.swift */; };
+		E4F1F4BC1C6B9D5C006A06EF /* BoardInfoDataRepositoryTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4BB1C6B9D5C006A06EF /* BoardInfoDataRepositoryTestCase.swift */; };
+		E4F1F4BE1C6B9EE7006A06EF /* BoardInfoMapperTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4BD1C6B9EE7006A06EF /* BoardInfoMapperTestCase.swift */; };
 		E4F5087D1C63B50D007E8065 /* BoardInfoMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F5087C1C63B50D007E8065 /* BoardInfoMapper.swift */; };
 		E4F508801C64D218007E8065 /* BoardInfoDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F5087F1C64D218007E8065 /* BoardInfoDataRepository.swift */; };
 		E4F508821C64D28C007E8065 /* BoardInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F508811C64D28C007E8065 /* BoardInfoRepository.swift */; };
@@ -110,6 +112,8 @@
 		E4F1F4B71C6A2554006A06EF /* photoboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photoboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F1F4B81C6A2570006A06EF /* photoboardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photoboardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F1F4B91C6A3589006A06EF /* BoardInfoListDataStoreTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoListDataStoreTestCase.swift; sourceTree = "<group>"; };
+		E4F1F4BB1C6B9D5C006A06EF /* BoardInfoDataRepositoryTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoDataRepositoryTestCase.swift; sourceTree = "<group>"; };
+		E4F1F4BD1C6B9EE7006A06EF /* BoardInfoMapperTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoMapperTestCase.swift; sourceTree = "<group>"; };
 		E4F5087C1C63B50D007E8065 /* BoardInfoMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoMapper.swift; sourceTree = "<group>"; };
 		E4F5087F1C64D218007E8065 /* BoardInfoDataRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoDataRepository.swift; sourceTree = "<group>"; };
 		E4F508811C64D28C007E8065 /* BoardInfoRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoRepository.swift; sourceTree = "<group>"; };
@@ -345,6 +349,7 @@
 		E4F1F4961C6A1770006A06EF /* mapper */ = {
 			isa = PBXGroup;
 			children = (
+				E4F1F4BD1C6B9EE7006A06EF /* BoardInfoMapperTestCase.swift */,
 			);
 			path = mapper;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 			children = (
 				E4F1F4AE1C6A1AF4006A06EF /* CoreDataManagerTestCase.swift */,
 				E4F1F4B91C6A3589006A06EF /* BoardInfoListDataStoreTestCase.swift */,
+				E4F1F4BB1C6B9D5C006A06EF /* BoardInfoDataRepositoryTestCase.swift */,
 			);
 			path = repository;
 			sourceTree = "<group>";
@@ -600,8 +606,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4F1F4BE1C6B9EE7006A06EF /* BoardInfoMapperTestCase.swift in Sources */,
 				E4F9FA441C35260B0016F0AC /* photoboardTests.swift in Sources */,
 				E4F1F4BA1C6A3589006A06EF /* BoardInfoListDataStoreTestCase.swift in Sources */,
+				E4F1F4BC1C6B9D5C006A06EF /* BoardInfoDataRepositoryTestCase.swift in Sources */,
 				E4F1F4AF1C6A1AF4006A06EF /* CoreDataManagerTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

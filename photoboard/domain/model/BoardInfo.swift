@@ -27,9 +27,9 @@ class BoardInfo : NSObject {
     }
     
     init( id : String, title : String, row : NSNumber, createdAt : NSDate, updatedAt : NSDate) {
-        self.id = ""
+        self.id = id
         self.title = title
-        self.row = 0
+        self.row = row
         self.updatedAt = updatedAt
         self.createdAt = createdAt
         super.init()
