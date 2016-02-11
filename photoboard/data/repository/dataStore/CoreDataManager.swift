@@ -24,6 +24,8 @@ class CoreDataManager {
     func create<DataType:NSManagedObject>() -> DataType {
         let managedObject: AnyObject = NSEntityDescription.insertNewObjectForEntityForName(
             NSStringFromClass(DataType).componentsSeparatedByString(".").last! as String, inManagedObjectContext: managedObjectContext)
+        let success = saveContext()
+        NSLog("createdSave :\(success)")
         return managedObject as! DataType
     }
     

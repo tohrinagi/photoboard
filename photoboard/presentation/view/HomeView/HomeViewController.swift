@@ -22,6 +22,10 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.eventHandler = self
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         presenter.loadBoardInfoList()
     }
 
@@ -118,6 +122,7 @@ extension HomeViewController : HomePresenterEventHandler {
         }
         self.boardInfoList = boardInfoList
         self.homeCollectionView.reloadData()
+        NSLog("OnLoadedBoards:\(images.count)")
     }
     
     func OnCreatedNewBoard(board: BoardInfo) {

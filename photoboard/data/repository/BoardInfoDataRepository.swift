@@ -22,11 +22,6 @@ class BoardInfoDataRepository : BoardInfoRepository {
      - parameter completion: 処理完了ブロック
      */
     func getBoardInfoList( completion : (BoardInfoList)->Void ) {
-        if let boardInfoList = self.boardInfoList {
-            completion(boardInfoList)
-            return
-        }
-        
         dataSource.readAllEntity {
             ( success, boardInfoEntities ) -> Void in
             if success {
