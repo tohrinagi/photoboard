@@ -22,6 +22,8 @@
 		E46D4DCF1C37F10000A8E12A /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DCE1C37F10000A8E12A /* HomePresenter.swift */; };
 		E46D4DD11C37F2DE00A8E12A /* BoardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DD01C37F2DE00A8E12A /* BoardPresenter.swift */; };
 		E46D4DD61C37FB3300A8E12A /* PresenterContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DD51C37FB3300A8E12A /* PresenterContainer.swift */; };
+		E475EB441C708888005E3F7A /* AddBoardPhotoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E475EB431C708888005E3F7A /* AddBoardPhotoUseCase.swift */; };
+		E475EB461C708A1C005E3F7A /* BoardBodyDataSorce.swift in Sources */ = {isa = PBXBuildFile; fileRef = E475EB451C708A1C005E3F7A /* BoardBodyDataSorce.swift */; };
 		E47657ED1C40142400B10A7E /* DraggableCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47657EC1C40142400B10A7E /* DraggableCollectionDataSource.swift */; };
 		E47657EF1C411B1F00B10A7E /* DraggableCollectionSlideOnDrag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47657EE1C411B1F00B10A7E /* DraggableCollectionSlideOnDrag.swift */; };
 		E48176001C64F4090005AF19 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48175FF1C64F4090005AF19 /* TaskManager.swift */; };
@@ -92,6 +94,8 @@
 		E46D4DCE1C37F10000A8E12A /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		E46D4DD01C37F2DE00A8E12A /* BoardPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardPresenter.swift; sourceTree = "<group>"; };
 		E46D4DD51C37FB3300A8E12A /* PresenterContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterContainer.swift; sourceTree = "<group>"; };
+		E475EB431C708888005E3F7A /* AddBoardPhotoUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBoardPhotoUseCase.swift; sourceTree = "<group>"; };
+		E475EB451C708A1C005E3F7A /* BoardBodyDataSorce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardBodyDataSorce.swift; sourceTree = "<group>"; };
 		E47657EC1C40142400B10A7E /* DraggableCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableCollectionDataSource.swift; sourceTree = "<group>"; };
 		E47657EE1C411B1F00B10A7E /* DraggableCollectionSlideOnDrag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableCollectionSlideOnDrag.swift; sourceTree = "<group>"; };
 		E48175FF1C64F4090005AF19 /* TaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
@@ -274,6 +278,7 @@
 				E4167ECC1C5E5FEE00BF563A /* GetBoardBodyUseCase.swift */,
 				E42CA7A61C660EA700CA3D4C /* UseCase.swift */,
 				E45B9B391C6C8D2700299141 /* CreateNewBoardUseCase.swift */,
+				E475EB431C708888005E3F7A /* AddBoardPhotoUseCase.swift */,
 			);
 			path = usecase;
 			sourceTree = "<group>";
@@ -309,6 +314,7 @@
 			children = (
 				E4B64FD31C5F9E2C0091D9DC /* BoardInfoListDataStore.swift */,
 				E4B64FD71C5FA1300091D9DC /* CoreDataManager.swift */,
+				E475EB451C708A1C005E3F7A /* BoardBodyDataSorce.swift */,
 			);
 			path = dataStore;
 			sourceTree = "<group>";
@@ -589,6 +595,7 @@
 				E41DD3E11C3AB33400FA6F93 /* BoardCollectionViewLayout.swift in Sources */,
 				E46D4DD11C37F2DE00A8E12A /* BoardPresenter.swift in Sources */,
 				E424B0BE1C5C6BCB00F47235 /* HomeCollectionViewLayout.swift in Sources */,
+				E475EB441C708888005E3F7A /* AddBoardPhotoUseCase.swift in Sources */,
 				E4F1F48B1C678D1F006A06EF /* BoardInfoEntity+CoreDataProperties.swift in Sources */,
 				E48FA0351C5D20D200C88CB2 /* BoardBody.swift in Sources */,
 				E48BB2731C39444800CE518A /* BoardCollectionViewCell.swift in Sources */,
@@ -608,6 +615,7 @@
 				E45B9B3A1C6C8D2700299141 /* CreateNewBoardUseCase.swift in Sources */,
 				E46D4DCD1C37EA9000A8E12A /* CameraControllerFactory.swift in Sources */,
 				E48FA0331C5D208C00C88CB2 /* BoardInfo.swift in Sources */,
+				E475EB461C708A1C005E3F7A /* BoardBodyDataSorce.swift in Sources */,
 				E46D4DCF1C37F10000A8E12A /* HomePresenter.swift in Sources */,
 				E4F9FA5D1C366E380016F0AC /* BoardViewController.swift in Sources */,
 				E4F508801C64D218007E8065 /* BoardInfoDataRepository.swift in Sources */,

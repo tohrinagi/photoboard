@@ -13,4 +13,5 @@ protocol BoardInfoRepository {
     func updateBoardInfoList( boardInfoList : BoardInfoList, completion : (Bool)->Void )
     func createNewBoard( completion : (BoardInfo)->Void )
     func readBoardBody( boardInfo : BoardInfo, completion : (Bool,BoardBody?)->Void )
+    func addBoardPhoto( boardBody : BoardBody, referenceUrl : String, section : Int, row : Int, completion : (BoardPhoto)->Void )
 }

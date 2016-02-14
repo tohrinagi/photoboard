@@ -28,6 +28,7 @@ class BoardInfoListDataStoreTestCase: XCTestCase {
         let dataSource = BoardInfoListDataStore()
         dataSource.createEntity { (boardInfoEntity) -> Void in
             XCTAssertNotNil(boardInfoEntity)
+            XCTAssertNotNil(boardInfoEntity.body)
             
             boardInfoEntity.title = title
             

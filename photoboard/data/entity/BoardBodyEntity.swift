@@ -13,5 +13,8 @@ import CoreData
 class BoardBodyEntity: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
-
+    func addPhoto( photo : BoardPhotoEntity ) {
+        let items = self.mutableSetValueForKey("photos")
+        items.addObject(photo)
+    }
 }

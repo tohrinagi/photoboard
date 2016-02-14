@@ -8,7 +8,7 @@
 
 protocol BoardPresenterEventHandler: class {
     func OnLoadedBoard( board : BoardBody ) -> Void
-    func OnAddedPhoto( referenceUrl : String ) -> Void
+    func OnAddedPhoto( photo : BoardPhoto ) -> Void
 }
 
 /// Board画面用プレゼンター
@@ -24,7 +24,10 @@ class BoardPresenter {
         }
     }
 
-    func addPhoto( referenceUrl : String ) {
-        
+    func addPhoto( boardBody : BoardBody, referenceUrl : String, section : Int, row : Int ) {
+        let task = AddBoardPhotoUseCase(boardBody: boardBody, url: referenceUrl, section: section, row: row)
+        TaskManager.startBackground(task) { (task) -> Void in
+            self.eventHandler?.OnAddedPhoto(task.boardPhoto!)
+        }
     }
 }

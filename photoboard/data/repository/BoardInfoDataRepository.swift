@@ -10,9 +10,11 @@ import Foundation
 
 /// ボード情報を操作するリポジトリクラス
 class BoardInfoDataRepository : BoardInfoRepository {
-    private let dataSource = BoardInfoListDataStore()
+    private let infoDataSource = BoardInfoListDataStore()
+    private let bodyDataSource = BoardBodyDataSource()
     private let infoMapper = BoardInfoMapper()
     private let bodyMapper = BoardBodyMapper()
+    private let photoMapper = BoardPhotoMapper()
     
     private var boardInfoEntities : [BoardInfoEntity]? = nil
     private var boardInfoList : BoardInfoList? = nil
@@ -23,7 +25,7 @@ class BoardInfoDataRepository : BoardInfoRepository {
      - parameter completion: 処理完了ブロック
      */
     func readBoardInfoList( completion : (BoardInfoList)->Void ) {
-        dataSource.readAllEntity {
+        infoDataSource.readAllEntity {
             ( success, boardInfoEntities ) -> Void in
             if success {
                 self.boardInfoEntities = boardInfoEntities
@@ -45,7 +47,7 @@ class BoardInfoDataRepository : BoardInfoRepository {
         for boardInfo in boardInfoList.items {
             if let entity = searchEntity(boardInfo) {
                 infoMapper.ToEntity(entity, info: boardInfo)
-                dataSource.updateEntity(entity, completion: { (success) -> Void in
+                infoDataSource.updateEntity(entity, completion: { (success) -> Void in
                     if success {
                         self.afterSave()
                     }
@@ -65,7 +67,7 @@ class BoardInfoDataRepository : BoardInfoRepository {
      */
     func deleteBoardInfoList( boardInfo : BoardInfo, completion : (Bool)->Void ) {
         if let entity = searchEntity(boardInfo) {
-            dataSource.deleteEntity(entity) { (success) -> Void in
+            infoDataSource.deleteEntity(entity) { (success) -> Void in
                 if success {
                     self.afterSave()
                 }
@@ -82,8 +84,9 @@ class BoardInfoDataRepository : BoardInfoRepository {
      - parameter completion: 処理完了ブロック
      */
     func createNewBoard( completion : (BoardInfo)->Void ) {
-        //TODO List にいれる…？
-        dataSource.createEntity { (boardInfoEntity) -> Void in
+        infoDataSource.createEntity { (boardInfoEntity) -> Void in
+            self.boardInfoEntities?.append(boardInfoEntity)
+            //TODO InfoListにいれる？？
             self.afterSave()
             completion(self.infoMapper.ToModel(boardInfoEntity))
         }
@@ -100,6 +103,28 @@ class BoardInfoDataRepository : BoardInfoRepository {
             completion(true, bodyMapper.ToModel(infoEntity) )
         }else {
             completion(false, nil)
+        }
+    }
+    
+    /**
+     BoardBody に Photo を追加する処理
+     
+     - parameter boardBody:    Photo を追加する BoardBody
+     - parameter referenceUrl: 画像の参照URL
+     - parameter section:      セクション位置
+     - parameter row:          ROW位置
+     - parameter completion:   処理完了ブロック
+     */
+    func addBoardPhoto( boardBody : BoardBody, referenceUrl : String, section : Int, row : Int, completion : (BoardPhoto)->Void ) {
+        if let infoEntity = searchEntity(boardBody.info) {
+            //infoEntity.body?.photos
+            bodyDataSource.createEntity(infoEntity.body!, completion: { (boardPhotoEntity) -> Void in
+                boardPhotoEntity.name = referenceUrl
+                boardPhotoEntity.section = section
+                boardPhotoEntity.row = row
+                self.afterSave()
+                completion(self.photoMapper.ToModel(boardPhotoEntity))
+            })
         }
     }
     

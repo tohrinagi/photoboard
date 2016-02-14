@@ -12,7 +12,10 @@ import CoreData
 class BoardInfoListDataStore: NSObject {
     
     func createEntity( completion : (BoardInfoEntity)->Void ) {
-        completion( CoreDataManager.sharedInstance.create() )
+        let info = CoreDataManager.sharedInstance.create() as BoardInfoEntity
+        let body = CoreDataManager.sharedInstance.create() as BoardBodyEntity
+        info.body = body
+        completion( info )
     }
     
     func readAllEntity( completion :(Bool,[BoardInfoEntity]?)->Void ) {

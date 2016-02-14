@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class BoardViewController: UIViewController, UINavigationControllerDelegate {
     
@@ -57,6 +58,39 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
     
     //TODO 確認用コード
     var a = 0
+    
+    /**
+     URL から Image を生成する処理
+     
+     - parameter photo: BoardPhoto
+     */
+    private func generateUrlToImage(photo: BoardPhoto) {
+        
+        let options = PHFetchOptions()
+        options.includeHiddenAssets = true
+        NSLog(photo.referenceURL.absoluteString)
+        let fetchResult = PHAsset.fetchAssetsWithALAssetURLs([photo.referenceURL], options: options)
+        let asset = fetchResult.firstObject as! PHAsset
+     
+        PHImageManager().requestImageForAsset(asset,
+            targetSize: CGSize(width: 320, height: 320),
+            contentMode: .AspectFill, options: nil) {
+                image, info in
+                
+                let isDegraded = info?[PHImageResultIsDegradedKey]?.boolValue ?? false
+                if isDegraded {
+                    //TODO 低解像度の置き換え処理
+                } else {
+                    if self.images.count <= self.a {
+                        self.images.append([])
+                    }
+                    //TODO ない場合
+                    self.images[self.a].append(image!)
+                    self.a ^= 1
+                    self.boardCollectionView.reloadData()
+                }
+        }
+    }
 }
 
 extension BoardViewController : UIImagePickerControllerDelegate {
@@ -69,25 +103,10 @@ extension BoardViewController : UIImagePickerControllerDelegate {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]){
         // モーダルビューを閉じる
         self.dismissViewControllerAnimated(true, completion: nil)
-        
         // 画像があったらBoardScrollViewに追加
-        //TODOキャッシュ作ったりする？
-        if  let originImage = info[UIImagePickerControllerOriginalImage] {
-            let image:UIImage = originImage as! UIImage
-            //let reference = info[UIImagePickerControllerReferenceURL]
-            
-            // 渡されてきた画像をフォトアルバムに保存
-            //UIImageWriteToSavedPhotosAlbum(image, self, @selectjor(targetImage:didFinishSavingWithError:contextInfo:), NULL);
-            
-            //TODO 本来はpresenterに投げてそのコールバックを受けて、CollectionView に通知
-            //TODO 確認用コード
-            if images.count <= a {
-                images.append([])
-            }
-            images[a].append(image)
-            a ^= 1
-            boardCollectionView.reloadData()
-        }
+        let url = info[UIImagePickerControllerReferenceURL] as! NSURL
+        //TODO section, row
+        boardPresenter.addPhoto(boardBody!, referenceUrl: url.absoluteString, section: 0, row: 0)
     }
     
     /**
@@ -98,7 +117,7 @@ extension BoardViewController : UIImagePickerControllerDelegate {
     func imagePickerControllerDidCancel(picker: UIImagePickerController){
         // モーダルビューを閉じる
         self.dismissViewControllerAnimated(true, completion: nil)
-        // キャンセルされたときの処理を記述・・・
+        //TODO キャンセルされたときの処理を記述・・・
     }
 }
 
@@ -199,8 +218,13 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
 extension BoardViewController : BoardPresenterEventHandler {
     func OnLoadedBoard(board: BoardBody) {
         boardBody = board
+        
+        for photo in boardBody?.photos ?? [] {
+            generateUrlToImage( photo )
+        }
     }
     
-    func OnAddedPhoto(referenceUrl: String) {
+    func OnAddedPhoto(photo: BoardPhoto) {
+        generateUrlToImage(photo)
     }
 }

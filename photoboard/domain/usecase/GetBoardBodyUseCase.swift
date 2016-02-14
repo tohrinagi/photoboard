@@ -21,6 +21,7 @@ class GetBoardBodyUseCase : UseCase {
     
     func main() {
         boardInfoRepository.readBoardBody(boardInfo) { (success, boardBody) -> Void in
+            //TODO error
             self.boardBody = boardBody
         }
     }

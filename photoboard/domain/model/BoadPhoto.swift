@@ -25,6 +25,12 @@ class BoardPhoto : NSObject {
         return UIImage(named: photoPath)
     }
     
+    var referenceURL : NSURL {
+        get {
+            return NSURL(string: photoPath)!
+        }
+    }
+    
     var IndexPath : NSIndexPath {
         get {
             return NSIndexPath(forRow: row, inSection: section)
