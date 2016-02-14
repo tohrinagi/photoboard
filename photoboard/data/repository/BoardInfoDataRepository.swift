@@ -1,5 +1,5 @@
 //
-//  BoardInfoDataRepository.swift
+//  BoardDataRepository.swift
 //  photoboard
 //
 //  Created by tohrinagi on 2016/02/05.
@@ -11,7 +11,8 @@ import Foundation
 /// ボード情報を操作するリポジトリクラス
 class BoardInfoDataRepository : BoardInfoRepository {
     private let dataSource = BoardInfoListDataStore()
-    private let mapper = BoardInfoMapper()
+    private let infoMapper = BoardInfoMapper()
+    private let bodyMapper = BoardBodyMapper()
     
     private var boardInfoEntities : [BoardInfoEntity]? = nil
     private var boardInfoList : BoardInfoList? = nil
@@ -21,7 +22,7 @@ class BoardInfoDataRepository : BoardInfoRepository {
      
      - parameter completion: 処理完了ブロック
      */
-    func getBoardInfoList( completion : (BoardInfoList)->Void ) {
+    func readBoardInfoList( completion : (BoardInfoList)->Void ) {
         dataSource.readAllEntity {
             ( success, boardInfoEntities ) -> Void in
             if success {
@@ -29,7 +30,7 @@ class BoardInfoDataRepository : BoardInfoRepository {
             } else {
                 self.boardInfoEntities = []
             }
-            self.boardInfoList = self.mapper.ToListModel(boardInfoEntities!)
+            self.boardInfoList = self.infoMapper.ToListModel(boardInfoEntities!)
             completion(self.boardInfoList!)
         }
     }
@@ -43,7 +44,7 @@ class BoardInfoDataRepository : BoardInfoRepository {
     func updateBoardInfoList( boardInfoList : BoardInfoList, completion : (Bool)->Void ) {
         for boardInfo in boardInfoList.items {
             if let entity = searchEntity(boardInfo) {
-                mapper.ToEntity(entity, info: boardInfo)
+                infoMapper.ToEntity(entity, info: boardInfo)
                 dataSource.updateEntity(entity, completion: { (success) -> Void in
                     if success {
                         self.afterSave()
@@ -83,7 +84,22 @@ class BoardInfoDataRepository : BoardInfoRepository {
     func createNewBoard( completion : (BoardInfo)->Void ) {
         //TODO List にいれる…？
         dataSource.createEntity { (boardInfoEntity) -> Void in
-            completion(self.mapper.ToModel(boardInfoEntity))
+            self.afterSave()
+            completion(self.infoMapper.ToModel(boardInfoEntity))
+        }
+    }
+    
+    /**
+     BoardBody を読み込む処理
+     
+     - parameter boardInfo:  BoardInfoモデル
+     - parameter completion: 処理完了ブロック
+     */
+    func readBoardBody( boardInfo : BoardInfo, completion : (Bool,BoardBody?)->Void ) {
+        if let infoEntity = searchEntity(boardInfo) {
+            completion(true, bodyMapper.ToModel(infoEntity) )
+        }else {
+            completion(false, nil)
         }
     }
     

@@ -10,10 +10,11 @@ import UIKit
 
 class BoardViewController: UIViewController, UINavigationControllerDelegate {
     
-    var boardPresenter = PresenterContainer.sharedInstance.boardPresenter
-    var images : [[UIImage]] = [[]]
+    private var boardPresenter = PresenterContainer.sharedInstance.boardPresenter
+    private var images : [[UIImage]] = [[]]
+    private var boardBody : BoardBody? = nil
     
-    @IBOutlet weak var boardCollectionView: BoardCollectionView!
+    @IBOutlet weak private var boardCollectionView: BoardCollectionView!
     
     
     /**
@@ -30,14 +31,7 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
      */
     func setup( boardInfo : BoardInfo){
         print("setupForNew:"+boardInfo.title)
-    }
-    
-    /**
-     データを読み込む時のセットアップ
-     
-     - parameter boardId: ロードするboardId
-     */
-    func setupForLoad( dataId : Int ) {
+        boardPresenter.loadBoardBody(boardInfo)
     }
     
     //TODO
@@ -80,9 +74,10 @@ extension BoardViewController : UIImagePickerControllerDelegate {
         //TODOキャッシュ作ったりする？
         if  let originImage = info[UIImagePickerControllerOriginalImage] {
             let image:UIImage = originImage as! UIImage
+            //let reference = info[UIImagePickerControllerReferenceURL]
             
             // 渡されてきた画像をフォトアルバムに保存
-            //UIImageWriteToSavedPhotosAlbum(image, self, @selector(targetImage:didFinishSavingWithError:contextInfo:), NULL);
+            //UIImageWriteToSavedPhotosAlbum(image, self, @selectjor(targetImage:didFinishSavingWithError:contextInfo:), NULL);
             
             //TODO 本来はpresenterに投げてそのコールバックを受けて、CollectionView に通知
             //TODO 確認用コード
@@ -202,5 +197,10 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
 }
 
 extension BoardViewController : BoardPresenterEventHandler {
+    func OnLoadedBoard(board: BoardBody) {
+        boardBody = board
+    }
     
+    func OnAddedPhoto(referenceUrl: String) {
+    }
 }

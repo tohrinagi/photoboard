@@ -14,7 +14,7 @@ class GetBoardInfoListUseCase : UseCase {
     private(set) var boardInfoList : BoardInfoList?
     
     func main() {
-        boardInfoRepository.getBoardInfoList {
+        boardInfoRepository.readBoardInfoList {
             (boardInfoList) -> Void in
             self.boardInfoList = boardInfoList
         }

@@ -19,7 +19,7 @@ class BoardInfoMapper : NSObject {
      - returns: model
      */
     func ToModel( info : BoardInfoEntity ) -> BoardInfo {
-        return BoardInfo(id: info.id, title: info.title!, row: info.row!, createdAt: info.createdAt!, updatedAt: info.updatedAt!)
+        return BoardInfo(id: info.id, title: info.title!, row: Int(info.row!), createdAt: info.createdAt!, updatedAt: info.updatedAt!)
     }
     
     /**

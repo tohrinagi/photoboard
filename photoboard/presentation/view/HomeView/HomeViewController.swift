@@ -10,11 +10,11 @@ import UIKit
 
 /// 開始画面管理コントローラ
 class HomeViewController: UIViewController {
-    var presenter = PresenterContainer.sharedInstance.homePresenter
-    var images : [UIImage] = []
-    var boardInfoList : BoardInfoList? = nil
+    private var presenter = PresenterContainer.sharedInstance.homePresenter
+    private var images : [UIImage] = []
+    private var boardInfoList : BoardInfoList? = nil
     
-    @IBOutlet weak var homeCollectionView: HomeCollectionView!
+    @IBOutlet weak private var homeCollectionView: HomeCollectionView!
     
     /**
      ViewDidLoad 開始読み込み

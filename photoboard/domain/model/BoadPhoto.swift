@@ -11,9 +11,13 @@ import UIKit
 
 class BoardPhoto : NSObject {
     let photoPath : String
+    let section : Int
+    let row : Int
 
-    init( photoPath : String ) {
+    init( photoPath : String, section : Int, row : Int ) {
         self.photoPath = photoPath
+        self.section = section
+        self.row = row
         super.init()
     }
     
@@ -21,6 +25,9 @@ class BoardPhoto : NSObject {
         return UIImage(named: photoPath)
     }
     
-    func rotate() {
+    var IndexPath : NSIndexPath {
+        get {
+            return NSIndexPath(forRow: row, inSection: section)
+        }
     }
 }

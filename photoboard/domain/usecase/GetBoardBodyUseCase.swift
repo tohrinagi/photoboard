@@ -11,9 +11,17 @@ import Foundation
 
 /// ボードの本体情報を取得するビジネスロジック
 class GetBoardBodyUseCase : UseCase {
+    private let boardInfoRepository : BoardInfoRepository = RepositoryContainer.sharedInstance.boardInfoRepository
+    private let boardInfo : BoardInfo
+    private(set) var boardBody : BoardBody? = nil
     
-    private var loadBoardId : Int = 0
+    init( boardInfo : BoardInfo ) {
+        self.boardInfo = boardInfo
+    }
     
     func main() {
+        boardInfoRepository.readBoardBody(boardInfo) { (success, boardBody) -> Void in
+            self.boardBody = boardBody
+        }
     }
 }

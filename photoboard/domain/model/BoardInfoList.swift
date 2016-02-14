@@ -15,17 +15,4 @@ class BoardInfoList: NSObject {
         self.items = boardInfos
         super.init()
     }
-
-    /*
-    func createNewBoard() -> BoardInfo {
-        let new = BoardInfo()
-        items.append(new)
-        return new
-    }
-    
-    func deleteBoard( id : Int ) {
-    }
-    
-    func moveBoard( movedId : Int, insertAt : Int ) {
-    }*/
 }

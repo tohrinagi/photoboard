@@ -18,22 +18,4 @@ class BoardBody : NSObject {
         self.photos = photos
         super.init()
     }
-    
-    override init() {
-        self.info = BoardInfo()
-        self.photos = []
-        super.init()
-    }
-
-    func createNewPhoto( path : String ) -> BoardPhoto {
-        return BoardPhoto(photoPath: "")
-    }
-    
-    func deletePhoto( photo : BoardPhoto ) {
-        
-    }
-    
-    func movePhoto( movedPhoto : BoardPhoto, insertAt : Int ) {
-        
-    }
 }

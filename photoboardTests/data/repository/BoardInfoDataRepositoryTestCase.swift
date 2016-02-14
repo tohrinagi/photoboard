@@ -25,7 +25,7 @@ class BoardInfoDataRepositoryTestCase: XCTestCase {
     func testCombination() {
         let repository = BoardInfoDataRepository()
         
-        repository.getBoardInfoList { (boardInfoList) -> Void in
+        repository.readBoardInfoList { (boardInfoList) -> Void in
             XCTAssertEqual(boardInfoList.items.count, 0)
             
             //TODO 更新する
