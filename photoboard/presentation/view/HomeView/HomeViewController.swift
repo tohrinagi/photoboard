@@ -21,12 +21,26 @@ class HomeViewController: UIViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.eventHandler = self
     }
-    
+ 
+    /**
+     開始
+     
+     - parameter animated: anime
+     */
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        presenter.eventHandler = self
         presenter.loadBoardInfoList()
+    }
+    
+    /**
+     終了
+     
+     - parameter animated: anime
+     */
+    override func viewDidDisappear(animated: Bool) {
+        presenter.eventHandler = nil
     }
 
     /**
@@ -36,7 +50,6 @@ class HomeViewController: UIViewController {
      - parameter sender: sender
      */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //Segueの特定
         if segue.identifier == "HomeToBoard" {
             let info = sender as! BoardInfo
             let nextViewController = segue.destinationViewController as! BoardViewController;

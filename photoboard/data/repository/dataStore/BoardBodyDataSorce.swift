@@ -16,4 +16,9 @@ class BoardBodyDataSource {
         boardBody.addPhoto( photo )
         completion( photo )
     }
+    
+    func updateEntity( completion : (Bool)->Void ) {
+        let success = CoreDataManager.sharedInstance.update()
+        completion(success)
+    }
 }

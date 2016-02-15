@@ -13,7 +13,7 @@ class HomeCollectionViewLayout : UICollectionViewFlowLayout {
         ()->DraggableCollectionView in
         return self.collectionView as! DraggableCollectionView
     }()
-    lazy var moveOnDrag : DraggableCollectionSlideOnDrag? = {
+    lazy var moveOnDrag : DraggableCollectionSlideOnDrag = {
         ()->DraggableCollectionSlideOnDrag in
         return DraggableCollectionSlideOnDrag(collectionView: self.draggableCollectionView)
     }()
@@ -46,6 +46,6 @@ class HomeCollectionViewLayout : UICollectionViewFlowLayout {
      */
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let attributes = super.layoutAttributesForElementsInRect(rect)
-        return moveOnDrag?.layoutAttributesForElementsInRectOnDrag( attributes! ) ?? attributes
+        return moveOnDrag.layoutAttributesForElementsInRectOnDrag( attributes! ) ?? attributes
     }
 }

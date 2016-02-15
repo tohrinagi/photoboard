@@ -14,4 +14,5 @@ protocol BoardInfoRepository {
     func createNewBoard( completion : (BoardInfo)->Void )
     func readBoardBody( boardInfo : BoardInfo, completion : (Bool,BoardBody?)->Void )
     func addBoardPhoto( boardBody : BoardBody, referenceUrl : String, section : Int, row : Int, completion : (BoardPhoto)->Void )
+    func moveBoardPhoto( boardBody : BoardBody, from : NSIndexPath, to : NSIndexPath, completion : (from:BoardPhoto, to:BoardPhoto)->Void )
 }

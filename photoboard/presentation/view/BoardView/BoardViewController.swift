@@ -11,11 +11,11 @@ import Photos
 
 class BoardViewController: UIViewController, UINavigationControllerDelegate {
     
-    private var boardPresenter = PresenterContainer.sharedInstance.boardPresenter
+    private var presenter = PresenterContainer.sharedInstance.boardPresenter
     private var images : [[UIImage]] = [[]]
     private var boardBody : BoardBody? = nil
     
-    @IBOutlet weak private var boardCollectionView: BoardCollectionView!
+    @IBOutlet weak private var boardCollectionView: BoardCollectionView?
     
     
     /**
@@ -23,21 +23,30 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        boardPresenter.eventHandler = self
-        print("viewDidLoad")
+        NSLog("viewDidLoad")
     }
     
     /**
      新しく作成した時のセットアップ
      */
     func setup( boardInfo : BoardInfo){
-        print("setupForNew:"+boardInfo.title)
-        boardPresenter.loadBoardBody(boardInfo)
+        NSLog("setupForNew:"+boardInfo.title)
+        presenter.eventHandler = self
+        presenter.loadBoardBody(boardInfo)
+    }
+    
+    /**
+     終了
+     
+     - parameter animated: anime
+     */
+    override func viewDidDisappear(animated: Bool) {
+        presenter.eventHandler = nil
     }
     
     //TODO
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //print(segue.debugDescription)
+        //NSLog(segue.debugDescription)
     }
     
     /**
@@ -55,9 +64,6 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
         // 撮影画面をモーダルビューとして表示する
         self.presentViewController(cameraController, animated: true, completion: nil)
     }
-    
-    //TODO 確認用コード
-    var a = 0
     
     /**
      URL から Image を生成する処理
@@ -77,18 +83,19 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
             contentMode: .AspectFill, options: nil) {
                 image, info in
                 
-                let isDegraded = info?[PHImageResultIsDegradedKey]?.boolValue ?? false
-                if isDegraded {
+                //let isDegraded = info?[PHImageResultIsDegradedKey]?.boolValue ?? false
+                //if isDegraded {
                     //TODO 低解像度の置き換え処理
-                } else {
-                    if self.images.count <= self.a {
-                        self.images.append([])
-                    }
-                    //TODO ない場合
-                    self.images[self.a].append(image!)
-                    self.a ^= 1
-                    self.boardCollectionView.reloadData()
+                //} else {
+                while self.images.count <= photo.section {
+                    self.images.append([])
                 }
+                while self.images[photo.section].count <= photo.row {
+                    self.images[photo.section].append(UIImage())
+                }
+                self.images[photo.section][photo.row] = image!
+                //}
+                self.boardCollectionView?.reloadData()
         }
     }
 }
@@ -104,9 +111,9 @@ extension BoardViewController : UIImagePickerControllerDelegate {
         // モーダルビューを閉じる
         self.dismissViewControllerAnimated(true, completion: nil)
         // 画像があったらBoardScrollViewに追加
-        let url = info[UIImagePickerControllerReferenceURL] as! NSURL
-        //TODO section, row
-        boardPresenter.addPhoto(boardBody!, referenceUrl: url.absoluteString, section: 0, row: 0)
+        if let url = info[UIImagePickerControllerReferenceURL] as? NSURL {
+            presenter.addPhoto(boardBody!, referenceUrl: url.absoluteString, section: 0, row: images[0].count)
+        }
     }
     
     /**
@@ -144,7 +151,7 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
      - returns: 作成したセル
      */
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = boardCollectionView.dequeueReusableCellWithReuseIdentifier("BoardCell", forIndexPath: indexPath) as! BoardCollectionViewCell
+        let cell = boardCollectionView?.dequeueReusableCellWithReuseIdentifier("BoardCell", forIndexPath: indexPath) as! BoardCollectionViewCell
         
         cell.imageView.image = images[indexPath.section][indexPath.row]
         return cell
@@ -176,19 +183,8 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
         //TODO モデルに入れ替え通知
         let sourceImage = images[sourceIndexPath.section].removeAtIndex(sourceIndexPath.row)
         images[destinationIndexPath.section].insert(sourceImage, atIndex: destinationIndexPath.row)
-/*
-        if destinationIndexPath.section == images.count - 1 {
-            if images[ images.count-1].count > 0 {
-                images.append([])
-            }
-        }
-        if sourceIndexPath.section == images.count - 1 {
-            if images[ images.count-1].count == 0 {
-                images.removeAtIndex(images.count-1)
-            }
-        }
-  */      
-        print("srcSec:\(sourceIndexPath.section) srcRow:\(sourceIndexPath.row) -> dstSec:\(destinationIndexPath.section) dstRow:\(destinationIndexPath.row)")
+        NSLog("srcSec:\(sourceIndexPath.section) srcRow:\(sourceIndexPath.row) -> dstSec:\(destinationIndexPath.section) dstRow:\(destinationIndexPath.row)")
+        presenter.movePhoto(boardBody!, from: sourceIndexPath, to: destinationIndexPath)
     }
  
     /**
@@ -198,8 +194,8 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
      - parameter collectionView: collectionView
      */
     func finishedMove(collectionView: UICollectionView ) {
-        print("finishedMove")
-        //TODO モデルでセクションを増やす処理
+        NSLog("finishedMove")
+        //セクションを増やす処理
         let last = images.count - 1
         if images[last].count != 0 {
             images.append([])
@@ -217,6 +213,7 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
 
 extension BoardViewController : BoardPresenterEventHandler {
     func OnLoadedBoard(board: BoardBody) {
+        NSLog("OnLoadedBoard")
         boardBody = board
         
         for photo in boardBody?.photos ?? [] {
@@ -226,5 +223,9 @@ extension BoardViewController : BoardPresenterEventHandler {
     
     func OnAddedPhoto(photo: BoardPhoto) {
         generateUrlToImage(photo)
+    }
+    
+    func OnMovePhoto(fromPhoto: BoardPhoto, toPhoto: BoardPhoto) {
+        NSLog("OnMovePhoto")
     }
 }

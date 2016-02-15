@@ -122,10 +122,26 @@ class BoardInfoDataRepository : BoardInfoRepository {
                 boardPhotoEntity.name = referenceUrl
                 boardPhotoEntity.section = section
                 boardPhotoEntity.row = row
-                self.afterSave()
-                completion(self.photoMapper.ToModel(boardPhotoEntity))
+                self.bodyDataSource.updateEntity( { (success) -> Void in
+                    self.afterSave()
+                    completion(self.photoMapper.ToModel(boardPhotoEntity))
+                })
             })
         }
+    }
+    
+    /**
+     BoardPhoto の入れ替え処理
+     
+     - parameter boardBody:  Photo を移動する BoardBody
+     - parameter from:       移動元写真
+     - parameter to:         移動後写真
+     - parameter completion: 処理完了ブロック
+     */
+    func moveBoardPhoto(boardBody: BoardBody, from: NSIndexPath, to: NSIndexPath, completion: (from: BoardPhoto, to: BoardPhoto) -> Void) {
+        //TODO
+        //let sourceImage = images[sourceIndexPath.section].removeAtIndex(sourceIndexPath.row)
+        //images[destinationIndexPath.section].insert(sourceImage, atIndex: destinationIndexPath.row)
     }
     
     /**
