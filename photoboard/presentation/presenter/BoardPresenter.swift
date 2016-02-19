@@ -37,7 +37,7 @@ class BoardPresenter {
     func movePhoto( boardBody : BoardBody, from : NSIndexPath, to : NSIndexPath ) {
         let task = MoveBoardPhotoUseCase(boardBody: boardBody, from: from, to: to)
         TaskManager.startBackground(task) { (task) -> Void in
-            self.eventHandler?.OnMovePhoto(task.fromPhoto!, toPhoto: task.toPhoto!)
+            //self.eventHandler?.OnMovePhoto(task.fromPhoto!, toPhoto: task.toPhoto!)
         }
     }
 }

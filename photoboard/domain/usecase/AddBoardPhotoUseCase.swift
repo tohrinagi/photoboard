@@ -11,7 +11,7 @@ import Foundation
 /// ボードに写真を追加するユースケース
 class AddBoardPhotoUseCase : UseCase {
     
-    private let boardInfoRepository : BoardInfoRepository = RepositoryContainer.sharedInstance.boardInfoRepository
+    private let boardBodyRepository = RepositoryContainer.sharedInstance.boardBodyRepository
     private let boardBody : BoardBody
     private let url : String
     private let section : Int
@@ -26,8 +26,13 @@ class AddBoardPhotoUseCase : UseCase {
     }
     
     func main() {
-        boardInfoRepository.addBoardPhoto(boardBody, referenceUrl: url, section: section, row: row) { (boardPhoto) -> Void in
-            self.boardPhoto = boardPhoto
+        boardBodyRepository.createPhoto(boardBody) { (photo) -> Void in
+            photo.photoPath = self.url
+            photo.section = self.section
+            photo.row = self.row
+            self.boardBodyRepository.update(self.boardBody, completion: { () -> Void in
+                //noting
+            })
         }
     }
 }

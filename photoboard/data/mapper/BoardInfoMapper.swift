@@ -29,23 +29,24 @@ class BoardInfoMapper : NSObject {
      
      - returns: model
      */
-    func ToListModel( infos : [BoardInfoEntity] ) -> BoardInfoList {
+    func ToListModel( infos : [BoardInfoEntity] ) -> [BoardInfo] {
         var list : [BoardInfo] = []
         for info in infos {
             list.append(ToModel(info))
         }
-        return BoardInfoList(boardInfos: list)
+        return list
     }
     
-    
-    func ToEntity( entity : BoardInfoEntity, info : BoardInfo ){
-        NSLog("\(entity.objectID.URIRepresentation())=\(info.id)")
-        if entity.objectID.URIRepresentation().absoluteString != info.id {
-            assert(false)
-        }
-        entity.row = info.row
-        entity.title = info.title
-        entity.updatedAt = info.updatedAt
-        entity.createdAt = info.createdAt
+    /**
+     Modelの内容をEntityへ書き出し
+     
+     - parameter entity: BoardInfoEntity
+     - parameter model:  BoardInfo
+     */
+    func ToEntity( entity : BoardInfoEntity, model : BoardInfo ) {
+        entity.createdAt = model.createdAt
+        entity.row = model.row
+        entity.title = model.title
+        entity.updatedAt = model.updatedAt
     }
 }

@@ -12,7 +12,7 @@ import UIKit
 class HomeViewController: UIViewController {
     private var presenter = PresenterContainer.sharedInstance.homePresenter
     private var images : [UIImage] = []
-    private var boardInfoList : BoardInfoList? = nil
+    private var boardInfoList = [BoardInfo]()
     
     @IBOutlet weak private var homeCollectionView: HomeCollectionView!
     
@@ -94,7 +94,7 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
      - returns: セクションのアイテム数
      */
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return boardInfoList?.items.count ?? 0
+        return boardInfoList.count
     }
     
     /**
@@ -129,17 +129,17 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
      */
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         NSLog("selected Sec:\(indexPath.section) Row:\(indexPath.row)")
-        let board = boardInfoList?.items[indexPath.row]
+        let board = boardInfoList[indexPath.row]
         self.performSegueWithIdentifier("HomeToBoard", sender: board)
     }
 }
 
 extension HomeViewController : HomePresenterEventHandler {
     
-    func OnLoadedBoards(boardInfoList: BoardInfoList) {
+    func OnLoadedBoards(boardInfoList: [BoardInfo]) {
         //TODO
         images = []
-        for _ in boardInfoList.items {
+        for _ in boardInfoList {
             //let image = UIImage(named: item.)
             if let image = UIImage(named: "cat.jpg") {
                 images.append(image)

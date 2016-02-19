@@ -9,10 +9,7 @@
 import Foundation
 
 protocol BoardInfoRepository {
-    func readBoardInfoList( completion : (BoardInfoList)->Void )
-    func updateBoardInfoList( boardInfoList : BoardInfoList, completion : (Bool)->Void )
-    func createNewBoard( completion : (BoardInfo)->Void )
-    func readBoardBody( boardInfo : BoardInfo, completion : (Bool,BoardBody?)->Void )
-    func addBoardPhoto( boardBody : BoardBody, referenceUrl : String, section : Int, row : Int, completion : (BoardPhoto)->Void )
-    func moveBoardPhoto( boardBody : BoardBody, from : NSIndexPath, to : NSIndexPath, completion : (from:BoardPhoto, to:BoardPhoto)->Void )
+    func create( completion : (BoardInfo)->Void )
+    func read( completion : ([BoardInfo])->Void )
+    func update( boardInfoList : [BoardInfo], completion : ()->Void )
 }

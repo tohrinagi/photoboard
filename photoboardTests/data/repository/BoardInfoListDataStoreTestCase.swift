@@ -25,32 +25,24 @@ class BoardInfoListDataStoreTestCase: XCTestCase {
     
     func testCombination() {
         let title = "DataSourceTest"
-        let dataSource = BoardInfoListDataStore()
-        dataSource.createEntity { (boardInfoEntity) -> Void in
+        let dataSource = BoardInfoDataStore()
+        dataSource.create { (boardInfoEntity) -> Void in
             XCTAssertNotNil(boardInfoEntity)
-            XCTAssertNotNil(boardInfoEntity.body)
+            XCTAssertNil(boardInfoEntity.body)
             
             boardInfoEntity.title = title
             
-            dataSource.updateEntity(boardInfoEntity, completion: { (success) -> Void in
-                XCTAssert(success)
+            dataSource.load{ (entities) -> Void in
+                XCTAssertNotNil(entities)
+                XCTAssert(entities.count > 0)
+                XCTAssertEqual(entities.first!.title, title)
                 
-                dataSource.readAllEntity{ (success, entities) -> Void in
-                    XCTAssert(success)
-                    XCTAssertNotNil(entities)
-                    XCTAssert(entities!.count > 0)
-                    XCTAssertEqual(entities!.first!.title, title)
-                    
-                    dataSource.deleteEntity(entities!.first!, completion: { (success) -> Void in
-                        XCTAssert(success)
-                        
-                        dataSource.readAllEntity{ (success, entities) -> Void in
-                            XCTAssert(success)
-                            XCTAssertEqual(entities!.count,0)
-                        }
-                    })
-                }
-            })
+                dataSource.delete(entities.first!.id, completion: { () -> Void in
+                    dataSource.load{ (entities) -> Void in
+                        XCTAssertEqual(entities.count,0)
+                    }
+                })
+            }
         }
     }
 }

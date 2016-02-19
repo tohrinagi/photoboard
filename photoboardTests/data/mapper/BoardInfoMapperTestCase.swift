@@ -37,8 +37,8 @@ class BoardInfoMapperTestCase: XCTestCase {
         let entities = [boardInfoEntity]
         let listModel = mapper.ToListModel(entities)
         XCTAssertNotNil(listModel)
-        XCTAssertNotNil(listModel.items.first)
-        if let model = listModel.items.first {
+        XCTAssertEqual(listModel.count, 1)
+        if let model = listModel.first {
             XCTAssertEqual(boardInfoEntity.title,model.title)
             XCTAssertEqual(boardInfoEntity.updatedAt, model.updatedAt)
             XCTAssertEqual(boardInfoEntity.createdAt, model.createdAt)
@@ -58,7 +58,7 @@ class BoardInfoMapperTestCase: XCTestCase {
         model.renameTitle("BoardInfoMapperTestToEntity")
         model.updated()
         //TODO
-        mapper.ToEntity(boardInfoEntity, info: model)
+        mapper.ToEntity(boardInfoEntity, model: model)
         
         XCTAssertEqual(boardInfoEntity.title,model.title)
         XCTAssertEqual(boardInfoEntity.updatedAt, model.updatedAt)

@@ -12,10 +12,22 @@ import Foundation
 class BoardBody : NSObject {
     let info : BoardInfo
     private(set) var photos : [BoardPhoto]
+    var id : String
     
-    init( info : BoardInfo, photos : [BoardPhoto] ) {
+    init( id : String, info : BoardInfo, photos : [BoardPhoto] ) {
+        self.id = id
         self.info = info
         self.photos = photos
         super.init()
+    }
+    
+    func AddPhoto( photo : BoardPhoto )
+    {
+        photos.append(photo)
+    }
+    
+    func deletePhoto( photo : BoardPhoto )
+    {
+        photos.removeAtIndex(photos.indexOf(photo)!)
     }
 }

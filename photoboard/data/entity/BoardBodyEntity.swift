@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-class BoardBodyEntity: NSManagedObject {
+class BoardBodyEntity: CoreDataEntity {
 
 // Insert code here to add functionality to your managed object subclass
     func addPhoto( photo : BoardPhotoEntity ) {

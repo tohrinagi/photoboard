@@ -10,13 +10,15 @@ import Foundation
 
 /// ボードセットを取得するビジネスロジック
 class GetBoardInfoListUseCase : UseCase {
-    private let boardInfoRepository : BoardInfoRepository = RepositoryContainer.sharedInstance.boardInfoRepository
-    private(set) var boardInfoList : BoardInfoList?
+    private let boardInfoRepository = RepositoryContainer.sharedInstance.boardInfoRepository
+    private(set) var boardInfoList = [BoardInfo]()
     
     func main() {
-        boardInfoRepository.readBoardInfoList {
+        boardInfoRepository.read {
             (boardInfoList) -> Void in
             self.boardInfoList = boardInfoList
         }
     }
+    
+    //TODO task でバッググラウンド開始で、（）->Void の待つ処理は…？？？
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol HomePresenterEventHandler: class {
-    func OnLoadedBoards(boards : BoardInfoList) -> Void
+    func OnLoadedBoards(boards : [BoardInfo]) -> Void
     func OnCreatedNewBoard( board : BoardInfo ) -> Void
 }
 
@@ -26,7 +26,7 @@ class HomePresenter {
         let task = GetBoardInfoListUseCase()
         TaskManager.startBackground(task) {
             (task) -> Void in
-            self.eventHandler?.OnLoadedBoards(task.boardInfoList!)
+            self.eventHandler?.OnLoadedBoards(task.boardInfoList)
         }
     }
     
@@ -36,7 +36,7 @@ class HomePresenter {
     func createNewBoard() {
         let task = CreateNewBoardUseCase()
         TaskManager.startBackground(task) { (task) -> Void in
-            self.eventHandler?.OnCreatedNewBoard(task.boardInfo!)
+            self.eventHandler?.OnCreatedNewBoard(task.boardBody!.info)
         }
     }
 }

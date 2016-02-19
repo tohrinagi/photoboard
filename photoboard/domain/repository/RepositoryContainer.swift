@@ -17,10 +17,17 @@ class RepositoryContainer {
         return Static.instance
     }
     private(set) var boardInfoRepository : BoardInfoRepository
+    private(set) var boardBodyRepository : BoardBodyRepository
+    
+    //以下依存
+    private var infoDataStore = BoardInfoDataStore()
+    private var bodyDataStore = BoardBodyDataStore()
+    private var photoDataStore = BoardPhotoDataStore()
     
     
     init() {
         //TODO DI する
-        self.boardInfoRepository = BoardInfoDataRepository()
+        self.boardInfoRepository = BoardInfoDataRepository( infoStore: self.infoDataStore )
+        self.boardBodyRepository = BoardBodyDataRepository( infoStore: self.infoDataStore, bodyStore: self.bodyDataStore, photoStore: self.photoDataStore )
     }
 }

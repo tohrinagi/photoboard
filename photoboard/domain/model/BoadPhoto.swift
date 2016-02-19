@@ -10,11 +10,13 @@ import Foundation
 import UIKit
 
 class BoardPhoto : NSObject {
-    let photoPath : String
-    let section : Int
-    let row : Int
+    var photoPath : String
+    var section : Int
+    var row : Int
+    var id : String
 
-    init( photoPath : String, section : Int, row : Int ) {
+    init( id : String, photoPath : String, section : Int, row : Int ) {
+        self.id = id
         self.photoPath = photoPath
         self.section = section
         self.row = row

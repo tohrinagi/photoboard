@@ -11,12 +11,15 @@ import Foundation
 /// 新規ボードを作成するユースケース
 class CreateNewBoardUseCase : UseCase {
     
-    private let boardInfoRepository : BoardInfoRepository = RepositoryContainer.sharedInstance.boardInfoRepository
-    private(set) var boardInfo : BoardInfo?
+    private let boardInfoRepository = RepositoryContainer.sharedInstance.boardInfoRepository
+    private let boardBodyRepository = RepositoryContainer.sharedInstance.boardBodyRepository
+    private(set) var boardBody : BoardBody?
     
     func main() {
-        boardInfoRepository.createNewBoard { (boardInfo) -> Void in
-            self.boardInfo = boardInfo
+        boardInfoRepository.create { (info) -> Void in
+            self.boardBodyRepository.create(info, completion: { (body) -> Void in
+                self.boardBody = body
+            })
         }
     }
 }

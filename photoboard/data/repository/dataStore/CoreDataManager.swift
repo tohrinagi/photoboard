@@ -24,8 +24,6 @@ class CoreDataManager {
     func create<DataType:NSManagedObject>() -> DataType {
         let managedObject: AnyObject = NSEntityDescription.insertNewObjectForEntityForName(
             NSStringFromClass(DataType).componentsSeparatedByString(".").last! as String, inManagedObjectContext: managedObjectContext)
-        let success = saveContext()
-        NSLog("createdSave :\(success)")
         return managedObject as! DataType
     }
     
@@ -33,30 +31,28 @@ class CoreDataManager {
         do {
             return try managedObjectContext.executeFetchRequest(fetchRequest) as? [DataType]
         }catch{
+            //例外
             return nil
         }
     }
     
-    func update() ->Bool {
-        return saveContext()
+    func dispose( object : NSManagedObject, mergeChanges : Bool ) {
+        managedObjectContext.refreshObject(object, mergeChanges: mergeChanges)
     }
     
-    func delete( entity :NSManagedObject )->Bool {
+    func delete( entity :NSManagedObject )->Void {
         managedObjectContext.deleteObject(entity);
-        return saveContext()
     }
     
     // MARK: - Core Data Saving support
-    func saveContext () ->Bool {
+    func saveContext () ->Void {
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()
-                return true
             } catch {
-                return false
+                //TODO 例外
             }
         }
-        return false
     }
     
     // MARK: - Core Data stack

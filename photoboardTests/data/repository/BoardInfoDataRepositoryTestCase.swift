@@ -23,14 +23,14 @@ class BoardInfoDataRepositoryTestCase: XCTestCase {
         }
     }
     func testCombination() {
-        let repository = BoardInfoDataRepository()
+        let infoStore = BoardInfoDataStore()
+        let repository = BoardInfoDataRepository(infoStore: infoStore)
         
-        repository.readBoardInfoList { (boardInfoList) -> Void in
-            XCTAssertEqual(boardInfoList.items.count, 0)
+        repository.read { (boardInfoList) -> Void in
+            XCTAssertEqual(boardInfoList.count, 0)
             
             //TODO 更新する
-            repository.updateBoardInfoList(boardInfoList, completion: { (success) -> Void in
-                XCTAssert(success)
+            repository.update(boardInfoList, completion: { () -> Void in
                 
                 //TODO 削除する
                 /*repository.deleteBoardInfoList(BoardInfo, completion: { (success)-> Void in

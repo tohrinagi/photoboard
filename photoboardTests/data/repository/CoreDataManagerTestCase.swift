@@ -23,10 +23,6 @@ class CoreDataManagerTestCase: XCTestCase {
         XCTAssertNotNil(entities)
     }
     
-    func testUpdate() {
-        CoreDataManager.sharedInstance.update()
-    }
-    
     func testDelete() {
         let entity : BoardInfoEntity = CoreDataManager.sharedInstance.create()
         CoreDataManager.sharedInstance.delete(entity)
@@ -39,8 +35,6 @@ class CoreDataManagerTestCase: XCTestCase {
         
         let createdEntity : BoardInfoEntity = CoreDataManager.sharedInstance.create()
         createdEntity.title = title
-        let updateResult = CoreDataManager.sharedInstance.update()
-        XCTAssert(updateResult)
         
         let entityName = NSStringFromClass(BoardInfoEntity).componentsSeparatedByString(".").last! as String
         let fetchRequest = NSFetchRequest(entityName: entityName)

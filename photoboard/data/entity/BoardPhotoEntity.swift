@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-class BoardPhotoEntity: NSManagedObject {
+class BoardPhotoEntity: CoreDataEntity {
 
 // Insert code here to add functionality to your managed object subclass
 

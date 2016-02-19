@@ -11,7 +11,7 @@ import Foundation
 /// ボードの写真を移動するユースケース
 class MoveBoardPhotoUseCase : UseCase {
     
-    private let boardInfoRepository : BoardInfoRepository = RepositoryContainer.sharedInstance.boardInfoRepository
+    private let boardBodyRepository = RepositoryContainer.sharedInstance.boardBodyRepository
     private let boardBody : BoardBody
     private let from : NSIndexPath
     private let to : NSIndexPath
@@ -25,9 +25,13 @@ class MoveBoardPhotoUseCase : UseCase {
     }
     
     func main() {
-        boardInfoRepository.moveBoardPhoto(boardBody, from: from, to: to) { (from, to) -> Void in
-            self.fromPhoto = from
-            self.toPhoto = to
+        //入れ替え処理を行う
+        
+        
+        //モデルの書き込みをリポジトリに指示する
+        boardBodyRepository.update(boardBody) { () -> Void in
+            //noting
         }
+        
     }
 }
