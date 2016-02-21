@@ -23,6 +23,14 @@ class BoardPhoto : NSObject {
         super.init()
     }
     
+    init( id : String ) {
+        self.id = id
+        self.photoPath = ""
+        self.section = 0
+        self.row = 0
+        super.init()
+    }
+    
     func createImage() -> UIImage? {
         return UIImage(named: photoPath)
     }

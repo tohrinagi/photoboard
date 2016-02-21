@@ -13,6 +13,10 @@ class BoardPhotoMapper {
         return BoardPhoto(id: entity.id, photoPath: entity.name!, section: Int(entity.section!), row: Int(entity.row!))
     }
     
+    func ToNewModel( entity : BoardPhotoEntity ) -> BoardPhoto {
+        return BoardPhoto(id: entity.id)
+    }
+    
     func ToListModel( entities : [BoardPhotoEntity] ) -> [BoardPhoto] {
         var list = [BoardPhoto]()
         for entity in entities {

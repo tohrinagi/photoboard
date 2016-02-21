@@ -31,7 +31,7 @@ class AddBoardPhotoUseCase : UseCase {
             photo.section = self.section
             photo.row = self.row
             self.boardBodyRepository.update(self.boardBody, completion: { () -> Void in
-                //noting
+                self.boardPhoto = photo
             })
         }
     }

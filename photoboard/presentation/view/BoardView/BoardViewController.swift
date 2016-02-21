@@ -41,7 +41,9 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
      - parameter animated: anime
      */
     override func viewDidDisappear(animated: Bool) {
-        presenter.eventHandler = nil
+        super.viewDidDisappear(animated)
+        //TODO カメラの戻りでプレゼンター使えなくなる
+        //presenter.eventHandler = nil
     }
     
     //TODO
