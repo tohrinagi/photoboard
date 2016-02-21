@@ -11,7 +11,7 @@ import Foundation
 protocol BoardPresenterEventHandler: class {
     func OnLoadedBoard( board : BoardBody ) -> Void
     func OnAddedPhoto( photo : BoardPhoto ) -> Void
-    func OnMovePhoto( fromPhoto : BoardPhoto, toPhoto : BoardPhoto ) -> Void
+    func OnMovePhoto( from : NSIndexPath, to : NSIndexPath ) -> Void
 }
 
 /// Board画面用プレゼンター
@@ -37,7 +37,7 @@ class BoardPresenter {
     func movePhoto( boardBody : BoardBody, from : NSIndexPath, to : NSIndexPath ) {
         let task = MoveBoardPhotoUseCase(boardBody: boardBody, from: from, to: to)
         TaskManager.startBackground(task) { (task) -> Void in
-            //self.eventHandler?.OnMovePhoto(task.fromPhoto!, toPhoto: task.toPhoto!)
+            self.eventHandler?.OnMovePhoto(from, to: to)
         }
     }
 }

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 class BoardPhoto : NSObject {
     var photoPath : String
@@ -31,17 +30,13 @@ class BoardPhoto : NSObject {
         super.init()
     }
     
-    func createImage() -> UIImage? {
-        return UIImage(named: photoPath)
-    }
-    
     var referenceURL : NSURL {
         get {
             return NSURL(string: photoPath)!
         }
     }
     
-    var IndexPath : NSIndexPath {
+    var indexPath : NSIndexPath {
         get {
             return NSIndexPath(forRow: row, inSection: section)
         }

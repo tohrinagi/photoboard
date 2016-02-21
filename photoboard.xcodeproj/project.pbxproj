@@ -30,6 +30,7 @@
 		E475EB501C74C6D8005E3F7A /* BoardPhotoDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E475EB4F1C74C6D8005E3F7A /* BoardPhotoDataStore.swift */; };
 		E475EB521C775EA3005E3F7A /* BoardBodyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E475EB511C775EA3005E3F7A /* BoardBodyRepository.swift */; };
 		E475EB541C776003005E3F7A /* BoardDataBodyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E475EB531C776003005E3F7A /* BoardDataBodyRepository.swift */; };
+		E475EB561C79A0A6005E3F7A /* BoardBodyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E475EB551C79A0A6005E3F7A /* BoardBodyViewModel.swift */; };
 		E47657ED1C40142400B10A7E /* DraggableCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47657EC1C40142400B10A7E /* DraggableCollectionDataSource.swift */; };
 		E47657EF1C411B1F00B10A7E /* DraggableCollectionSlideOnDrag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47657EE1C411B1F00B10A7E /* DraggableCollectionSlideOnDrag.swift */; };
 		E48176001C64F4090005AF19 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48175FF1C64F4090005AF19 /* TaskManager.swift */; };
@@ -107,6 +108,7 @@
 		E475EB4F1C74C6D8005E3F7A /* BoardPhotoDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardPhotoDataStore.swift; sourceTree = "<group>"; };
 		E475EB511C775EA3005E3F7A /* BoardBodyRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardBodyRepository.swift; sourceTree = "<group>"; };
 		E475EB531C776003005E3F7A /* BoardDataBodyRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardDataBodyRepository.swift; sourceTree = "<group>"; };
+		E475EB551C79A0A6005E3F7A /* BoardBodyViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardBodyViewModel.swift; sourceTree = "<group>"; };
 		E47657EC1C40142400B10A7E /* DraggableCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableCollectionDataSource.swift; sourceTree = "<group>"; };
 		E47657EE1C411B1F00B10A7E /* DraggableCollectionSlideOnDrag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableCollectionSlideOnDrag.swift; sourceTree = "<group>"; };
 		E48175FF1C64F4090005AF19 /* TaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				E48BB2741C39468A00CE518A /* BoardCollectionView.swift */,
 				E48BB2721C39444800CE518A /* BoardCollectionViewCell.swift */,
 				E41DD3E01C3AB33400FA6F93 /* BoardCollectionViewLayout.swift */,
+				E475EB551C79A0A6005E3F7A /* BoardBodyViewModel.swift */,
 			);
 			path = BoardView;
 			sourceTree = "<group>";
@@ -604,6 +607,7 @@
 				E475EB501C74C6D8005E3F7A /* BoardPhotoDataStore.swift in Sources */,
 				E4F9FA311C35260B0016F0AC /* HomeViewController.swift in Sources */,
 				E45B9B3E1C6CD18F00299141 /* BoardPhotoMapper.swift in Sources */,
+				E475EB561C79A0A6005E3F7A /* BoardBodyViewModel.swift in Sources */,
 				E48FA0401C5DC0AF00C88CB2 /* Task.swift in Sources */,
 				E45B9B3C1C6CCD5200299141 /* BoardBodyMapper.swift in Sources */,
 				E4F508821C64D28C007E8065 /* BoardInfoRepository.swift in Sources */,

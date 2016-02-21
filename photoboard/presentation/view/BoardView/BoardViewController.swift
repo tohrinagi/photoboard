@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import Photos
 
 class BoardViewController: UIViewController, UINavigationControllerDelegate {
     
     private var presenter = PresenterContainer.sharedInstance.boardPresenter
-    private var images : [[UIImage]] = [[]]
     private var boardBody : BoardBody? = nil
+    private var bodyViewModel : BoardBodyViewModel? = nil
     
     @IBOutlet weak private var boardCollectionView: BoardCollectionView?
     
@@ -67,39 +66,6 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
         self.presentViewController(cameraController, animated: true, completion: nil)
     }
     
-    /**
-     URL から Image を生成する処理
-     
-     - parameter photo: BoardPhoto
-     */
-    private func generateUrlToImage(photo: BoardPhoto) {
-        
-        let options = PHFetchOptions()
-        options.includeHiddenAssets = true
-        NSLog(photo.referenceURL.absoluteString)
-        let fetchResult = PHAsset.fetchAssetsWithALAssetURLs([photo.referenceURL], options: options)
-        let asset = fetchResult.firstObject as! PHAsset
-     
-        PHImageManager().requestImageForAsset(asset,
-            targetSize: CGSize(width: 320, height: 320),
-            contentMode: .AspectFill, options: nil) {
-                image, info in
-                
-                //let isDegraded = info?[PHImageResultIsDegradedKey]?.boolValue ?? false
-                //if isDegraded {
-                    //TODO 低解像度の置き換え処理
-                //} else {
-                while self.images.count <= photo.section {
-                    self.images.append([])
-                }
-                while self.images[photo.section].count <= photo.row {
-                    self.images[photo.section].append(UIImage())
-                }
-                self.images[photo.section][photo.row] = image!
-                //}
-                self.boardCollectionView?.reloadData()
-        }
-    }
 }
 
 extension BoardViewController : UIImagePickerControllerDelegate {
@@ -114,7 +80,7 @@ extension BoardViewController : UIImagePickerControllerDelegate {
         self.dismissViewControllerAnimated(true, completion: nil)
         // 画像があったらBoardScrollViewに追加
         if let url = info[UIImagePickerControllerReferenceURL] as? NSURL {
-            presenter.addPhoto(boardBody!, referenceUrl: url.absoluteString, section: 0, row: images[0].count)
+            presenter.addPhoto(boardBody!, referenceUrl: url.absoluteString, section: 0, row: bodyViewModel!.numberOfItems(0))
         }
     }
     
@@ -140,7 +106,7 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
      - returns: セクション数
      */
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return images.count
+        return bodyViewModel?.numberOfSections() ?? 0
     }
     
     /**
@@ -155,7 +121,7 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = boardCollectionView?.dequeueReusableCellWithReuseIdentifier("BoardCell", forIndexPath: indexPath) as! BoardCollectionViewCell
         
-        cell.imageView.image = images[indexPath.section][indexPath.row]
+        cell.imageView.image = bodyViewModel!.photo(indexPath)
         return cell
     }
     
@@ -169,7 +135,7 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
      - returns: 指定したセクションごとのアイテム数
      */
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images[section].count
+        return bodyViewModel?.numberOfItems(section) ?? 0
     }
     
     /**
@@ -181,11 +147,8 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
      - parameter destinationIndexPath: 移動先
      */
     func collectionView(collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-    
-        //TODO モデルに入れ替え通知
-        let sourceImage = images[sourceIndexPath.section].removeAtIndex(sourceIndexPath.row)
-        images[destinationIndexPath.section].insert(sourceImage, atIndex: destinationIndexPath.row)
-        NSLog("srcSec:\(sourceIndexPath.section) srcRow:\(sourceIndexPath.row) -> dstSec:\(destinationIndexPath.section) dstRow:\(destinationIndexPath.row)")
+        //早く反応させるために、OnMovePhoto をまたない
+        bodyViewModel?.movePhoto(sourceIndexPath, to: destinationIndexPath)
         presenter.movePhoto(boardBody!, from: sourceIndexPath, to: destinationIndexPath)
     }
  
@@ -197,17 +160,7 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
      */
     func finishedMove(collectionView: UICollectionView ) {
         NSLog("finishedMove")
-        //セクションを増やす処理
-        let last = images.count - 1
-        if images[last].count != 0 {
-            images.append([])
-        } else {
-            if last > 0 {
-                if images[last-1].count == 0 {
-                    images.removeAtIndex(last)
-                }
-            }
-        }
+        bodyViewModel?.updateBlankSection()
         //セクションを増減させたので、リロード
         collectionView.reloadData()
     }
@@ -217,17 +170,20 @@ extension BoardViewController : BoardPresenterEventHandler {
     func OnLoadedBoard(board: BoardBody) {
         NSLog("OnLoadedBoard")
         boardBody = board
+        bodyViewModel = BoardBodyViewModel(boardBody: board)
         
-        for photo in boardBody?.photos ?? [] {
-            generateUrlToImage( photo )
+        bodyViewModel!.generateImageAll{
+            self.boardCollectionView?.reloadData()
         }
     }
     
     func OnAddedPhoto(photo: BoardPhoto) {
-        generateUrlToImage(photo)
+        bodyViewModel?.generateImage(photo, completion: { () -> Void in
+            self.boardCollectionView?.reloadData()
+        })
     }
     
-    func OnMovePhoto(fromPhoto: BoardPhoto, toPhoto: BoardPhoto) {
+    func OnMovePhoto(from: NSIndexPath, to: NSIndexPath) {
         NSLog("OnMovePhoto")
     }
 }

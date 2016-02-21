@@ -93,7 +93,7 @@ class BoardBodyDataRepository : BoardBodyRepository {
         bodyStore.search(boardBody.id) { (bodyEntity) -> Void in
             self.photoStore.create(bodyEntity!, completion: { (photoEntity) -> Void in
                 let photoModel = self.photoMapper.ToNewModel(photoEntity)
-                boardBody.AddPhoto(photoModel)
+                boardBody.addPhoto(photoModel)
                 completion(photoModel)
             })
         }

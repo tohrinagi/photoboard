@@ -15,8 +15,6 @@ class MoveBoardPhotoUseCase : UseCase {
     private let boardBody : BoardBody
     private let from : NSIndexPath
     private let to : NSIndexPath
-    private(set) var fromPhoto : BoardPhoto?
-    private(set) var toPhoto : BoardPhoto?
     
     init( boardBody : BoardBody, from : NSIndexPath, to : NSIndexPath ){
         self.boardBody = boardBody
@@ -26,11 +24,10 @@ class MoveBoardPhotoUseCase : UseCase {
     
     func main() {
         //入れ替え処理を行う
-        
+        self.boardBody.movePhoto(self.from, to: self.to)
         
         //モデルの書き込みをリポジトリに指示する
         boardBodyRepository.update(boardBody) { () -> Void in
-            //noting
         }
         
     }
