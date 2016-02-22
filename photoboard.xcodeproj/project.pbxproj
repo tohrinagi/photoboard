@@ -22,6 +22,9 @@
 		E46D4DCF1C37F10000A8E12A /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DCE1C37F10000A8E12A /* HomePresenter.swift */; };
 		E46D4DD11C37F2DE00A8E12A /* BoardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DD01C37F2DE00A8E12A /* BoardPresenter.swift */; };
 		E46D4DD61C37FB3300A8E12A /* PresenterContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46D4DD51C37FB3300A8E12A /* PresenterContainer.swift */; };
+		E4723D621C7B5E0C000D8235 /* BoardBodyDataStoreTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4723D611C7B5E0C000D8235 /* BoardBodyDataStoreTestCase.swift */; };
+		E4723D641C7B6256000D8235 /* BoardPhotoDataStoreTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4723D631C7B6256000D8235 /* BoardPhotoDataStoreTestCase.swift */; };
+		E4723D661C7B680C000D8235 /* BoardBodyDataRepositoryTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4723D651C7B680C000D8235 /* BoardBodyDataRepositoryTestCase.swift */; };
 		E475EB441C708888005E3F7A /* AddBoardPhotoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E475EB431C708888005E3F7A /* AddBoardPhotoUseCase.swift */; };
 		E475EB461C708A1C005E3F7A /* BoardBodyDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E475EB451C708A1C005E3F7A /* BoardBodyDataStore.swift */; };
 		E475EB481C7216AF005E3F7A /* MoveBoardPhotoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E475EB471C7216AE005E3F7A /* MoveBoardPhotoUseCase.swift */; };
@@ -52,11 +55,11 @@
 		E4F1F48F1C678D1F006A06EF /* BoardPhotoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4891C678D1F006A06EF /* BoardPhotoEntity+CoreDataProperties.swift */; };
 		E4F1F4901C678D1F006A06EF /* BoardPhotoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F48A1C678D1F006A06EF /* BoardPhotoEntity.swift */; };
 		E4F1F4AF1C6A1AF4006A06EF /* CoreDataManagerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4AE1C6A1AF4006A06EF /* CoreDataManagerTestCase.swift */; };
-		E4F1F4BA1C6A3589006A06EF /* BoardInfoListDataStoreTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4B91C6A3589006A06EF /* BoardInfoListDataStoreTestCase.swift */; };
+		E4F1F4BA1C6A3589006A06EF /* BoardInfoDataStoreTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4B91C6A3589006A06EF /* BoardInfoDataStoreTestCase.swift */; };
 		E4F1F4BC1C6B9D5C006A06EF /* BoardInfoDataRepositoryTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4BB1C6B9D5C006A06EF /* BoardInfoDataRepositoryTestCase.swift */; };
 		E4F1F4BE1C6B9EE7006A06EF /* BoardInfoMapperTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4BD1C6B9EE7006A06EF /* BoardInfoMapperTestCase.swift */; };
 		E4F5087D1C63B50D007E8065 /* BoardInfoMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F5087C1C63B50D007E8065 /* BoardInfoMapper.swift */; };
-		E4F508801C64D218007E8065 /* BoardDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F5087F1C64D218007E8065 /* BoardDataRepository.swift */; };
+		E4F508801C64D218007E8065 /* BoardInfoDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F5087F1C64D218007E8065 /* BoardInfoDataRepository.swift */; };
 		E4F508821C64D28C007E8065 /* BoardInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F508811C64D28C007E8065 /* BoardInfoRepository.swift */; };
 		E4F9FA2F1C35260B0016F0AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA2E1C35260B0016F0AC /* AppDelegate.swift */; };
 		E4F9FA311C35260B0016F0AC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F9FA301C35260B0016F0AC /* HomeViewController.swift */; };
@@ -100,6 +103,9 @@
 		E46D4DCE1C37F10000A8E12A /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		E46D4DD01C37F2DE00A8E12A /* BoardPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardPresenter.swift; sourceTree = "<group>"; };
 		E46D4DD51C37FB3300A8E12A /* PresenterContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterContainer.swift; sourceTree = "<group>"; };
+		E4723D611C7B5E0C000D8235 /* BoardBodyDataStoreTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardBodyDataStoreTestCase.swift; sourceTree = "<group>"; };
+		E4723D631C7B6256000D8235 /* BoardPhotoDataStoreTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardPhotoDataStoreTestCase.swift; sourceTree = "<group>"; };
+		E4723D651C7B680C000D8235 /* BoardBodyDataRepositoryTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardBodyDataRepositoryTestCase.swift; sourceTree = "<group>"; };
 		E475EB431C708888005E3F7A /* AddBoardPhotoUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBoardPhotoUseCase.swift; sourceTree = "<group>"; };
 		E475EB451C708A1C005E3F7A /* BoardBodyDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardBodyDataStore.swift; sourceTree = "<group>"; };
 		E475EB471C7216AE005E3F7A /* MoveBoardPhotoUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveBoardPhotoUseCase.swift; sourceTree = "<group>"; };
@@ -133,11 +139,11 @@
 		E4F1F4AE1C6A1AF4006A06EF /* CoreDataManagerTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTestCase.swift; sourceTree = "<group>"; };
 		E4F1F4B71C6A2554006A06EF /* photoboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photoboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F1F4B81C6A2570006A06EF /* photoboardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photoboardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4F1F4B91C6A3589006A06EF /* BoardInfoListDataStoreTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoListDataStoreTestCase.swift; sourceTree = "<group>"; };
+		E4F1F4B91C6A3589006A06EF /* BoardInfoDataStoreTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoDataStoreTestCase.swift; sourceTree = "<group>"; };
 		E4F1F4BB1C6B9D5C006A06EF /* BoardInfoDataRepositoryTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoDataRepositoryTestCase.swift; sourceTree = "<group>"; };
 		E4F1F4BD1C6B9EE7006A06EF /* BoardInfoMapperTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoMapperTestCase.swift; sourceTree = "<group>"; };
 		E4F5087C1C63B50D007E8065 /* BoardInfoMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoMapper.swift; sourceTree = "<group>"; };
-		E4F5087F1C64D218007E8065 /* BoardDataRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardDataRepository.swift; sourceTree = "<group>"; };
+		E4F5087F1C64D218007E8065 /* BoardInfoDataRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoDataRepository.swift; sourceTree = "<group>"; };
 		E4F508811C64D28C007E8065 /* BoardInfoRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoRepository.swift; sourceTree = "<group>"; };
 		E4F9FA2E1C35260B0016F0AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4F9FA301C35260B0016F0AC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -388,8 +394,11 @@
 			isa = PBXGroup;
 			children = (
 				E4F1F4AE1C6A1AF4006A06EF /* CoreDataManagerTestCase.swift */,
-				E4F1F4B91C6A3589006A06EF /* BoardInfoListDataStoreTestCase.swift */,
+				E4F1F4B91C6A3589006A06EF /* BoardInfoDataStoreTestCase.swift */,
 				E4F1F4BB1C6B9D5C006A06EF /* BoardInfoDataRepositoryTestCase.swift */,
+				E4723D611C7B5E0C000D8235 /* BoardBodyDataStoreTestCase.swift */,
+				E4723D631C7B6256000D8235 /* BoardPhotoDataStoreTestCase.swift */,
+				E4723D651C7B680C000D8235 /* BoardBodyDataRepositoryTestCase.swift */,
 			);
 			path = repository;
 			sourceTree = "<group>";
@@ -408,7 +417,7 @@
 			isa = PBXGroup;
 			children = (
 				E4AEC1391C5E5A290084F8F5 /* dataStore */,
-				E4F5087F1C64D218007E8065 /* BoardDataRepository.swift */,
+				E4F5087F1C64D218007E8065 /* BoardInfoDataRepository.swift */,
 				E475EB531C776003005E3F7A /* BoardDataBodyRepository.swift */,
 			);
 			path = repository;
@@ -642,7 +651,7 @@
 				E475EB461C708A1C005E3F7A /* BoardBodyDataStore.swift in Sources */,
 				E46D4DCF1C37F10000A8E12A /* HomePresenter.swift in Sources */,
 				E4F9FA5D1C366E380016F0AC /* BoardViewController.swift in Sources */,
-				E4F508801C64D218007E8065 /* BoardDataRepository.swift in Sources */,
+				E4F508801C64D218007E8065 /* BoardInfoDataRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,7 +661,10 @@
 			files = (
 				E4F1F4BE1C6B9EE7006A06EF /* BoardInfoMapperTestCase.swift in Sources */,
 				E4F9FA441C35260B0016F0AC /* photoboardTests.swift in Sources */,
-				E4F1F4BA1C6A3589006A06EF /* BoardInfoListDataStoreTestCase.swift in Sources */,
+				E4723D621C7B5E0C000D8235 /* BoardBodyDataStoreTestCase.swift in Sources */,
+				E4F1F4BA1C6A3589006A06EF /* BoardInfoDataStoreTestCase.swift in Sources */,
+				E4723D661C7B680C000D8235 /* BoardBodyDataRepositoryTestCase.swift in Sources */,
+				E4723D641C7B6256000D8235 /* BoardPhotoDataStoreTestCase.swift in Sources */,
 				E4F1F4BC1C6B9D5C006A06EF /* BoardInfoDataRepositoryTestCase.swift in Sources */,
 				E4F1F4AF1C6A1AF4006A06EF /* CoreDataManagerTestCase.swift in Sources */,
 			);

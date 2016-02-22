@@ -1,5 +1,5 @@
 //
-//  BoardInfoListDataStoreTestCase.swift
+//  BoardInfoDataStoreTestCase.swift
 //  photoboard
 //
 //  Created by tohrinagi on 2016/02/09.
@@ -10,7 +10,7 @@ import XCTest
 import CoreData
 @testable import photoboard
 
-class BoardInfoListDataStoreTestCase: XCTestCase {
+class BoardInfoDataStoreTestCase: XCTestCase {
 
     override func setUp() {
         let entityName = NSStringFromClass(BoardInfoEntity).componentsSeparatedByString(".").last! as String

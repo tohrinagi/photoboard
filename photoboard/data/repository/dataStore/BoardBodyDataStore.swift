@@ -21,7 +21,9 @@ class BoardBodyDataStore {
     }
     
     func load( info :BoardInfoEntity, completion : (BoardBodyEntity?)->Void) {
-        entities.add(info.body!)
+        if let body = info.body {
+            entities.add(body)
+        }
         completion(info.body)
     }
     

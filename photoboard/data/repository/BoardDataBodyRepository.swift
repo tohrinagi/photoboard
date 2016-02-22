@@ -83,6 +83,17 @@ class BoardBodyDataRepository : BoardBodyRepository {
         completion()
     }
     
+    
+    /**
+     BoardBody のメモリ消去
+     
+     - parameter boardBody:  消去するBoardBody
+     */
+    func dispose( boardBody : BoardBody ) {
+        photoStore.dispose()
+        bodyStore.dispose(boardBody.id)
+    }
+    
     /**
      Photo の作成
      
