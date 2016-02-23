@@ -21,26 +21,33 @@ class CoreDataManager {
         return Static.instance
     }
     
-    func create<DataType:NSManagedObject>() -> DataType {
+    func create<DataType:CoreDataEntity>() -> DataType {
         let managedObject: AnyObject = NSEntityDescription.insertNewObjectForEntityForName(
             NSStringFromClass(DataType).componentsSeparatedByString(".").last! as String, inManagedObjectContext: managedObjectContext)
-        return managedObject as! DataType
+        
+        let entity = managedObject as! DataType
+        entity.updatePrevioudId()
+        return entity
     }
     
-    func read<DataType:NSManagedObject>(fetchRequest:NSFetchRequest) ->[DataType]? {
+    func read<DataType:CoreDataEntity>(fetchRequest:NSFetchRequest) ->[DataType]? {
         do {
-            return try managedObjectContext.executeFetchRequest(fetchRequest) as? [DataType]
+            let data = try managedObjectContext.executeFetchRequest(fetchRequest) as? [DataType]
+            for entity in data! {
+                entity.updatePrevioudId()
+            }
+            return data
         }catch{
             //例外
             return nil
         }
     }
     
-    func dispose( object : NSManagedObject, mergeChanges : Bool ) {
+    func dispose( object : CoreDataEntity, mergeChanges : Bool ) {
         managedObjectContext.refreshObject(object, mergeChanges: mergeChanges)
     }
     
-    func delete( entity :NSManagedObject )->Void {
+    func delete( entity : CoreDataEntity )->Void {
         managedObjectContext.deleteObject(entity);
     }
     

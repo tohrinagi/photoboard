@@ -32,6 +32,14 @@ class BoardPhotoMapper {
     }
     
     func ToListEntity( entities : [BoardPhotoEntity], models : [BoardPhoto] ) {
-        //entity と model の IDが一致したら変換
+        for entity in entities {
+            if let model = models.filter({$0.id == entity.id}).first {
+                ToEntity(entity, model: model)
+            }
+            else
+            {
+                assert(false)
+            }
+        }
     }
 }

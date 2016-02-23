@@ -22,20 +22,6 @@ class CoreDataEntity: NSManagedObject {
     }
     
     /**
-     Insert時の処理
-     */
-    override func awakeFromInsert() {
-        previousID = id
-    }
-    
-    /**
-     Fetch時の処理
-     */
-    override func awakeFromFetch() {
-        previousID = id
-    }
-    
-    /**
      IDの更新処理
      */
     func updatePrevioudId() {
