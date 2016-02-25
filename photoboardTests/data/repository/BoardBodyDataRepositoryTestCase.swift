@@ -14,7 +14,7 @@ class BoardBodyDataRepositoryTestCase: XCTestCase {
 
     override func setUp() {
         let fetchRequest = NSFetchRequest(entityName: "BoardInfoEntity")
-        let readEntities : [BoardInfoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
+        let readEntities: [BoardInfoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
         if let readEntities = readEntities {
             for entity in readEntities {
                 CoreDataManager.sharedInstance.delete(entity)
@@ -26,7 +26,8 @@ class BoardBodyDataRepositoryTestCase: XCTestCase {
         let bodyStore = BoardBodyDataStore()
         let photoStore = BoardPhotoDataStore()
         let infoRepository = BoardInfoDataRepository(infoStore: infoStore)
-        let bodyRepository = BoardBodyDataRepository(infoStore: infoStore, bodyStore: bodyStore, photoStore: photoStore)
+        let bodyRepository = BoardBodyDataRepository(
+            infoStore: infoStore, bodyStore: bodyStore, photoStore: photoStore)
         
         infoRepository.create { (info) -> Void in
                 XCTAssertNotNil(info)
@@ -43,7 +44,7 @@ class BoardBodyDataRepositoryTestCase: XCTestCase {
                         infoRepository.read({ (infoList) -> Void in
                             XCTAssertEqual(infoList.count, 1)
                             bodyRepository.read(infoList.first!, completion: { (body) -> Void in
-                                XCTAssertEqual(body.photos.count,1)
+                                XCTAssertEqual(body.photos.count, 1)
                                 //TODO delete
                                 
                                 //TODO dispose
@@ -60,7 +61,8 @@ class BoardBodyDataRepositoryTestCase: XCTestCase {
         let bodyStore = BoardBodyDataStore()
         let photoStore = BoardPhotoDataStore()
         let infoRepository = BoardInfoDataRepository(infoStore: infoStore)
-        let bodyRepository = BoardBodyDataRepository(infoStore: infoStore, bodyStore: bodyStore, photoStore: photoStore)
+        let bodyRepository = BoardBodyDataRepository(
+            infoStore: infoStore, bodyStore: bodyStore, photoStore: photoStore)
         
         
         infoRepository.create { (info) -> Void in

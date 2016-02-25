@@ -1,0 +1,9 @@
+disabled_rules:
+- trailing_whitespace
+- force_cast
+
+variable_name:
+  min_length: 2
+
+type_name:
+  min_length: 2

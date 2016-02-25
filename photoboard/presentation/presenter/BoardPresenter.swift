@@ -9,16 +9,16 @@
 import Foundation
 
 protocol BoardPresenterEventHandler: class {
-    func OnLoadedBoard( board : BoardBody ) -> Void
-    func OnAddedPhoto( photo : BoardPhoto ) -> Void
-    func OnMovePhoto( from : NSIndexPath, to : NSIndexPath ) -> Void
+    func OnLoadedBoard( board: BoardBody ) -> Void
+    func OnAddedPhoto( photo: BoardPhoto ) -> Void
+    func OnMovePhoto( from: NSIndexPath, to: NSIndexPath ) -> Void
 }
 
 /// Board画面用プレゼンター
 class BoardPresenter {
     weak var eventHandler: BoardPresenterEventHandler?
     
-    func loadBoardBody( boardInfo : BoardInfo ) {
+    func loadBoardBody( boardInfo: BoardInfo ) {
         let task = GetBoardBodyUseCase(boardInfo: boardInfo)
         TaskManager.startBackground(task) {
             (task) -> Void in
@@ -27,14 +27,15 @@ class BoardPresenter {
         }
     }
 
-    func addPhoto( boardBody : BoardBody, referenceUrl : String, section : Int, row : Int ) {
-        let task = AddBoardPhotoUseCase(boardBody: boardBody, url: referenceUrl, section: section, row: row)
+    func addPhoto( boardBody: BoardBody, referenceUrl: String, section: Int, row: Int ) {
+        let task = AddBoardPhotoUseCase(boardBody: boardBody,
+            url: referenceUrl, section: section, row: row)
         TaskManager.startBackground(task) { (task) -> Void in
             self.eventHandler?.OnAddedPhoto(task.boardPhoto!)
         }
     }
     
-    func movePhoto( boardBody : BoardBody, from : NSIndexPath, to : NSIndexPath ) {
+    func movePhoto( boardBody: BoardBody, from: NSIndexPath, to: NSIndexPath ) {
         let task = MoveBoardPhotoUseCase(boardBody: boardBody, from: from, to: to)
         TaskManager.startBackground(task) { (task) -> Void in
             self.eventHandler?.OnMovePhoto(from, to: to)

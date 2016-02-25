@@ -12,7 +12,7 @@ import XCTest
 class BoardInfoMapperTestCase: XCTestCase {
     
     let mapper = BoardInfoMapper()
-    let boardInfoEntity : BoardInfoEntity = CoreDataManager.sharedInstance.create()
+    let boardInfoEntity: BoardInfoEntity = CoreDataManager.sharedInstance.create()
     
     override func setUp() {
         boardInfoEntity.title = "BoardInfoMapperTest"
@@ -26,7 +26,7 @@ class BoardInfoMapperTestCase: XCTestCase {
     func testToModel() {
         let model = mapper.ToModel(boardInfoEntity)
         XCTAssertNotNil(model)
-        XCTAssertEqual(boardInfoEntity.title,model.title)
+        XCTAssertEqual(boardInfoEntity.title, model.title)
         XCTAssertEqual(boardInfoEntity.updatedAt, model.updatedAt)
         XCTAssertEqual(boardInfoEntity.createdAt, model.createdAt)
         XCTAssertEqual(boardInfoEntity.row, model.row)
@@ -39,7 +39,7 @@ class BoardInfoMapperTestCase: XCTestCase {
         XCTAssertNotNil(listModel)
         XCTAssertEqual(listModel.count, 1)
         if let model = listModel.first {
-            XCTAssertEqual(boardInfoEntity.title,model.title)
+            XCTAssertEqual(boardInfoEntity.title, model.title)
             XCTAssertEqual(boardInfoEntity.updatedAt, model.updatedAt)
             XCTAssertEqual(boardInfoEntity.createdAt, model.createdAt)
             XCTAssertEqual(boardInfoEntity.row, model.row)
@@ -60,7 +60,7 @@ class BoardInfoMapperTestCase: XCTestCase {
         //TODO
         mapper.ToEntity(boardInfoEntity, model: model)
         
-        XCTAssertEqual(boardInfoEntity.title,model.title)
+        XCTAssertEqual(boardInfoEntity.title, model.title)
         XCTAssertEqual(boardInfoEntity.updatedAt, model.updatedAt)
         XCTAssertEqual(boardInfoEntity.createdAt, model.createdAt)
         XCTAssertEqual(boardInfoEntity.row, model.row)

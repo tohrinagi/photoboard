@@ -7,14 +7,14 @@
 //
 import UIKit
 
-class HomeCollectionViewLayout : UICollectionViewFlowLayout {
+class HomeCollectionViewLayout: UICollectionViewFlowLayout {
     
-    lazy var draggableCollectionView : DraggableCollectionView = {
-        ()->DraggableCollectionView in
+    lazy var draggableCollectionView: DraggableCollectionView = {
+        () -> DraggableCollectionView in
         return self.collectionView as! DraggableCollectionView
     }()
-    lazy var moveOnDrag : DraggableCollectionSlideOnDrag = {
-        ()->DraggableCollectionSlideOnDrag in
+    lazy var moveOnDrag: DraggableCollectionSlideOnDrag = {
+        () -> DraggableCollectionSlideOnDrag in
         return DraggableCollectionSlideOnDrag(collectionView: self.draggableCollectionView)
     }()
     
@@ -30,7 +30,7 @@ class HomeCollectionViewLayout : UICollectionViewFlowLayout {
      レイアウト計算準備に呼ばれる override UICollectionViewFlowLayout
      */
     override func prepareLayout() {
-        self.itemSize.height = 100;
+        self.itemSize.height = 100
         self.itemSize.width = draggableCollectionView.bounds.width
         self.scrollDirection = .Vertical
         draggableCollectionView.zoomable = false
@@ -44,7 +44,8 @@ class HomeCollectionViewLayout : UICollectionViewFlowLayout {
      
      - returns: 表示するセルのレイアウト情報
      */
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElementsInRect(rect: CGRect)
+        -> [UICollectionViewLayoutAttributes]? {
         let attributes = super.layoutAttributesForElementsInRect(rect)
         return moveOnDrag.layoutAttributesForElementsInRectOnDrag( attributes! ) ?? attributes
     }

@@ -9,7 +9,7 @@
 import Foundation
 
 /// BoardInfo 用 Entity から Model に変換するクラス
-class BoardInfoMapper : NSObject {
+class BoardInfoMapper: NSObject {
     
     /**
      BoardInfoEntity から BoardInfo への変換
@@ -18,8 +18,9 @@ class BoardInfoMapper : NSObject {
      
      - returns: model
      */
-    func ToModel( info : BoardInfoEntity ) -> BoardInfo {
-        return BoardInfo(id: info.id, title: info.title!, row: Int(info.row!), createdAt: info.createdAt!, updatedAt: info.updatedAt!)
+    func ToModel( info: BoardInfoEntity ) -> BoardInfo {
+        return BoardInfo(id: info.id, title: info.title!, row: Int(info.row!),
+            createdAt: info.createdAt!, updatedAt: info.updatedAt!)
     }
     
     /**
@@ -29,8 +30,8 @@ class BoardInfoMapper : NSObject {
      
      - returns: model
      */
-    func ToListModel( infos : [BoardInfoEntity] ) -> [BoardInfo] {
-        var list : [BoardInfo] = []
+    func ToListModel( infos: [BoardInfoEntity] ) -> [BoardInfo] {
+        var list: [BoardInfo] = []
         for info in infos {
             list.append(ToModel(info))
         }
@@ -43,7 +44,7 @@ class BoardInfoMapper : NSObject {
      - parameter entity: BoardInfoEntity
      - parameter model:  BoardInfo
      */
-    func ToEntity( entity : BoardInfoEntity, model : BoardInfo ) {
+    func ToEntity( entity: BoardInfoEntity, model: BoardInfo ) {
         entity.createdAt = model.createdAt
         entity.row = model.row
         entity.title = model.title

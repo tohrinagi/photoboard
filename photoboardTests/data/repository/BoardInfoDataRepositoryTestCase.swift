@@ -14,7 +14,7 @@ class BoardInfoDataRepositoryTestCase: XCTestCase {
 
     override func setUp() {
         let fetchRequest = NSFetchRequest(entityName: "BoardInfoEntity")
-        let readEntities : [BoardInfoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
+        let readEntities: [BoardInfoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
         if let readEntities = readEntities {
             for entity in readEntities {
                 CoreDataManager.sharedInstance.delete(entity)
@@ -57,8 +57,8 @@ class BoardInfoDataRepositoryTestCase: XCTestCase {
                 XCTAssertNotNil(info2)
                 info2.renameTitle("info2")
                 repository.read({ (infoList) -> Void in
-                    XCTAssertEqual(infoList.filter{$0.id == info1.id}.count, 1)
-                    XCTAssertEqual(infoList.filter{$0.id == info2.id}.count, 1)
+                    XCTAssertEqual(infoList.filter {$0.id == info1.id}.count, 1)
+                    XCTAssertEqual(infoList.filter {$0.id == info2.id}.count, 1)
                 })
             }
         }

@@ -13,21 +13,21 @@ class BoardBodyDataStore {
     
     private var entities = CoreDataStore<BoardBodyEntity>()
     
-    func create( info : BoardInfoEntity, completion : (BoardBodyEntity)->Void ) {
+    func create( info: BoardInfoEntity, completion: (BoardBodyEntity) -> Void ) {
         let body = CoreDataManager.sharedInstance.create() as BoardBodyEntity
         info.body = body
         entities.add(body)
         completion( body )
     }
     
-    func load( info :BoardInfoEntity, completion : (BoardBodyEntity?)->Void) {
+    func load( info: BoardInfoEntity, completion: (BoardBodyEntity?) -> Void) {
         if let body = info.body {
             entities.add(body)
         }
         completion(info.body)
     }
     
-    func search( id : String, completion : (BoardBodyEntity?)->Void ) {
+    func search( id: String, completion: (BoardBodyEntity?) -> Void ) {
         if let entity = entities.search(id) {
             completion(entity)
         } else {
@@ -36,19 +36,19 @@ class BoardBodyDataStore {
         }
     }
     
-    func dispose( id : String ) {
+    func dispose( id: String ) {
         if let entity = entities.search(id) {
             CoreDataManager.sharedInstance.dispose(entity, mergeChanges: false)
             entities.remove(entity)
         }
     }
     
-    func delete( id : String, completion : ()->Void ) {
+    func delete( id: String, completion : () -> Void ) {
         if let entity = entities.search(id) {
             CoreDataManager.sharedInstance.delete(entity)
             entities.remove(entity)
             completion()
-        }else {
+        } else {
             //TODO 例外
             completion()
         }
@@ -58,7 +58,7 @@ class BoardBodyDataStore {
         entities.updateID()
     }
     
-    func rebind(previousID : String) -> String {
+    func rebind(previousID: String) -> String {
         return entities.rebind( previousID)
     }
 }

@@ -14,7 +14,7 @@ class CoreDataEntityTestCase: XCTestCase {
     //CoreDataEntity は テストできないので、BoardInfoEntity にて代用する
     override func setUp() {
         let fetchRequest = NSFetchRequest(entityName: "BoardInfoEntity")
-        let readEntities : [BoardInfoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
+        let readEntities: [BoardInfoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
         if let readEntities = readEntities {
             for entity in readEntities {
                 CoreDataManager.sharedInstance.delete(entity)

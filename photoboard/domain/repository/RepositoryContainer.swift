@@ -10,14 +10,14 @@ import Foundation
 
 /// Repository 保持クラス
 class RepositoryContainer {
-    class var sharedInstance : RepositoryContainer {
+    class var sharedInstance: RepositoryContainer {
         struct Static {
             static let instance = RepositoryContainer()
         }
         return Static.instance
     }
-    private(set) var boardInfoRepository : BoardInfoRepository
-    private(set) var boardBodyRepository : BoardBodyRepository
+    private(set) var boardInfoRepository: BoardInfoRepository
+    private(set) var boardBodyRepository: BoardBodyRepository
     
     //以下依存
     private var infoDataStore = BoardInfoDataStore()
@@ -28,6 +28,9 @@ class RepositoryContainer {
     init() {
         //TODO DI する
         self.boardInfoRepository = BoardInfoDataRepository( infoStore: self.infoDataStore )
-        self.boardBodyRepository = BoardBodyDataRepository( infoStore: self.infoDataStore, bodyStore: self.bodyDataStore, photoStore: self.photoDataStore )
+        self.boardBodyRepository = BoardBodyDataRepository(
+            infoStore: self.infoDataStore,
+            bodyStore: self.bodyDataStore,
+            photoStore: self.photoDataStore )
     }
 }

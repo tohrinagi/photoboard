@@ -9,14 +9,14 @@
 import Foundation
 
 /// ボードの写真を移動するユースケース
-class MoveBoardPhotoUseCase : UseCase {
+class MoveBoardPhotoUseCase: UseCase {
     
     private let boardBodyRepository = RepositoryContainer.sharedInstance.boardBodyRepository
-    private let boardBody : BoardBody
-    private let from : NSIndexPath
-    private let to : NSIndexPath
+    private let boardBody: BoardBody
+    private let from: NSIndexPath
+    private let to: NSIndexPath
     
-    init( boardBody : BoardBody, from : NSIndexPath, to : NSIndexPath ){
+    init( boardBody: BoardBody, from: NSIndexPath, to: NSIndexPath ) {
         self.boardBody = boardBody
         self.from = from
         self.to = to

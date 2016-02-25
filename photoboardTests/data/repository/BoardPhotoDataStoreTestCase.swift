@@ -14,7 +14,7 @@ class BoardPhotoDataStoreTestCase: XCTestCase {
 
     override func setUp() {
         let fetchRequest = NSFetchRequest(entityName: "BoardPhotoEntity")
-        let readEntities : [BoardPhotoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
+        let readEntities: [BoardPhotoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
         if let readEntities = readEntities {
             for entity in readEntities {
                 CoreDataManager.sharedInstance.delete(entity)

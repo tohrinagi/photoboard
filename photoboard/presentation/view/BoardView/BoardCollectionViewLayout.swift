@@ -8,16 +8,16 @@
 
 import UIKit
 
-class BoardCollectionViewLayout : UICollectionViewLayout {
+class BoardCollectionViewLayout: UICollectionViewLayout {
     
     var minimumInteritemSpacing: CGSize = CGSize(width: 0, height: 0)
     var itemSize: CGSize = CGSize(width: 200, height: 200)
-    lazy var draggableCollectionView : DraggableCollectionView = {
-        ()->DraggableCollectionView in
+    lazy var draggableCollectionView: DraggableCollectionView = {
+        () -> DraggableCollectionView in
         return self.collectionView as! DraggableCollectionView
     }()
-    lazy var moveOnDrag : DraggableCollectionSlideOnDrag? = {
-        ()->DraggableCollectionSlideOnDrag in
+    lazy var moveOnDrag: DraggableCollectionSlideOnDrag? = {
+        () -> DraggableCollectionSlideOnDrag in
         return DraggableCollectionSlideOnDrag(collectionView: self.draggableCollectionView)
     }()
  
@@ -36,7 +36,8 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
      */
     func GetSizeForItem () -> CGSize {
         //return itemSize
-        return CGSize(width: itemSize.width * draggableCollectionView.currentScale, height: itemSize.height * draggableCollectionView.currentScale)
+        return CGSize(width: itemSize.width * draggableCollectionView.currentScale,
+            height: itemSize.height * draggableCollectionView.currentScale)
     }
     
     
@@ -75,7 +76,7 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
         var contentWidth = width * CGFloat(sectionLength)
         var contentHeight = height * CGFloat(mostNumCell)
         
-        let bounds = collectionView?.bounds ?? CGRectZero
+        let bounds = collectionView?.bounds ?? CGRect.zero
         var dragHeight = height
         var dragWidth = width
         if contentWidth < bounds.width {
@@ -88,8 +89,10 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
         }
         
         let sizeOnNormal = CGSize(width: contentWidth, height: contentHeight)
-        let sizeOnDrag = CGSize(width: contentWidth + dragWidth, height: contentHeight + dragHeight )
-        return moveOnDrag?.collectionViewContentSizeOnDrag( sizeOnNormal, sizeOnDrag: sizeOnDrag ) ?? sizeOnNormal
+        let sizeOnDrag = CGSize(width: contentWidth + dragWidth,
+            height: contentHeight + dragHeight )
+        return moveOnDrag?.collectionViewContentSizeOnDrag(
+            sizeOnNormal, sizeOnDrag: sizeOnDrag ) ?? sizeOnNormal
     }
 
     /**
@@ -101,7 +104,8 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
      
      - returns: レイアウト情報
      */
-    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+    override func layoutAttributesForItemAtIndexPath(
+        indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
         let attributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
         
         let width = GetSizeForItem().width + minimumInteritemSpacing.width
@@ -121,7 +125,8 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
      
      - returns: 表示するセルのレイアウト情報
      */
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElementsInRect(
+        rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var attributes: [UICollectionViewLayoutAttributes] = []
         
         //TODO 最適化:当たり判定を少なくする
@@ -131,7 +136,9 @@ class BoardCollectionViewLayout : UICollectionViewLayout {
             for cell in 0..<numCell {
                 let indexPath = NSIndexPath(forItem: cell, inSection: section)
                 let attribute = layoutAttributesForItemAtIndexPath(indexPath)
-                let origin = CGPoint( x :attribute!.center.x - attribute!.size.width/2, y: attribute!.center.y - attribute!.size.height/2 )
+                let origin = CGPoint(
+                    x :attribute!.center.x - attribute!.size.width/2,
+                    y: attribute!.center.y - attribute!.size.height/2 )
                 let itemRect = CGRect(origin: origin, size: attribute!.size)
                 if rect.contains(itemRect) || rect.intersects(itemRect) {
                     attributes.append(attribute!)

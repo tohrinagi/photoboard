@@ -9,16 +9,16 @@
 import Foundation
 
 /// ボードに写真を追加するユースケース
-class AddBoardPhotoUseCase : UseCase {
+class AddBoardPhotoUseCase: UseCase {
     
     private let boardBodyRepository = RepositoryContainer.sharedInstance.boardBodyRepository
-    private let boardBody : BoardBody
-    private let url : String
-    private let section : Int
-    private let row : Int
-    private(set) var boardPhoto : BoardPhoto?
+    private let boardBody: BoardBody
+    private let url: String
+    private let section: Int
+    private let row: Int
+    private(set) var boardPhoto: BoardPhoto?
     
-    init( boardBody : BoardBody, url : String, section : Int, row : Int ){
+    init( boardBody: BoardBody, url: String, section: Int, row: Int ) {
         self.boardBody = boardBody
         self.url = url
         self.section = section

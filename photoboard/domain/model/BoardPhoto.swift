@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-class BoardPhoto : NSObject {
-    let photoPath : String
+class BoardPhoto: NSObject {
+    let photoPath: String
 
-    init( photoPath : String ) {
+    init( photoPath: String ) {
         self.photoPath = photoPath
         super.init()
     }

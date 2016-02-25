@@ -12,14 +12,14 @@ class BoardPhotoDataStore {
 
     private var entities = CoreDataStore<BoardPhotoEntity>()
     
-    func create( body : BoardBodyEntity, completion : (BoardPhotoEntity)->Void ) {
+    func create( body: BoardBodyEntity, completion: (BoardPhotoEntity) -> Void ) {
         let photo = CoreDataManager.sharedInstance.create() as BoardPhotoEntity
         body.addPhoto(photo)
         entities.add(photo)
         completion(photo)
     }
     
-    func load( body : BoardBodyEntity, completion : ([BoardPhotoEntity])->Void ) {
+    func load( body: BoardBodyEntity, completion: ([BoardPhotoEntity]) -> Void ) {
         entities.clear()
         for item in body.photos! {
             if let photo = item as? BoardPhotoEntity {
@@ -29,7 +29,7 @@ class BoardPhotoDataStore {
         completion(entities.searchAll())
     }
     
-    func search( id : String, completion : (BoardPhotoEntity?)->Void ) {
+    func search( id: String, completion: (BoardPhotoEntity?) -> Void ) {
         if let entity = entities.search(id) {
             completion(entity)
         } else {
@@ -45,12 +45,12 @@ class BoardPhotoDataStore {
         entities.clear()
     }
     
-    func delete( id : String, completion : ()->Void ) {
+    func delete( id: String, completion : () -> Void ) {
         if let entity = entities.search(id) {
             CoreDataManager.sharedInstance.delete(entity)
             entities.remove(entity)
             completion()
-        }else {
+        } else {
             //TODO例外
             completion()
         }
@@ -60,7 +60,7 @@ class BoardPhotoDataStore {
         entities.updateID()
     }
     
-    func rebind(previousID : String) -> String {
+    func rebind(previousID: String) -> String {
         return entities.rebind( previousID)
     }
 }

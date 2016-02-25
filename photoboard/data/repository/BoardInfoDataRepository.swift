@@ -9,14 +9,13 @@
 import Foundation
 
 /// ボードヘッダ情報を操作するリポジトリクラス
-class BoardInfoDataRepository : BoardInfoRepository {
-    private let infoStore : BoardInfoDataStore
+class BoardInfoDataRepository: BoardInfoRepository {
+    private let infoStore: BoardInfoDataStore
     private let infoMapper = BoardInfoMapper()
     
     private var boardInfoList = [BoardInfo]()
     
-    init( infoStore : BoardInfoDataStore )
-    {
+    init( infoStore: BoardInfoDataStore ) {
         self.infoStore = infoStore
     }
     
@@ -25,7 +24,7 @@ class BoardInfoDataRepository : BoardInfoRepository {
      
      - parameter completion: 処理完了ブロック
      */
-    func read( completion : ([BoardInfo])->Void ) {
+    func read( completion: ([BoardInfo]) -> Void ) {
         infoStore.load { (entities) -> Void in
             self.boardInfoList = self.infoMapper.ToListModel(entities)
             self.save()
@@ -38,7 +37,7 @@ class BoardInfoDataRepository : BoardInfoRepository {
      
      - parameter completion: 処理完了ブロック
      */
-    func create( completion : (BoardInfo)->Void ) {
+    func create( completion: (BoardInfo) -> Void ) {
         infoStore.create { (info) -> Void in
             self.save()
             let model = self.infoMapper.ToModel(info)
@@ -50,10 +49,10 @@ class BoardInfoDataRepository : BoardInfoRepository {
     /**
      BoardInfo を更新する処理
      
-     - parameter boardInfo: 更新するモデル
+     - parameter boardInfoList: 更新するモデル
      - parameter completion:    処理完了ブロック
      */
-    func update( boardInfoList : [BoardInfo], completion : ()->Void ) {
+    func update( boardInfoList: [BoardInfo], completion : () -> Void ) {
         for boardInfo in boardInfoList {
             infoStore.search(boardInfo.id, completion: { (entity) -> Void in
                 self.infoMapper.ToEntity(entity!, model: boardInfo)
@@ -69,7 +68,7 @@ class BoardInfoDataRepository : BoardInfoRepository {
      - parameter boardInfo: 削除するモデル
      - parameter completion:    処理更新ブロック
      */
-    func delete( boardInfo : BoardInfo, completion : ()->Void ) {
+    func delete( boardInfo: BoardInfo, completion : () -> Void ) {
         infoStore.delete(boardInfo.id) { () -> Void in
             //TODO BodyEntityとPhotoEntityも消えるか
             
@@ -83,7 +82,7 @@ class BoardInfoDataRepository : BoardInfoRepository {
     /**
      保存処理
      */
-    private func save(){
+    private func save() {
         CoreDataManager.sharedInstance.saveContext()
         afterSave()
     }
@@ -93,7 +92,7 @@ class BoardInfoDataRepository : BoardInfoRepository {
      */
     private func afterSave() {
         //セーブ後にIDが変わるため、以前のIDと一致しているモデルに今回のIDをいれる
-        boardInfoList.forEach{ $0.id = infoStore.rebind($0.id) }
+        boardInfoList.forEach { $0.id = infoStore.rebind($0.id) }
         //モデルにIDを渡したので、エンティティのprevioudISを正式なIDで上書き
         infoStore.updateID()
     }

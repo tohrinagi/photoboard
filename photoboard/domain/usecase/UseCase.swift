@@ -8,5 +8,5 @@
 
 import Foundation
 
-protocol UseCase : Task {
+protocol UseCase: Task {
 }

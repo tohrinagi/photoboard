@@ -9,20 +9,20 @@
 import Foundation
 
 protocol HomePresenterEventHandler: class {
-    func OnLoadedBoards(boards : [BoardInfo]) -> Void
-    func OnCreatedNewBoard( board : BoardInfo ) -> Void
+    func OnLoadedBoards(boards: [BoardInfo]) -> Void
+    func OnCreatedNewBoard( board: BoardInfo ) -> Void
 }
 
 class HomePresenter {
     weak var eventHandler: HomePresenterEventHandler?
     
-    init(){
+    init() {
     }
     
     /**
      ボード情報を読み込む
      */
-    func loadBoardInfoList(){
+    func loadBoardInfoList() {
         let task = GetBoardInfoListUseCase()
         TaskManager.startBackground(task) {
             (task) -> Void in

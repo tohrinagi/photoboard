@@ -11,7 +11,7 @@ import UIKit
 /// 開始画面管理コントローラ
 class HomeViewController: UIViewController {
     private var presenter = PresenterContainer.sharedInstance.homePresenter
-    private var images : [UIImage] = []
+    private var images: [UIImage] = []
     private var boardInfoList = [BoardInfo]()
     
     @IBOutlet weak private var homeCollectionView: HomeCollectionView!
@@ -52,7 +52,7 @@ class HomeViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "HomeToBoard" {
             let info = sender as! BoardInfo
-            let nextViewController = segue.destinationViewController as! BoardViewController;
+            let nextViewController = segue.destinationViewController as! BoardViewController
             nextViewController.setup( info )
         }
     }
@@ -78,8 +78,10 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
      
      - returns: セル
      */
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = homeCollectionView.dequeueReusableCellWithReuseIdentifier("HomeCell", forIndexPath: indexPath) as! HomeCollectionViewCell
+    func collectionView(collectionView: UICollectionView,
+        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = homeCollectionView.dequeueReusableCellWithReuseIdentifier(
+            "HomeCell", forIndexPath: indexPath) as! HomeCollectionViewCell
         
         cell.imageView.image = images[indexPath.row]
         return cell
@@ -93,7 +95,8 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
      
      - returns: セクションのアイテム数
      */
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView,
+        numberOfItemsInSection section: Int) -> Int {
         return boardInfoList.count
     }
     
@@ -104,11 +107,14 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
      - parameter sourceIndexPath:      移動元
      - parameter destinationIndexPath: 移動先
      */
-    func collectionView(collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView,
+        moveItemAtIndexPath sourceIndexPath: NSIndexPath,
+        toIndexPath destinationIndexPath: NSIndexPath) {
     
         //TODO モデルに入れ替え通知
         let sourceImage = images.removeAtIndex(sourceIndexPath.row)
         images.insert(sourceImage, atIndex: destinationIndexPath.row)
+        //swiftlint:disable:next line_length
         print("srcSec:\(sourceIndexPath.section) srcRow:\(sourceIndexPath.row) -> dstSec:\(destinationIndexPath.section) dstRow:\(destinationIndexPath.row)")
     }
     
@@ -127,7 +133,9 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
      - parameter collectionView: コレクションビュー
      - parameter indexPath:      選択した場所のインデックスパス
      */
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(
+        collectionView: UICollectionView,
+        didSelectItemAtIndexPath indexPath: NSIndexPath) {
         NSLog("selected Sec:\(indexPath.section) Row:\(indexPath.row)")
         let board = boardInfoList[indexPath.row]
         self.performSegueWithIdentifier("HomeToBoard", sender: board)

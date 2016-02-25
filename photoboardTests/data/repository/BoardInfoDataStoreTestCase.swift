@@ -13,9 +13,10 @@ import CoreData
 class BoardInfoDataStoreTestCase: XCTestCase {
 
     override func setUp() {
-        let entityName = NSStringFromClass(BoardInfoEntity).componentsSeparatedByString(".").last! as String
+        let entityName = NSStringFromClass(BoardInfoEntity)
+            .componentsSeparatedByString(".").last! as String
         let fetchRequest = NSFetchRequest(entityName: entityName)
-        let readEntities : [BoardInfoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
+        let readEntities: [BoardInfoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
         if let readEntities = readEntities {
             for entity in readEntities {
                 CoreDataManager.sharedInstance.delete(entity)
@@ -34,7 +35,7 @@ class BoardInfoDataStoreTestCase: XCTestCase {
             
             boardInfoEntity.title = title
             
-            dataSource.load{ (entities) -> Void in
+            dataSource.load { (entities) -> Void in
                 XCTAssertNotNil(entities)
                 XCTAssert(entities.count > 0)
                 XCTAssertEqual(entities.first!.title, title)
@@ -42,8 +43,8 @@ class BoardInfoDataStoreTestCase: XCTestCase {
                 XCTAssertNotEqual(entities.first!.previousID,"")
                 
                 dataSource.delete(entities.first!.id, completion: { () -> Void in
-                    dataSource.load{ (entities) -> Void in
-                        XCTAssertEqual(entities.count,0)
+                    dataSource.load { (entities) -> Void in
+                        XCTAssertEqual(entities.count, 0)
                     }
                 })
             }

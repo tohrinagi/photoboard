@@ -8,13 +8,13 @@
 
 import Foundation
 
-class BoardPhoto : NSObject {
-    var photoPath : String
-    var section : Int
-    var row : Int
-    var id : String
+class BoardPhoto: NSObject {
+    var photoPath: String
+    var section: Int
+    var row: Int
+    var id: String
 
-    init( id : String, photoPath : String, section : Int, row : Int ) {
+    init( id: String, photoPath: String, section: Int, row: Int ) {
         self.id = id
         self.photoPath = photoPath
         self.section = section
@@ -22,7 +22,7 @@ class BoardPhoto : NSObject {
         super.init()
     }
     
-    init( id : String ) {
+    init( id: String ) {
         self.id = id
         self.photoPath = ""
         self.section = 0
@@ -30,13 +30,13 @@ class BoardPhoto : NSObject {
         super.init()
     }
     
-    var referenceURL : NSURL {
+    var referenceURL: NSURL {
         get {
             return NSURL(string: photoPath)!
         }
     }
     
-    var indexPath : NSIndexPath {
+    var indexPath: NSIndexPath {
         get {
             return NSIndexPath(forRow: row, inSection: section)
         }

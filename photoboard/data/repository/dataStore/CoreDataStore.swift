@@ -13,15 +13,15 @@ class CoreDataStore<T:CoreDataEntity> {
     
     private var entities = [T]()
     
-    func add( entity : T ) {
+    func add( entity: T ) {
         entities.append(entity)
     }
     
-    func overwrite( entities : [T] ) {
+    func overwrite( entities: [T] ) {
         self.entities = entities
     }
     
-    func search( id : String ) -> T? {
+    func search( id: String ) -> T? {
         return entities.filter({$0.id == id}).first
     }
     
@@ -29,7 +29,7 @@ class CoreDataStore<T:CoreDataEntity> {
         return entities
     }
     
-    func remove( entity : T) {
+    func remove( entity: T) {
         if let index = entities.indexOf(entity) {
             entities.removeAtIndex(index)
         }
@@ -40,11 +40,11 @@ class CoreDataStore<T:CoreDataEntity> {
     }
     
     func updateID() {
-        entities.forEach{ $0.updatePrevioudId() }
+        entities.forEach { $0.updatePrevioudId() }
     }
     
-    func rebind( previousID : String ) -> String {
-        let result = entities.filter{ $0.previousID == previousID }
+    func rebind( previousID: String ) -> String {
+        let result = entities.filter { $0.previousID == previousID }
         return (result.first?.id)!
     }
 }

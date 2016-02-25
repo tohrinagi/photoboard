@@ -8,5 +8,5 @@
 
 import UIKit
 
-class HomeCollectionView : DraggableCollectionView {
+class HomeCollectionView: DraggableCollectionView {
 }

@@ -8,9 +8,9 @@
 
 /// Presenterを格納しておくクラス
 class PresenterContainer {
-    class var sharedInstance : PresenterContainer {
+    class var sharedInstance: PresenterContainer {
         struct Static {
-            static let instance : PresenterContainer = PresenterContainer()
+            static let instance: PresenterContainer = PresenterContainer()
         }
         return Static.instance
     }

@@ -10,12 +10,12 @@ import Foundation
 
 
 /// ボードの本体情報を取得するビジネスロジック
-class GetBoardBodyUseCase : UseCase {
+class GetBoardBodyUseCase: UseCase {
     private let boardBodyRepository = RepositoryContainer.sharedInstance.boardBodyRepository
-    private let boardInfo : BoardInfo
-    private(set) var boardBody : BoardBody? = nil
+    private let boardInfo: BoardInfo
+    private(set) var boardBody: BoardBody? = nil
     
-    init( boardInfo : BoardInfo ) {
+    init( boardInfo: BoardInfo ) {
         self.boardInfo = boardInfo
     }
     

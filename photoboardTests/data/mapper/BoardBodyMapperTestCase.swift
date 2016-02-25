@@ -28,7 +28,8 @@ class BoardBodyMapperTestCase: XCTestCase {
     }
     
     func testToModel() {
-        let model = mapper.ToModel(boardInfoEntity, bodyEntity: boardBodyEntity, photoEntities: [boardPhotoEntity])
+        let model = mapper.ToModel(boardInfoEntity,
+            bodyEntity: boardBodyEntity, photoEntities: [boardPhotoEntity])
         XCTAssertNotNil(model)
         XCTAssertEqual(boardInfoEntity.title, model.info.title)
         XCTAssertEqual(boardInfoEntity.updatedAt, model.info.updatedAt)

@@ -13,11 +13,10 @@ import Photos
 /// BoardBody の View処理追加版
 class BoardBodyViewModel {
     
-    private let boardBody : BoardBody
-    private var images : [[UIImage]]
+    private let boardBody: BoardBody
+    private var images: [[UIImage]]
 
-    init( boardBody:BoardBody)
-    {
+    init( boardBody: BoardBody) {
         self.boardBody = boardBody
         self.images = []
     }
@@ -27,8 +26,7 @@ class BoardBodyViewModel {
      
      - returns: セクション数
      */
-    func numberOfSections() -> Int
-    {
+    func numberOfSections() -> Int {
         return images.count
     }
     
@@ -39,8 +37,7 @@ class BoardBodyViewModel {
      
      - returns: アイテム数
      */
-    func numberOfItems( section : Int ) -> Int
-    {
+    func numberOfItems( section: Int ) -> Int {
         if section < images.count {
             return images[section].count
         } else {
@@ -55,16 +52,14 @@ class BoardBodyViewModel {
      
      - returns: イメージ
      */
-    func photo( indexPath : NSIndexPath) -> UIImage
-    {
+    func photo( indexPath: NSIndexPath) -> UIImage {
         return images[indexPath.section][indexPath.row]
     }
     
     /**
      セクションの数に応じて、ドラッグ用のセクションを追加、削除する
      */
-    func updateBlankSection()
-    {
+    func updateBlankSection() {
         //セクションを増やす処理
         let last = images.count - 1
         if images[last].count != 0 {
@@ -81,11 +76,10 @@ class BoardBodyViewModel {
     /**
      写真を移動する
      
-     - parameter fromPhoto: 元
-     - parameter toPhoto:   先
+     - parameter from: 元
+     - parameter to:   先
      */
-    func movePhoto(from: NSIndexPath, to: NSIndexPath)
-    {
+    func movePhoto(from: NSIndexPath, to: NSIndexPath) {
         let remove = images[from.section].removeAtIndex(from.row)
         images[to.section].insert(remove, atIndex: to.row)
     }
@@ -95,8 +89,7 @@ class BoardBodyViewModel {
      
      - parameter completion: 処理完了ブロック
      */
-    func generateImageAll(completion: ()->Void)
-    {
+    func generateImageAll(completion: () -> Void) {
         for photo in boardBody.photos {
             generateImage(photo, completion: {
                 completion()
@@ -110,8 +103,7 @@ class BoardBodyViewModel {
      - parameter photo:      Photo
      - parameter completion: 処理完了ブロック
      */
-    func generateImage(photo:BoardPhoto, completion: ()->Void)
-    {
+    func generateImage(photo: BoardPhoto, completion: () -> Void) {
         let options = PHFetchOptions()
         options.includeHiddenAssets = true
         NSLog(photo.referenceURL.absoluteString)

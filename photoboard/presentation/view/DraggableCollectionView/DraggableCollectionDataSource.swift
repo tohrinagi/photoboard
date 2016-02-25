@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DraggableCollectionDataSource : UICollectionViewDataSource {
+protocol DraggableCollectionDataSource: UICollectionViewDataSource {
     
     /**
      セクション毎のアイテム数
@@ -18,7 +18,8 @@ protocol DraggableCollectionDataSource : UICollectionViewDataSource {
      
      - returns: セクション毎のアイテム数
      */
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    func collectionView(collectionView: UICollectionView,
+        numberOfItemsInSection section: Int) -> Int
     
     /**
      インデックスパス対応するセルを作成して返す
@@ -28,7 +29,8 @@ protocol DraggableCollectionDataSource : UICollectionViewDataSource {
      
      - returns: セル
      */
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+    func collectionView(collectionView: UICollectionView,
+        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     
     /**
      移動完了した時に呼ばれる

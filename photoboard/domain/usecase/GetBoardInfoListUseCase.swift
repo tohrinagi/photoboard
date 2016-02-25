@@ -9,7 +9,7 @@
 import Foundation
 
 /// ボードセットを取得するビジネスロジック
-class GetBoardInfoListUseCase : UseCase {
+class GetBoardInfoListUseCase: UseCase {
     private let boardInfoRepository = RepositoryContainer.sharedInstance.boardInfoRepository
     private(set) var boardInfoList = [BoardInfo]()
     

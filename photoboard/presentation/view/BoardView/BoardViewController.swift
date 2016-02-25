@@ -11,8 +11,8 @@ import UIKit
 class BoardViewController: UIViewController, UINavigationControllerDelegate {
     
     private var presenter = PresenterContainer.sharedInstance.boardPresenter
-    private var boardBody : BoardBody? = nil
-    private var bodyViewModel : BoardBodyViewModel? = nil
+    private var boardBody: BoardBody? = nil
+    private var bodyViewModel: BoardBodyViewModel? = nil
     
     @IBOutlet weak private var boardCollectionView: BoardCollectionView?
     
@@ -25,10 +25,12 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
         NSLog("viewDidLoad")
     }
     
-    /**
+     /**
      新しく作成した時のセットアップ
+     
+     - parameter boardInfo: 読み込むinfo
      */
-    func setup( boardInfo : BoardInfo){
+    func setup( boardInfo: BoardInfo) {
         NSLog("setupForNew:"+boardInfo.title)
         presenter.eventHandler = self
         presenter.loadBoardBody(boardInfo)
@@ -75,12 +77,15 @@ extension BoardViewController : UIImagePickerControllerDelegate {
     - parameter picker: イメージ選択コントローラ
     - parameter info: 選択したメディア情報
     */
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]){
+    func imagePickerController(picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         // モーダルビューを閉じる
         self.dismissViewControllerAnimated(true, completion: nil)
         // 画像があったらBoardScrollViewに追加
         if let url = info[UIImagePickerControllerReferenceURL] as? NSURL {
-            presenter.addPhoto(boardBody!, referenceUrl: url.absoluteString, section: 0, row: bodyViewModel!.numberOfItems(0))
+            presenter.addPhoto(boardBody!,
+                referenceUrl: url.absoluteString,
+                section: 0, row: bodyViewModel!.numberOfItems(0))
         }
     }
     
@@ -89,7 +94,7 @@ extension BoardViewController : UIImagePickerControllerDelegate {
     
     - parameter picker: イメージ選択コントローラ
     */
-    func imagePickerControllerDidCancel(picker: UIImagePickerController){
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         // モーダルビューを閉じる
         self.dismissViewControllerAnimated(true, completion: nil)
         //TODO キャンセルされたときの処理を記述・・・
@@ -118,8 +123,10 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
      
      - returns: 作成したセル
      */
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = boardCollectionView?.dequeueReusableCellWithReuseIdentifier("BoardCell", forIndexPath: indexPath) as! BoardCollectionViewCell
+    func collectionView(collectionView: UICollectionView,
+        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = boardCollectionView?.dequeueReusableCellWithReuseIdentifier(
+            "BoardCell", forIndexPath: indexPath) as! BoardCollectionViewCell
         
         cell.imageView.image = bodyViewModel!.photo(indexPath)
         return cell
@@ -134,7 +141,8 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
      
      - returns: 指定したセクションごとのアイテム数
      */
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView,
+        numberOfItemsInSection section: Int) -> Int {
         return bodyViewModel?.numberOfItems(section) ?? 0
     }
     
@@ -146,7 +154,9 @@ extension BoardViewController : DraggableCollectionDataSource, UICollectionViewD
      - parameter sourceIndexPath:      移動元
      - parameter destinationIndexPath: 移動先
      */
-    func collectionView(collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView,
+        moveItemAtIndexPath sourceIndexPath: NSIndexPath,
+        toIndexPath destinationIndexPath: NSIndexPath) {
         //早く反応させるために、OnMovePhoto をまたない
         bodyViewModel?.movePhoto(sourceIndexPath, to: destinationIndexPath)
         presenter.movePhoto(boardBody!, from: sourceIndexPath, to: destinationIndexPath)
@@ -172,7 +182,7 @@ extension BoardViewController : BoardPresenterEventHandler {
         boardBody = board
         bodyViewModel = BoardBodyViewModel(boardBody: board)
         
-        bodyViewModel!.generateImageAll{
+        bodyViewModel!.generateImageAll {
             self.boardCollectionView?.reloadData()
         }
     }

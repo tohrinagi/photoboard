@@ -12,13 +12,15 @@ class BoardBodyMapper {
     let infoMapper = BoardInfoMapper()
     let photoMapper = BoardPhotoMapper()
 
-    func ToModel( infoEntity : BoardInfoEntity, bodyEntity : BoardBodyEntity, photoEntities : [BoardPhotoEntity] ) -> BoardBody {
+    func ToModel( infoEntity: BoardInfoEntity, bodyEntity: BoardBodyEntity,
+        photoEntities: [BoardPhotoEntity] ) -> BoardBody {
         
-        return BoardBody(id: bodyEntity.id, info: infoMapper.ToModel(infoEntity), photos: photoMapper.ToListModel(photoEntities) )
+        return BoardBody(id: bodyEntity.id, info: infoMapper.ToModel(infoEntity),
+            photos: photoMapper.ToListModel(photoEntities) )
     }
     
     
-    func ToEntity( entity : BoardBodyEntity, model : BoardBody ) {
+    func ToEntity( entity: BoardBodyEntity, model: BoardBody ) {
         //処理なし
     }
 }

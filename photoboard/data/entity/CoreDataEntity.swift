@@ -12,10 +12,10 @@ import CoreData
 class CoreDataEntity: NSManagedObject {
     
     /// 以前のID Save後IDが変わるため変更前を保存している
-    private(set) var previousID : String?
+    private(set) var previousID: String?
     
     /// ID
-    var id : String {
+    var id: String {
         get {
             return objectID.URIRepresentation().absoluteString
         }

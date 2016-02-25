@@ -16,7 +16,7 @@ class CameraControllerFactory {
     - returns: trueで使用可能、falseで不可
     */
     class func isAvailable() -> Bool {
-        if( !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) ){
+        if !UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
             return true
         }
         return false

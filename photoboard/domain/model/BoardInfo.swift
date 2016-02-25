@@ -9,15 +9,15 @@
 import Foundation
 
 /// ボードの付加情報
-class BoardInfo : NSObject {
-    private(set) var title : String
-    private(set) var updatedAt : NSDate
-    private(set) var createdAt : NSDate
-    private(set) var row : Int
-    private(set) var headerPhoto : Int = 0//TODO
-    var id : String
+class BoardInfo: NSObject {
+    private(set) var title: String
+    private(set) var updatedAt: NSDate
+    private(set) var createdAt: NSDate
+    private(set) var row: Int
+    private(set) var headerPhoto: Int = 0//TODO
+    var id: String
     
-    init( id : String, title : String, row : Int, createdAt : NSDate, updatedAt : NSDate) {
+    init( id: String, title: String, row: Int, createdAt: NSDate, updatedAt: NSDate) {
         self.id = id
         self.title = title
         self.row = row
@@ -30,7 +30,7 @@ class BoardInfo : NSObject {
         updatedAt = NSDate()
     }
     
-    func renameTitle( title : String ) {
+    func renameTitle( title: String ) {
         self.title = title
     }
 }

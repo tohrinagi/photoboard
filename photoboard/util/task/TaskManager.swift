@@ -16,12 +16,12 @@ struct TaskManager {
         static func main() -> NSOperationQueue {
             return NSOperationQueue.mainQueue()
         }
-        static let backGroundQueue : NSOperationQueue = {
+        static let backGroundQueue: NSOperationQueue = {
             var queue = NSOperationQueue()
             queue.maxConcurrentOperationCount = 1
             return queue
         }()
-        static func background() -> NSOperationQueue{
+        static func background() -> NSOperationQueue {
             return backGroundQueue
         }
     }
@@ -32,7 +32,7 @@ struct TaskManager {
      - parameter task:       task
      - parameter completion: タスク実行完了後処理
      */
-    static func startMain<T:Task >(task:T, completion:(task:T)->Void)  {
+    static func startMain<T: Task >(task: T, completion:(task: T) -> Void) {
         let taskOperation = createTaskOperation(task, completion: completion)
         Operation.main().addOperation(taskOperation)
     }
@@ -43,7 +43,7 @@ struct TaskManager {
      - parameter task:       task
      - parameter completion: タスク実行完了後処理
      */
-    static func startBackground<T:Task >(task:T, completion:(task:T)->Void)  {
+    static func startBackground<T: Task >(task: T, completion:(task: T) -> Void) {
         let taskOperation = createTaskOperation(task, completion: completion)
         Operation.background().addOperation(taskOperation)
     }
@@ -56,7 +56,8 @@ struct TaskManager {
      
      - returns: TaskOperation
      */
-    private static func createTaskOperation<T:Task>(task:T,completion:(task:T)->Void) -> NSOperation {
+    private static func createTaskOperation<T: Task>(
+        task: T, completion:(task: T) -> Void) -> NSOperation {
         let taskOperation = TaskOperation<T>(task: task, completion)
         return taskOperation
     }
@@ -64,10 +65,9 @@ struct TaskManager {
 
 private class TaskOperation<T:Task> : NSOperation {
     
-    private let task : T
-    private let completion : (task:T)->Void
-    init( task :T, _ completion:(task:T)->Void )
-    {
+    private let task: T
+    private let completion : (task: T) -> Void
+    init( task: T, _ completion:(task: T) -> Void ) {
         self.task = task
         self.completion = completion
     }

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol BoardInfoRepository {
-    func create( completion : (BoardInfo)->Void )
-    func read( completion : ([BoardInfo])->Void )
-    func update( boardInfoList : [BoardInfo], completion : ()->Void )
+    func create( completion: (BoardInfo) -> Void )
+    func read( completion: ([BoardInfo]) -> Void )
+    func update( boardInfoList: [BoardInfo], completion : () -> Void )
 }
