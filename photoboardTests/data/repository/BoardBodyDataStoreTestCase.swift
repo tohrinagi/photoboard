@@ -30,13 +30,19 @@ class BoardBodyDataStoreTestCase: XCTestCase {
             bodyDataStore.create(info, completion: { (body1) -> Void in
                 XCTAssertNotNil(body1)
                 XCTAssertNotNil(info.body)
+                XCTAssertNotNil(body1.previousID)
+                XCTAssertNotEqual(body1.previousID,"")
             
                 bodyDataStore.load(info, completion: { (body2) -> Void in
                     XCTAssertNotNil(body2)
                     XCTAssertNotNil(info.body)
+                    XCTAssertNotNil(body2!.previousID)
+                    XCTAssertNotEqual(body2!.previousID,"")
                  
                     bodyDataStore.search(body2!.id, completion: { (body3) -> Void in
                         XCTAssertNotNil(body3)
+                        XCTAssertNotNil(body3!.previousID)
+                        XCTAssertNotEqual(body3!.previousID,"")
                         bodyDataStore.delete(body3!.id, completion: { () -> Void in
                             CoreDataManager.sharedInstance.saveContext()
                             bodyDataStore.load(info, completion: { (body4) -> Void in

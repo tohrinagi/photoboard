@@ -29,6 +29,8 @@ class BoardInfoDataStoreTestCase: XCTestCase {
         dataSource.create { (boardInfoEntity) -> Void in
             XCTAssertNotNil(boardInfoEntity)
             XCTAssertNil(boardInfoEntity.body)
+            XCTAssertNotNil(boardInfoEntity.previousID)
+            XCTAssertNotEqual(boardInfoEntity.previousID,"")
             
             boardInfoEntity.title = title
             
@@ -36,6 +38,8 @@ class BoardInfoDataStoreTestCase: XCTestCase {
                 XCTAssertNotNil(entities)
                 XCTAssert(entities.count > 0)
                 XCTAssertEqual(entities.first!.title, title)
+                XCTAssertNotNil(entities.first!.previousID)
+                XCTAssertNotEqual(entities.first!.previousID,"")
                 
                 dataSource.delete(entities.first!.id, completion: { () -> Void in
                     dataSource.load{ (entities) -> Void in

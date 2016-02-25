@@ -35,12 +35,18 @@ class BoardPhotoDataStoreTestCase: XCTestCase {
                     XCTAssertNotNil(photo)
                     XCTAssertNotNil(body.photos)
                     XCTAssertEqual(body.photos?.count, 1)
+                    XCTAssertNotNil(photo.previousID)
+                    XCTAssertNotEqual(photo.previousID,"")
                     
                     photoDataStore.load(body, completion: { (photos) -> Void in
                         XCTAssertEqual(photos.count, 1)
+                        XCTAssertNotNil(photos.first!.previousID)
+                        XCTAssertNotEqual(photos.first!.previousID,"")
                         
                         photoDataStore.search(photo.id, completion: { (photo1) -> Void in
                             XCTAssertNotNil(photo1)
+                            XCTAssertNotNil(photo1!.previousID)
+                            XCTAssertNotEqual(photo1!.previousID,"")
                          
                             photoDataStore.delete(photo.id, completion: { () -> Void in
                                 CoreDataManager.sharedInstance.saveContext()
