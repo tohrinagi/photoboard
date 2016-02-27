@@ -43,79 +43,6 @@ class DraggableCollectionSlideOnDrag {
     func layoutAttributesForElementsInRectOnDrag(
         attributes: [UICollectionViewLayoutAttributes]) -> [UICollectionViewLayoutAttributes]? {
  
-        func moveOnDragForSameSection( attribute: UICollectionViewLayoutAttributes ) {
-         
-            guard attribute.representedElementCategory == UICollectionElementCategory.Cell else {
-                return
-            }
-            
-            //swiftlint:disable:next line_length
-            print("moveOnDragForSameSection row:\(attribute.indexPath.row) sec:\(attribute.indexPath.section)")
-            if attribute.indexPath.isEqual(collectionView.toIndexPath!) {
-                attribute.indexPath = NSIndexPath(forRow: collectionView.fromIndexPath!.row,
-                    inSection: collectionView.fromIndexPath!.section)
-            } else if attribute.indexPath.section == collectionView.fromIndexPath!.section {
-                if collectionView.fromIndexPath!.row <= attribute.indexPath.row
-                    && attribute.indexPath.row < collectionView.toIndexPath!.row {
-                    
-                    attribute.indexPath = NSIndexPath(forRow: attribute.indexPath.row + 1,
-                        inSection: attribute.indexPath.section)
-                } else if collectionView.fromIndexPath!.row >= attribute.indexPath.row
-                    && attribute.indexPath.row > collectionView.toIndexPath!.row {
-                    
-                    attribute.indexPath = NSIndexPath(forRow: attribute.indexPath.row - 1,
-                        inSection: attribute.indexPath.section)
-                }
-            }
-            
-            //swiftlint:disable:next line_length
-            print("moveOnDragForSameSection end row:\(attribute.indexPath.row) sec:\(attribute.indexPath.section)")
-        }
-        
-        func moveOnDragForOtherSection( attribute: UICollectionViewLayoutAttributes,
-            lastFromIndexPath: NSIndexPath ) {
-        
-            guard attribute.representedElementCategory == UICollectionElementCategory.Cell else {
-                return
-            }
-            //swiftlint:disable:next line_length
-            print("moveOnDragForOtherSection row:\(attribute.indexPath.row) sec:\(attribute.indexPath.section)")
-            //単純にIndexPathを書き換えるとSectionごとのアイテム数が合わなくなりエラーになる。
-            //そのため移動元セクションのセルを移動先セクションへ移動する
-            if attribute.indexPath.isEqual(lastFromIndexPath) {
-                let numRowOfToIndex = collectionView.numberOfItemsInSection(
-                    collectionView.toIndexPath!.section )
-                attribute.indexPath = NSIndexPath(forRow: numRowOfToIndex,
-                    inSection: collectionView.toIndexPath!.section)
-                if attribute.indexPath.row != 0 {
-                    attribute.center = collectionView.collectionViewLayout
-                        .layoutAttributesForItemAtIndexPath(
-                            attribute.indexPath)!.center
-                }
-                if attribute.indexPath.isEqual(collectionView.hiddenIndexPath!) {
-                   attribute.hidden = true
-                }
-            }
-            if attribute.indexPath.isEqual(collectionView.toIndexPath!) {
-                attribute.indexPath = NSIndexPath(forRow: collectionView.fromIndexPath!.row,
-                    inSection: collectionView.fromIndexPath!.section)
-            } else if attribute.indexPath.section == collectionView.fromIndexPath!.section {
-            //移動元のセクションはそこを詰める
-                if attribute.indexPath.row >= collectionView.fromIndexPath!.row {
-                    attribute.indexPath = NSIndexPath(forItem: attribute.indexPath.row+1,
-                        inSection: attribute.indexPath.section)
-                }
-            } else if attribute.indexPath.section == collectionView.toIndexPath!.section {
-            //移動先のセクションは挿入するため１つずつずらす
-                if attribute.indexPath.row >= collectionView.toIndexPath!.row {
-                    attribute.indexPath = NSIndexPath(forRow: attribute.indexPath.row-1,
-                        inSection: attribute.indexPath.section)
-                }
-            }
-            //swiftlint:disable:next line_length
-            print("moveOnDragForOtherSection end row:\(attribute.indexPath.row) sec:\(attribute.indexPath.section)")
-        }
-        
         //ドラッグはダミーのセルで行うので、元のセルを消す
         //下記のtoIndex, fromIndexのガードの外なのは、長押しキャンセル時のanimateWithDurationのときセルが二重に見えるのを防ぐため
         if collectionView.hiddenIndexPath != nil {
@@ -151,5 +78,78 @@ class DraggableCollectionSlideOnDrag {
             }
             return attributes
         }
+    }
+    
+    func moveOnDragForSameSection( attribute: UICollectionViewLayoutAttributes ) {
+     
+        guard attribute.representedElementCategory == UICollectionElementCategory.Cell else {
+            return
+        }
+        
+        //swiftlint:disable:next line_length
+        print("moveOnDragForSameSection row:\(attribute.indexPath.row) sec:\(attribute.indexPath.section)")
+        if attribute.indexPath.isEqual(collectionView.toIndexPath!) {
+            attribute.indexPath = NSIndexPath(forRow: collectionView.fromIndexPath!.row,
+                inSection: collectionView.fromIndexPath!.section)
+        } else if attribute.indexPath.section == collectionView.fromIndexPath!.section {
+            if collectionView.fromIndexPath!.row <= attribute.indexPath.row
+                && attribute.indexPath.row < collectionView.toIndexPath!.row {
+                
+                attribute.indexPath = NSIndexPath(forRow: attribute.indexPath.row + 1,
+                    inSection: attribute.indexPath.section)
+            } else if collectionView.fromIndexPath!.row >= attribute.indexPath.row
+                && attribute.indexPath.row > collectionView.toIndexPath!.row {
+                
+                attribute.indexPath = NSIndexPath(forRow: attribute.indexPath.row - 1,
+                    inSection: attribute.indexPath.section)
+            }
+        }
+        
+        //swiftlint:disable:next line_length
+        print("moveOnDragForSameSection end row:\(attribute.indexPath.row) sec:\(attribute.indexPath.section)")
+    }
+
+    func moveOnDragForOtherSection( attribute: UICollectionViewLayoutAttributes,
+        lastFromIndexPath: NSIndexPath ) {
+    
+        guard attribute.representedElementCategory == UICollectionElementCategory.Cell else {
+            return
+        }
+        //swiftlint:disable:next line_length
+        print("moveOnDragForOtherSection row:\(attribute.indexPath.row) sec:\(attribute.indexPath.section)")
+        //単純にIndexPathを書き換えるとSectionごとのアイテム数が合わなくなりエラーになる。
+        //そのため移動元セクションのセルを移動先セクションへ移動する
+        if attribute.indexPath.isEqual(lastFromIndexPath) {
+            let numRowOfToIndex = collectionView.numberOfItemsInSection(
+                collectionView.toIndexPath!.section )
+            attribute.indexPath = NSIndexPath(forRow: numRowOfToIndex,
+                inSection: collectionView.toIndexPath!.section)
+            if attribute.indexPath.row != 0 {
+                attribute.center = collectionView.collectionViewLayout
+                    .layoutAttributesForItemAtIndexPath(
+                        attribute.indexPath)!.center
+            }
+            if attribute.indexPath.isEqual(collectionView.hiddenIndexPath!) {
+               attribute.hidden = true
+            }
+        }
+        if attribute.indexPath.isEqual(collectionView.toIndexPath!) {
+            attribute.indexPath = NSIndexPath(forRow: collectionView.fromIndexPath!.row,
+                inSection: collectionView.fromIndexPath!.section)
+        } else if attribute.indexPath.section == collectionView.fromIndexPath!.section {
+        //移動元のセクションはそこを詰める
+            if attribute.indexPath.row >= collectionView.fromIndexPath!.row {
+                attribute.indexPath = NSIndexPath(forItem: attribute.indexPath.row+1,
+                    inSection: attribute.indexPath.section)
+            }
+        } else if attribute.indexPath.section == collectionView.toIndexPath!.section {
+        //移動先のセクションは挿入するため１つずつずらす
+            if attribute.indexPath.row >= collectionView.toIndexPath!.row {
+                attribute.indexPath = NSIndexPath(forRow: attribute.indexPath.row-1,
+                    inSection: attribute.indexPath.section)
+            }
+        }
+        //swiftlint:disable:next line_length
+        print("moveOnDragForOtherSection end row:\(attribute.indexPath.row) sec:\(attribute.indexPath.section)")
     }
 }

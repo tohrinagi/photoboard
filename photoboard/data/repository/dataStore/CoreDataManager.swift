@@ -9,6 +9,13 @@
 import Foundation
 import CoreData
 
+
+enum CoreDataManagerError: ErrorType {
+    case NotRead    //読み込めず存在しない
+    case NotFound   //検索して見つからなかった
+    case UnExpected //予期せぬ
+}
+
 class CoreDataManager {
     
     init() {
@@ -21,44 +28,75 @@ class CoreDataManager {
         return Static.instance
     }
     
-    func create<DataType: CoreDataEntity>() -> DataType {
+    /**
+     DataType を新規作成する
+     
+     - throws: DataTypeに変換できない場合 CoreDataManagerError.UnExpected
+     
+     - returns:新規作成した DataType
+     */
+    func create<DataType: CoreDataEntity>() throws -> DataType {
         let managedObject: AnyObject = NSEntityDescription.insertNewObjectForEntityForName(
             NSStringFromClass(DataType).componentsSeparatedByString(".").last!as String,
             inManagedObjectContext: managedObjectContext)
         
-        let entity = managedObject as! DataType
-        entity.updatePrevioudId()
-        return entity
+        if let entity = managedObject as? DataType {
+            entity.updatePrevioudId()
+            return entity
+        }
+        throw CoreDataManagerError.UnExpected
     }
     
-    func read<DataType: CoreDataEntity>(fetchRequest: NSFetchRequest) -> [DataType]? {
+    /**
+     DataType を読み込む
+     
+     - parameter fetchRequest: 検索情報
+     
+     - throws: DataTypeに変換できない場合 CoreDataManagerError.UnExpected
+     
+     - returns: 読み込んだ DataType
+     */
+    func read<DataType: CoreDataEntity>(fetchRequest: NSFetchRequest) throws -> [DataType] {
         do {
-            let data = try managedObjectContext.executeFetchRequest(fetchRequest) as? [DataType]
-            for entity in data! {
-                entity.updatePrevioudId()
+            if let data = try managedObjectContext
+                .executeFetchRequest(fetchRequest) as? [DataType] {
+                for entity in data {
+                    entity.updatePrevioudId()
+                }
+                return data
             }
-            return data
+            throw CoreDataManagerError.UnExpected
         } catch {
-            //例外
-            return nil
+            throw CoreDataManagerError.UnExpected
         }
     }
     
+    /**
+     読み込んだアイテムをメモリから消す
+     
+     - parameter object:       処分対象の Entity
+     - parameter mergeChanges: 変更をマージするか
+     */
     func dispose( object: CoreDataEntity, mergeChanges: Bool ) {
         managedObjectContext.refreshObject(object, mergeChanges: mergeChanges)
     }
     
-    func delete( entity: CoreDataEntity ) -> Void {
+    /**
+     Entity を消去する
+     
+     - parameter entity: 消去するEntity
+     */
+    func delete( entity: CoreDataEntity ) {
         managedObjectContext.deleteObject(entity)
     }
     
     // MARK: - Core Data Saving support
-    func saveContext () -> Void {
+    func saveContext () throws {
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()
             } catch {
-                //TODO 例外
+                throw CoreDataManagerError.UnExpected
             }
         }
     }

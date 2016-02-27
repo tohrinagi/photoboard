@@ -12,15 +12,13 @@ import XCTest
 class BoardInfoMapperTestCase: XCTestCase {
     
     let mapper = BoardInfoMapper()
-    let boardInfoEntity: BoardInfoEntity = CoreDataManager.sharedInstance.create()
+    var boardInfoEntity: BoardInfoEntity = DataStoreUtil().createBoardInfoEntity()
     
     override func setUp() {
         boardInfoEntity.title = "BoardInfoMapperTest"
         boardInfoEntity.row = 1
         boardInfoEntity.updatedAt = NSDate()
         boardInfoEntity.createdAt = NSDate()
-        //CoreDataManager.sharedInstance.update()
-        //boardInfoEntity.updatePrevioudId()
     }
     
     func testToModel() {
@@ -57,7 +55,6 @@ class BoardInfoMapperTestCase: XCTestCase {
         
         model.renameTitle("BoardInfoMapperTestToEntity")
         model.updated()
-        //TODO
         mapper.ToEntity(boardInfoEntity, model: model)
         
         XCTAssertEqual(boardInfoEntity.title, model.title)

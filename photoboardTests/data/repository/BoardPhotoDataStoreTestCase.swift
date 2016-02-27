@@ -13,13 +13,7 @@ import CoreData
 class BoardPhotoDataStoreTestCase: XCTestCase {
 
     override func setUp() {
-        let fetchRequest = NSFetchRequest(entityName: "BoardPhotoEntity")
-        let readEntities: [BoardPhotoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
-        if let readEntities = readEntities {
-            for entity in readEntities {
-                CoreDataManager.sharedInstance.delete(entity)
-            }
-        }
+        DataStoreUtil().deleteAllEntities()
     }
     
     func testCombination() {
@@ -45,15 +39,18 @@ class BoardPhotoDataStoreTestCase: XCTestCase {
                         
                         photoDataStore.search(photo.id, completion: { (photo1) -> Void in
                             XCTAssertNotNil(photo1)
-                            XCTAssertNotNil(photo1!.previousID)
-                            XCTAssertNotEqual(photo1!.previousID,"")
+                            XCTAssertNotNil(photo1.previousID)
+                            XCTAssertNotEqual(photo1.previousID,"")
                          
                             photoDataStore.delete(photo.id, completion: { () -> Void in
-                                CoreDataManager.sharedInstance.saveContext()
-                                
-                                photoDataStore.load(body, completion: { (photos2) -> Void in
-                                    XCTAssertEqual(photos2.count, 0)
-                                })
+                                do {
+                                    try CoreDataManager.sharedInstance.saveContext()
+                                    photoDataStore.load(body, completion: { (photos2) -> Void in
+                                        XCTAssertEqual(photos2.count, 0)
+                                    })
+                                } catch {
+                                    
+                                }
                             })
                         })
                     })

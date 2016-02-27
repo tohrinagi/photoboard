@@ -13,13 +13,7 @@ import CoreData
 class BoardInfoDataRepositoryTestCase: XCTestCase {
 
     override func setUp() {
-        let fetchRequest = NSFetchRequest(entityName: "BoardInfoEntity")
-        let readEntities: [BoardInfoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
-        if let readEntities = readEntities {
-            for entity in readEntities {
-                CoreDataManager.sharedInstance.delete(entity)
-            }
-        }
+        DataStoreUtil().deleteAllEntities()
     }
     func testCombination() {
         let infoStore = BoardInfoDataStore()

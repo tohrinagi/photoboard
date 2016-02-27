@@ -12,9 +12,9 @@ import XCTest
 class BoardBodyMapperTestCase: XCTestCase {
     
     let mapper = BoardBodyMapper()
-    let boardInfoEntity = CoreDataManager.sharedInstance.create() as BoardInfoEntity
-    let boardBodyEntity = CoreDataManager.sharedInstance.create() as BoardBodyEntity
-    let boardPhotoEntity = CoreDataManager.sharedInstance.create() as BoardPhotoEntity
+    let boardInfoEntity = DataStoreUtil().createBoardInfoEntity()
+    let boardBodyEntity = DataStoreUtil().createBoardBodyEntity()
+    let boardPhotoEntity = DataStoreUtil().createBoardPhotoEntity()
     
     override func setUp() {
         boardInfoEntity.title = "BoardBodyMapperTestInfo"

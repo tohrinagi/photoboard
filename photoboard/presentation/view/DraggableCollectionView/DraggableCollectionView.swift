@@ -328,7 +328,6 @@ class DraggableCollectionView: UICollectionView, UIGestureRecognizerDelegate {
                 //print("sclae:\(currentScale)")
                 //print("content x:\(contentOffset.x) y:\(contentOffset.y)")
                 
-                //TODO 最小サイズ
                 self.collectionViewLayout.invalidateLayout()
             }
             break
@@ -400,28 +399,28 @@ class DraggableCollectionView: UICollectionView, UIGestureRecognizerDelegate {
                 if (contentOffset.y + distance) <= 0 {
                     distance = -contentOffset.y
                 }
-                translation = CGPointMake(0, distance)
+                translation = CGPoint(x:0, y:distance)
                 break
             case .DOWN:
                 let maxY = max(contentSize.height, frameSize.height) - frameSize.height
                 if (contentOffset.y + distance) >= maxY {
                     distance = maxY - contentOffset.y
                 }
-                translation = CGPointMake(0, distance)
+                translation = CGPoint(x:0, y:distance)
                 break
             case .LEFT:
                 distance = -distance
                 if (contentOffset.x + distance) <= 0 {
                     distance = -contentOffset.x
                 }
-                translation = CGPointMake(distance, 0)
+                translation = CGPoint(x:distance, y:0)
                 break
             case .RIGHT:
                 let maxX = max(contentSize.width, frameSize.width) - frameSize.width
                 if (contentOffset.x + distance) >= maxX {
                     distance = maxX - contentOffset.x
                 }
-                translation = CGPointMake(distance, 0)
+                translation = CGPoint(x:distance, y:0)
                 break
             default:
                 break

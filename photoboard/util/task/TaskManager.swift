@@ -56,8 +56,8 @@ struct TaskManager {
      
      - returns: TaskOperation
      */
-    private static func createTaskOperation<T: Task>(
-        task: T, completion:(task: T) -> Void) -> NSOperation {
+    private static func createTaskOperation<T: Task>(task: T,
+        completion:(task: T) -> Void) -> NSOperation {
         let taskOperation = TaskOperation<T>(task: task, completion)
         return taskOperation
     }

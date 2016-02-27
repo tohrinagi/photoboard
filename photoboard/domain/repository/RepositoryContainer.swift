@@ -26,7 +26,6 @@ class RepositoryContainer {
     
     
     init() {
-        //TODO DI する
         self.boardInfoRepository = BoardInfoDataRepository( infoStore: self.infoDataStore )
         self.boardBodyRepository = BoardBodyDataRepository(
             infoStore: self.infoDataStore,

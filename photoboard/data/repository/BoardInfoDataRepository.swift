@@ -55,7 +55,7 @@ class BoardInfoDataRepository: BoardInfoRepository {
     func update( boardInfoList: [BoardInfo], completion : () -> Void ) {
         for boardInfo in boardInfoList {
             infoStore.search(boardInfo.id, completion: { (entity) -> Void in
-                self.infoMapper.ToEntity(entity!, model: boardInfo)
+                self.infoMapper.ToEntity(entity, model: boardInfo)
             })
         }
         self.save()
@@ -83,8 +83,12 @@ class BoardInfoDataRepository: BoardInfoRepository {
      保存処理
      */
     private func save() {
-        CoreDataManager.sharedInstance.saveContext()
-        afterSave()
+        do {
+            try CoreDataManager.sharedInstance.saveContext()
+            afterSave()
+        } catch {
+            assert(false)
+        }
     }
     
     /**

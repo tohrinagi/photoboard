@@ -34,10 +34,10 @@ class BoardBodyDataRepository: BoardBodyRepository {
      - parameter completion:   処理完了ブロック
      */
     func create(boardInfo: BoardInfo, completion: (BoardBody) -> Void) {
-        infoStore.search(boardInfo.id) { (infoEntity) -> Void in //TODO search でfetchが必要
-            self.bodyStore.create(infoEntity!, completion: { (bodyEntity) -> Void in
+        infoStore.search(boardInfo.id) { (infoEntity) -> Void in
+            self.bodyStore.create(infoEntity, completion: { (bodyEntity) -> Void in
                 self.boardBody = self.bodyMapper.ToModel(
-                    infoEntity!, bodyEntity: bodyEntity, photoEntities: [])
+                    infoEntity, bodyEntity: bodyEntity, photoEntities: [])
                 self.save()
                 completion(self.boardBody!)
             })
@@ -52,10 +52,10 @@ class BoardBodyDataRepository: BoardBodyRepository {
      */
     func read( boardInfo: BoardInfo, completion: (BoardBody) -> Void ) {
         infoStore.search(boardInfo.id) { (infoEntity) -> Void in
-            self.bodyStore.load(infoEntity!, completion: { (bodyEntity) -> Void in
-                self.photoStore.load(bodyEntity!, completion: { (photos) -> Void in
+            self.bodyStore.load(infoEntity, completion: { (bodyEntity) -> Void in
+                self.photoStore.load(bodyEntity, completion: { (photos) -> Void in
                     self.boardBody = self.bodyMapper.ToModel(
-                        infoEntity!, bodyEntity: bodyEntity!, photoEntities: photos)
+                        infoEntity, bodyEntity: bodyEntity, photoEntities: photos)
                     completion(self.boardBody!)
                 })
             })
@@ -71,14 +71,14 @@ class BoardBodyDataRepository: BoardBodyRepository {
      */
     func update( boardBody: BoardBody, completion : () -> Void ) {
         infoStore.search(boardBody.info.id, completion: { (entity) -> Void in
-            self.infoMapper.ToEntity(entity!, model: boardBody.info)
+            self.infoMapper.ToEntity(entity, model: boardBody.info)
         })
         bodyStore.search(boardBody.id) { (entity) -> Void in
-            self.bodyMapper.ToEntity(entity!, model: boardBody)
+            self.bodyMapper.ToEntity(entity, model: boardBody)
         }
         for photo in boardBody.photos {
             photoStore.search(photo.id, completion: { (entity) -> Void in
-                self.photoMapper.ToEntity(entity!, model: photo)
+                self.photoMapper.ToEntity(entity, model: photo)
             })
         }
         self.save()
@@ -104,7 +104,7 @@ class BoardBodyDataRepository: BoardBodyRepository {
      */
     func createPhoto( boardBody: BoardBody, completion: (BoardPhoto) -> Void ) {
         bodyStore.search(boardBody.id) { (bodyEntity) -> Void in
-            self.photoStore.create(bodyEntity!, completion: { (photoEntity) -> Void in
+            self.photoStore.create(bodyEntity, completion: { (photoEntity) -> Void in
                 let photoModel = self.photoMapper.ToNewModel(photoEntity)
                 boardBody.addPhoto(photoModel)
                 completion(photoModel)
@@ -134,8 +134,12 @@ class BoardBodyDataRepository: BoardBodyRepository {
      保存処理
      */
     private func save() {
-        CoreDataManager.sharedInstance.saveContext()
-        afterSave()
+        do {
+            try CoreDataManager.sharedInstance.saveContext()
+            afterSave()
+        } catch {
+            assert(false)
+        }
     }
     
     /**

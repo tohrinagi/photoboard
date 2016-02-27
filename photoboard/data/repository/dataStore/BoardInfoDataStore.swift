@@ -13,47 +13,82 @@ class BoardInfoDataStore: NSObject {
     
     private var entities = CoreDataStore<BoardInfoEntity>()
     
+    /**
+     BoardInfoEntity を新規作成する
+     
+     - parameter completion: 処理完了ブロック
+     */
     func create( completion: (BoardInfoEntity) -> Void ) {
-        let info = CoreDataManager.sharedInstance.create() as BoardInfoEntity
-        entities.add(info)
-        completion( info )
+        do {
+            let info = try CoreDataManager.sharedInstance.create() as BoardInfoEntity
+            entities.add(info)
+            completion(info)
+        } catch {
+            assert(false)
+        }
     }
     
+    /**
+     BoardInfoEntity をストレージから読み込む(現在のキャッシュはクリアされる)
+     
+     - parameter completion: 処理完了ブロック
+     */
     func load( completion: ([BoardInfoEntity]) -> Void ) {
         entities.clear()
         let request = NSFetchRequest(entityName: "BoardInfoEntity")
-        if let result = CoreDataManager.sharedInstance.read(request) as [BoardInfoEntity]? {
+        do {
+            let result = try CoreDataManager.sharedInstance.read(request) as [BoardInfoEntity]
             entities.overwrite(result)
             completion( entities.searchAll() )
-        } else {
-            //TODO 例外
+        } catch {
+            assert(false)
         }
     }
     
-    func search( id: String, completion: (BoardInfoEntity?) -> Void ) {
+    /**
+     キャッシュ上にある Info を検索
+     
+     - parameter id:         探す Info の ID
+     - parameter completion: 処理完了ブロック
+     */
+    func search( id: String, completion: (BoardInfoEntity) -> Void ) {
         if let entity = entities.search(id) {
             completion(entity)
         } else {
-            //TODO fetch id 
-            completion(nil)
+            assert(false)
         }
     }
     
+    /**
+     BoardInfoEntityを削除
+     
+     - parameter id:         削除するEntityのID
+     - parameter completion: 処理完了ブロック
+     */
     func delete( id: String, completion : () -> Void ) {
         if let entity = entities.search(id) {
             CoreDataManager.sharedInstance.delete(entity)
             entities.remove(entity)
             completion()
         } else {
-            //TODO 例外
-            completion()
+            assert(false)
         }
     }
     
+    /**
+     Entity の IDを更新する
+     */
     func updateID() {
         entities.updateID()
     }
     
+    /**
+     古いIDをもとに新しいIDを返す
+     
+     - parameter previousID: 古いID
+     
+     - returns: 新しいID
+     */
     func rebind(previousID: String) -> String {
         return entities.rebind( previousID)
     }

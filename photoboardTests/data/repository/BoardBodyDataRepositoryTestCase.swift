@@ -13,14 +13,9 @@ import CoreData
 class BoardBodyDataRepositoryTestCase: XCTestCase {
 
     override func setUp() {
-        let fetchRequest = NSFetchRequest(entityName: "BoardInfoEntity")
-        let readEntities: [BoardInfoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
-        if let readEntities = readEntities {
-            for entity in readEntities {
-                CoreDataManager.sharedInstance.delete(entity)
-            }
-        }
+        DataStoreUtil().deleteAllEntities()
     }
+
     func testCombination() {
         let infoStore = BoardInfoDataStore()
         let bodyStore = BoardBodyDataStore()
@@ -45,9 +40,6 @@ class BoardBodyDataRepositoryTestCase: XCTestCase {
                             XCTAssertEqual(infoList.count, 1)
                             bodyRepository.read(infoList.first!, completion: { (body) -> Void in
                                 XCTAssertEqual(body.photos.count, 1)
-                                //TODO delete
-                                
-                                //TODO dispose
                             })
                         })
                     })

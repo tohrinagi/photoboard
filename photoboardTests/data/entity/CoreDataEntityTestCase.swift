@@ -13,34 +13,33 @@ import CoreData
 class CoreDataEntityTestCase: XCTestCase {
     //CoreDataEntity は テストできないので、BoardInfoEntity にて代用する
     override func setUp() {
-        let fetchRequest = NSFetchRequest(entityName: "BoardInfoEntity")
-        let readEntities: [BoardInfoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
-        if let readEntities = readEntities {
-            for entity in readEntities {
-                CoreDataManager.sharedInstance.delete(entity)
-            }
-        }
+        DataStoreUtil().deleteAllEntities()
     }
     
     func testCreate() {
-        let entity = CoreDataManager.sharedInstance.create() as BoardInfoEntity
+        let entity = DataStoreUtil().createBoardInfoEntity()
         XCTAssertNotNil(entity)
         XCTAssertNotNil(entity.previousID)
         XCTAssertNotEqual(entity.previousID, "")
     }
     
     func testFetch() {
-        CoreDataManager.sharedInstance.create() as BoardInfoEntity
-        CoreDataManager.sharedInstance.saveContext()
+        DataStoreUtil().createBoardInfoEntity()
+        DataStoreUtil().save()
         
         let fetchRequest = NSFetchRequest(entityName: "BoardInfoEntity")
-        let entities = CoreDataManager.sharedInstance.read(fetchRequest) as [BoardInfoEntity]?
-        XCTAssertNotNil(entities)
-        XCTAssertEqual(entities?.count, 1)
-        XCTAssertNotNil(entities?.first!.previousID)
-        XCTAssertNotEqual(entities?.first!.previousID, "")
+        do {
+            let entities = try CoreDataManager
+                .sharedInstance.read(fetchRequest) as [BoardInfoEntity]?
+            XCTAssertNotNil(entities)
+            XCTAssertEqual(entities?.count, 1)
+            XCTAssertNotNil(entities?.first!.previousID)
+            XCTAssertNotEqual(entities?.first!.previousID, "")
+            CoreDataManager.sharedInstance.delete(entities!.first!)
+        } catch {
+            XCTAssert(false)
+        }
         
-        CoreDataManager.sharedInstance.delete(entities!.first!)
-        CoreDataManager.sharedInstance.saveContext()
+        DataStoreUtil().save()
     }
 }

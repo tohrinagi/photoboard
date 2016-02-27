@@ -28,6 +28,10 @@
 		E4723D681C7CAA6B000D8235 /* BoardBodyMapperTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4723D671C7CAA6B000D8235 /* BoardBodyMapperTestCase.swift */; };
 		E4723D6A1C7CAC07000D8235 /* BoardPhotoMapperTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4723D691C7CAC07000D8235 /* BoardPhotoMapperTestCase.swift */; };
 		E4723D6C1C7CADC9000D8235 /* CoreDataEntityTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4723D6B1C7CADC9000D8235 /* CoreDataEntityTestCase.swift */; };
+		E4723D721C8188BC000D8235 /* DataStoreUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4723D711C8188BC000D8235 /* DataStoreUtil.swift */; };
+		E4723D741C819F1A000D8235 /* BoardBodyTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4723D731C819F1A000D8235 /* BoardBodyTestCase.swift */; };
+		E4723D761C81A5F5000D8235 /* BoardPhotoTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4723D751C81A5F4000D8235 /* BoardPhotoTestCase.swift */; };
+		E4723D781C81A6CA000D8235 /* BoardInfoTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4723D771C81A6CA000D8235 /* BoardInfoTestCase.swift */; };
 		E475EB441C708888005E3F7A /* AddBoardPhotoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E475EB431C708888005E3F7A /* AddBoardPhotoUseCase.swift */; };
 		E475EB461C708A1C005E3F7A /* BoardBodyDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E475EB451C708A1C005E3F7A /* BoardBodyDataStore.swift */; };
 		E475EB481C7216AF005E3F7A /* MoveBoardPhotoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E475EB471C7216AE005E3F7A /* MoveBoardPhotoUseCase.swift */; };
@@ -112,6 +116,10 @@
 		E4723D671C7CAA6B000D8235 /* BoardBodyMapperTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardBodyMapperTestCase.swift; sourceTree = "<group>"; };
 		E4723D691C7CAC07000D8235 /* BoardPhotoMapperTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardPhotoMapperTestCase.swift; sourceTree = "<group>"; };
 		E4723D6B1C7CADC9000D8235 /* CoreDataEntityTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataEntityTestCase.swift; sourceTree = "<group>"; };
+		E4723D711C8188BC000D8235 /* DataStoreUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStoreUtil.swift; sourceTree = "<group>"; };
+		E4723D731C819F1A000D8235 /* BoardBodyTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardBodyTestCase.swift; sourceTree = "<group>"; };
+		E4723D751C81A5F4000D8235 /* BoardPhotoTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardPhotoTestCase.swift; sourceTree = "<group>"; };
+		E4723D771C81A6CA000D8235 /* BoardInfoTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoTestCase.swift; sourceTree = "<group>"; };
 		E475EB431C708888005E3F7A /* AddBoardPhotoUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBoardPhotoUseCase.swift; sourceTree = "<group>"; };
 		E475EB451C708A1C005E3F7A /* BoardBodyDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardBodyDataStore.swift; sourceTree = "<group>"; };
 		E475EB471C7216AE005E3F7A /* MoveBoardPhotoUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveBoardPhotoUseCase.swift; sourceTree = "<group>"; };
@@ -319,6 +327,14 @@
 			path = repository;
 			sourceTree = "<group>";
 		};
+		E4723D701C81885E000D8235 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				E4723D711C8188BC000D8235 /* DataStoreUtil.swift */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
 		E48175FD1C64F3E10005AF19 /* util */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,6 +386,9 @@
 		E4F1F4931C6A1737006A06EF /* model */ = {
 			isa = PBXGroup;
 			children = (
+				E4723D731C819F1A000D8235 /* BoardBodyTestCase.swift */,
+				E4723D751C81A5F4000D8235 /* BoardPhotoTestCase.swift */,
+				E4723D771C81A6CA000D8235 /* BoardInfoTestCase.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -463,6 +482,7 @@
 		E4F9FA421C35260B0016F0AC /* photoboardTests */ = {
 			isa = PBXGroup;
 			children = (
+				E4723D701C81885E000D8235 /* util */,
 				E4F1F4921C6A1724006A06EF /* domain */,
 				E4F1F4911C6A1653006A06EF /* data */,
 				E4F9FA431C35260B0016F0AC /* photoboardTests.swift */,
@@ -689,13 +709,17 @@
 				E4F9FA441C35260B0016F0AC /* photoboardTests.swift in Sources */,
 				E4723D621C7B5E0C000D8235 /* BoardBodyDataStoreTestCase.swift in Sources */,
 				E4F1F4BA1C6A3589006A06EF /* BoardInfoDataStoreTestCase.swift in Sources */,
+				E4723D781C81A6CA000D8235 /* BoardInfoTestCase.swift in Sources */,
 				E4723D6A1C7CAC07000D8235 /* BoardPhotoMapperTestCase.swift in Sources */,
 				E4723D6C1C7CADC9000D8235 /* CoreDataEntityTestCase.swift in Sources */,
 				E4723D661C7B680C000D8235 /* BoardBodyDataRepositoryTestCase.swift in Sources */,
+				E4723D741C819F1A000D8235 /* BoardBodyTestCase.swift in Sources */,
 				E4723D641C7B6256000D8235 /* BoardPhotoDataStoreTestCase.swift in Sources */,
+				E4723D761C81A5F5000D8235 /* BoardPhotoTestCase.swift in Sources */,
 				E4F1F4BC1C6B9D5C006A06EF /* BoardInfoDataRepositoryTestCase.swift in Sources */,
 				E4723D681C7CAA6B000D8235 /* BoardBodyMapperTestCase.swift in Sources */,
 				E4F1F4AF1C6A1AF4006A06EF /* CoreDataManagerTestCase.swift in Sources */,
+				E4723D721C8188BC000D8235 /* DataStoreUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

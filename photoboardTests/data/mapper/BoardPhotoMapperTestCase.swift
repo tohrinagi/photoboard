@@ -12,7 +12,7 @@ import XCTest
 class BoardPhotoMapperTestCase: XCTestCase {
     
     let mapper = BoardPhotoMapper()
-    let boardPhotoEntity = CoreDataManager.sharedInstance.create() as BoardPhotoEntity
+    let boardPhotoEntity = DataStoreUtil().createBoardPhotoEntity()
     
     override func setUp() {
         boardPhotoEntity.name = "BoardBodyMapperTestPhoto"

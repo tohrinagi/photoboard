@@ -12,21 +12,35 @@ import CoreData
 
 class CoreDataManagerTestCase: XCTestCase {
     func testCreate() {
-        let entity: BoardInfoEntity = CoreDataManager.sharedInstance.create()
-        XCTAssertNotNil(entity)
+        do {
+            let entity: BoardInfoEntity = try CoreDataManager.sharedInstance.create()
+            XCTAssertNotNil(entity)
+        } catch {
+            XCTAssert(false)
+        }
     }
 
     func testRead() {
         let entityName = NSStringFromClass(BoardInfoEntity)
             .componentsSeparatedByString(".").last! as String
         let fetchRequest = NSFetchRequest(entityName: entityName)
-        let entities: [BoardInfoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
-        XCTAssertNotNil(entities)
+        do {
+            let entities: [BoardInfoEntity]? = try CoreDataManager
+                .sharedInstance.read(fetchRequest)
+            XCTAssertNotNil(entities)
+        } catch {
+            XCTAssert(false)
+        }
     }
     
     func testDelete() {
-        let entity: BoardInfoEntity = CoreDataManager.sharedInstance.create()
-        CoreDataManager.sharedInstance.delete(entity)
+        do {
+            let entity: BoardInfoEntity = try CoreDataManager
+                .sharedInstance.create()
+            CoreDataManager.sharedInstance.delete(entity)
+        } catch {
+            XCTAssert(false)
+        }
     }
 
     func testCombination() {
@@ -34,34 +48,40 @@ class CoreDataManagerTestCase: XCTestCase {
         
         let title = "testTitle"
         
-        let createdEntity: BoardInfoEntity = CoreDataManager.sharedInstance.create()
-        createdEntity.title = title
+        do {
+            let createdEntity: BoardInfoEntity = try CoreDataManager
+                .sharedInstance.create()
+            createdEntity.title = title
+        } catch {
+            XCTAssert(false)
+        }
         
         let entityName = NSStringFromClass(BoardInfoEntity)
             .componentsSeparatedByString(".").last! as String
         let fetchRequest = NSFetchRequest(entityName: entityName)
-        let readEntities: [BoardInfoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
-        XCTAssertNotNil(readEntities)
-        XCTAssertEqual(readEntities!.count, 1)
-        XCTAssertEqual(readEntities!.first!.title, title)
+        do {
+            let readEntities: [BoardInfoEntity]? = try CoreDataManager
+                .sharedInstance.read(fetchRequest)
+            XCTAssertNotNil(readEntities)
+            XCTAssertEqual(readEntities!.count, 1)
+            XCTAssertEqual(readEntities!.first!.title, title)
+            CoreDataManager.sharedInstance.delete(readEntities!.first!)
+        } catch {
+            XCTAssert(false)
+        }
         
-        CoreDataManager.sharedInstance.delete(readEntities!.first!)
-        
-        let reloadedEntities: [BoardInfoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
-        XCTAssert( reloadedEntities == nil || reloadedEntities?.count == 0 )
+        do {
+            let reloadedEntities: [BoardInfoEntity]? = try CoreDataManager
+                .sharedInstance.read(fetchRequest)
+            XCTAssert( reloadedEntities == nil || reloadedEntities?.count == 0 )
+        } catch {
+            XCTAssert(false)
+        }
     }
     
     
     func deleteAll() {
-        let entityName = NSStringFromClass(BoardInfoEntity)
-            .componentsSeparatedByString(".").last! as String
-        let fetchRequest = NSFetchRequest(entityName: entityName)
-        let readEntities: [BoardInfoEntity]? = CoreDataManager.sharedInstance.read(fetchRequest)
-        if let readEntities = readEntities {
-            for entity in readEntities {
-                CoreDataManager.sharedInstance.delete(entity)
-            }
-        }
+        DataStoreUtil().deleteAllEntities()
     }
 
 }

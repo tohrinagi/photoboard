@@ -14,7 +14,6 @@ class BoardInfo: NSObject {
     private(set) var updatedAt: NSDate
     private(set) var createdAt: NSDate
     private(set) var row: Int
-    private(set) var headerPhoto: Int = 0//TODO
     var id: String
     
     init( id: String, title: String, row: Int, createdAt: NSDate, updatedAt: NSDate) {

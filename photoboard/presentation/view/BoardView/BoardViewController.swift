@@ -47,11 +47,6 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
         //presenter.eventHandler = nil
     }
     
-    //TODO
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //NSLog(segue.debugDescription)
-    }
-    
     /**
      「Camera」ボタンをタッチした時の呼ばれる
      
