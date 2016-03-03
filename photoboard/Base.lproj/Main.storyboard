@@ -79,7 +79,7 @@
         <!--Board View Controller-->
         <scene sceneID="CnF-IZ-9cg">
             <objects>
-                <viewController storyboardIdentifier="board" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6KZ-WD-M2a" userLabel="Board View Controller" customClass="BoardViewController" customModule="photoboard" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="board" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6KZ-WD-M2a" userLabel="Board View Controller" customClass="BoardViewController" customModule="photoboard" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hiH-6O-f7S"/>
                         <viewControllerLayoutGuide type="bottom" id="rfJ-uC-Yg9"/>
@@ -88,36 +88,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MCO-k7-Vqp" userLabel="Input View">
-                                <rect key="frame" x="0.0" y="549" width="600" height="51"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUm-vU-mvg">
-                                        <rect key="frame" x="8" y="11" width="54" height="30"/>
-                                        <state key="normal" title="Camera"/>
-                                        <connections>
-                                            <action selector="cameraTouchUpInsideHandler:" destination="6KZ-WD-M2a" eventType="touchUpInside" id="ThY-bn-9Ao"/>
-                                        </connections>
-                                    </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J8f-vF-o8u">
-                                        <rect key="frame" x="103" y="11" width="430" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="J8f-vF-o8u" secondAttribute="bottom" constant="10" id="0Qq-5H-e1n"/>
-                                    <constraint firstItem="YUm-vU-mvg" firstAttribute="top" secondItem="MCO-k7-Vqp" secondAttribute="top" constant="11" id="1Fg-T6-hm3"/>
-                                    <constraint firstAttribute="trailing" secondItem="J8f-vF-o8u" secondAttribute="trailing" constant="67" id="KiR-ap-uvb"/>
-                                    <constraint firstItem="J8f-vF-o8u" firstAttribute="top" secondItem="MCO-k7-Vqp" secondAttribute="top" constant="11" id="gki-4E-sNF"/>
-                                    <constraint firstAttribute="height" constant="51" id="iRX-iw-BL4"/>
-                                    <constraint firstItem="J8f-vF-o8u" firstAttribute="leading" secondItem="MCO-k7-Vqp" secondAttribute="leading" constant="103" id="q7x-sV-RIH"/>
-                                    <constraint firstItem="YUm-vU-mvg" firstAttribute="leading" secondItem="MCO-k7-Vqp" secondAttribute="leading" constant="8" id="utD-Al-3sY"/>
-                                    <constraint firstAttribute="bottom" secondItem="YUm-vU-mvg" secondAttribute="bottom" constant="10" id="vbc-FE-0Mu"/>
-                                </constraints>
-                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="10" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="thq-Z3-R9f" customClass="BoardCollectionView" customModule="photoboard">
-                                <rect key="frame" x="0.0" y="64" width="600" height="484"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                                 <color key="backgroundColor" red="0.0" green="0.14250775490000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewLayout key="collectionViewLayout" id="ffT-8W-FoY" customClass="BoardCollectionViewLayout" customModule="photoboard"/>
                                 <cells>
@@ -152,17 +124,46 @@
                                     <outlet property="delegate" destination="6KZ-WD-M2a" id="E6Z-Xb-9hg"/>
                                 </connections>
                             </collectionView>
+                            <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="1HD-t7-IqG">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="bJL-bD-FtB"/>
+                                </constraints>
+                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                <items>
+                                    <barButtonItem systemItem="flexibleSpace" id="dJP-kR-0tW"/>
+                                    <barButtonItem image="camera.png" id="2cX-WU-rHs" userLabel="Camera">
+                                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                        <connections>
+                                            <action selector="cameraTouchUpInsideHandler:" destination="6KZ-WD-M2a" id="Ffg-H3-9Hn"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="iiH-mF-7el"/>
+                                    <barButtonItem image="photo.png" id="7kf-7k-oZw" userLabel="Photo">
+                                        <connections>
+                                            <action selector="photoTouchUpInsideHandler:" destination="6KZ-WD-M2a" id="IyC-1u-Igv"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="L90-72-aOW"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.14250775490000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="MCO-k7-Vqp" secondAttribute="trailing" id="4Jl-zK-bD3"/>
-                            <constraint firstItem="rfJ-uC-Yg9" firstAttribute="top" secondItem="MCO-k7-Vqp" secondAttribute="bottom" id="EuV-TA-5YV"/>
-                            <constraint firstItem="MCO-k7-Vqp" firstAttribute="top" secondItem="thq-Z3-R9f" secondAttribute="bottom" constant="1" id="OI3-8W-pQb"/>
-                            <constraint firstItem="MCO-k7-Vqp" firstAttribute="leading" secondItem="9wu-z9-VXe" secondAttribute="leading" id="XIM-F0-5YN"/>
+                            <constraint firstItem="1HD-t7-IqG" firstAttribute="leading" secondItem="9wu-z9-VXe" secondAttribute="leading" id="06o-ei-zX4"/>
+                            <constraint firstItem="1HD-t7-IqG" firstAttribute="top" secondItem="thq-Z3-R9f" secondAttribute="bottom" id="EuA-fb-tTg"/>
+                            <constraint firstItem="rfJ-uC-Yg9" firstAttribute="top" secondItem="thq-Z3-R9f" secondAttribute="bottom" id="Rwa-oa-mp6"/>
+                            <constraint firstItem="rfJ-uC-Yg9" firstAttribute="top" secondItem="1HD-t7-IqG" secondAttribute="bottom" id="dJV-5X-Zo5"/>
                             <constraint firstItem="thq-Z3-R9f" firstAttribute="top" secondItem="hiH-6O-f7S" secondAttribute="bottom" id="eLH-hf-oWp"/>
+                            <constraint firstAttribute="trailing" secondItem="1HD-t7-IqG" secondAttribute="trailing" id="hKQ-rK-XJb"/>
                             <constraint firstAttribute="trailing" secondItem="thq-Z3-R9f" secondAttribute="trailing" id="hRc-Xn-sDV"/>
                             <constraint firstItem="thq-Z3-R9f" firstAttribute="leading" secondItem="9wu-z9-VXe" secondAttribute="leading" id="oUY-lw-Fp4"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Rwa-oa-mp6"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Board Controller" id="qcK-6S-o6f" userLabel="Board Navigation Controller">
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="RWN-Fn-n2y"/>
@@ -194,4 +195,8 @@
             <point key="canvasLocation" x="324" y="1048"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera.png" width="20" height="20"/>
+        <image name="photo.png" width="20" height="20"/>
+    </resources>
 </document>

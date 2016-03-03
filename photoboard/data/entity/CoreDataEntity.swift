@@ -21,6 +21,14 @@ class CoreDataEntity: NSManagedObject {
         }
     }
     
+    override func awakeFromInsert() {
+        updatePrevioudId()
+    }
+    
+    override func awakeFromFetch() {
+        updatePrevioudId()
+    }
+    
     /**
      IDの更新処理
      */

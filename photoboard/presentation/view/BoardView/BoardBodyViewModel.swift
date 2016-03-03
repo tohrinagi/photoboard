@@ -107,7 +107,14 @@ class BoardBodyViewModel {
         let options = PHFetchOptions()
         options.includeHiddenAssets = true
         NSLog(photo.referenceURL.absoluteString)
-        let fetchResult = PHAsset.fetchAssetsWithALAssetURLs([photo.referenceURL], options: options)
+        
+        
+        let fetchResult = photo.referenceURL.absoluteString.hasPrefix("assets-library") ?
+            PHAsset.fetchAssetsWithALAssetURLs([photo.referenceURL], options: options)
+        : PHAsset.fetchAssetsWithLocalIdentifiers(
+            [photo.referenceURL.absoluteString], options: options)
+        
+        //TODO ない
         let asset = fetchResult.firstObject as! PHAsset
      
         PHImageManager().requestImageForAsset(asset,

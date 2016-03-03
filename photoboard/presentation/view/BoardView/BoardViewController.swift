@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AssetsLibrary
+import Photos
 
 class BoardViewController: UIViewController, UINavigationControllerDelegate {
     
@@ -53,11 +55,26 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
      - parameter sender:
      */
     @IBAction func cameraTouchUpInsideHandler(sender: AnyObject) {
-        guard !CameraControllerFactory.isAvailable() else {
+        guard !CameraControllerFactory.isAvailable(.Camera) else {
             return
         }
         
-        let cameraController = CameraControllerFactory.Generate()
+        let cameraController = CameraControllerFactory.Generate(.Camera)
+        cameraController.delegate = self
+        // 撮影画面をモーダルビューとして表示する
+        self.presentViewController(cameraController, animated: true, completion: nil)
+    }
+    /**
+     「Photo」ボタンをタッチした時に呼ばれる
+     
+     - parameter sender:
+     */
+    @IBAction func photoTouchUpInsideHandler(sender: AnyObject) {
+        guard !CameraControllerFactory.isAvailable(.PhotoLibrary) else {
+            return
+        }
+        
+        let cameraController = CameraControllerFactory.Generate(.PhotoLibrary)
         cameraController.delegate = self
         // 撮影画面をモーダルビューとして表示する
         self.presentViewController(cameraController, animated: true, completion: nil)
@@ -78,9 +95,26 @@ extension BoardViewController : UIImagePickerControllerDelegate {
         self.dismissViewControllerAnimated(true, completion: nil)
         // 画像があったらBoardScrollViewに追加
         if let url = info[UIImagePickerControllerReferenceURL] as? NSURL {
+            //PhotoLibrary
             presenter.addPhoto(boardBody!,
                 referenceUrl: url.absoluteString,
                 section: 0, row: bodyViewModel!.numberOfItems(0))
+        } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            //Camera
+            var localIdentifier: String? = nil
+            PHPhotoLibrary.sharedPhotoLibrary().performChanges({ () -> Void in
+                let changeRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(image)
+                localIdentifier = changeRequest.placeholderForCreatedAsset?.localIdentifier
+                }, completionHandler: { (success, error) -> Void in
+                    if success {
+                        if let localIdentifier = localIdentifier {
+                            NSLog("PHPhotoLib" + localIdentifier)
+                            self.presenter.addPhoto(self.boardBody!,
+                                referenceUrl: localIdentifier,
+                                section: 0, row: self.bodyViewModel!.numberOfItems(0))
+                        }
+                    }
+            })
         }
     }
     
@@ -92,7 +126,6 @@ extension BoardViewController : UIImagePickerControllerDelegate {
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         // モーダルビューを閉じる
         self.dismissViewControllerAnimated(true, completion: nil)
-        //TODO キャンセルされたときの処理を記述・・・
     }
 }
 

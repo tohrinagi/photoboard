@@ -13,10 +13,12 @@ class CameraControllerFactory {
     /**
     カメラが使用可能が調べる
     
+    - parameter sourceType: ソースタイプ
+
     - returns: trueで使用可能、falseで不可
     */
-    class func isAvailable() -> Bool {
-        if !UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+    class func isAvailable(sourceType: UIImagePickerControllerSourceType) -> Bool {
+        if !UIImagePickerController.isSourceTypeAvailable(sourceType) {
             return true
         }
         return false
@@ -25,14 +27,16 @@ class CameraControllerFactory {
     /**
      UiImagePickerController を設定して返す
      
+     - parameter sourceType: ソースタイプ
+     
      - returns: UIImagePickerController
      */
-    class func Generate() -> UIImagePickerController {
+    class func Generate(sourceType: UIImagePickerControllerSourceType) -> UIImagePickerController {
         // UIImagePickerControllerのインスタンスを生成
         let imagePickerController = UIImagePickerController()
         
         // 画像の取得先をカメラに設定
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePickerController.sourceType = sourceType
         
         // 画像取得後に編集するかどうか（デフォルトはNO）
         imagePickerController.allowsEditing = false
