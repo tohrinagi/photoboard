@@ -16,7 +16,7 @@ class BoardInfoTestCase: XCTestCase {
 
     func testParams() {
         let date = info.updatedAt
-        info.updated()
+        info.updated(NSDate())
         XCTAssertGreaterThan(info.updatedAt.timeIntervalSince1970, date.timeIntervalSince1970)
         
         info.renameTitle("renamedTitle")

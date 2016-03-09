@@ -50,21 +50,20 @@ class HomeViewController: UIViewController {
      - parameter sender: sender
      */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "HomeToBoard" {
-            let info = sender as! BoardInfo
-            let nextViewController = segue.destinationViewController as! BoardViewController
-            nextViewController.setup( info )
+        switch segue.identifier! {
+        case "HomeToBoard":
+            if let info = sender as? BoardInfo {
+                let nextViewController = segue.destinationViewController as! BoardViewController
+                nextViewController.setup( info )
+            }
+        case "HomeToInfoBoard":
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let nextViewController = navigationController.topViewController
+                as! InfoBoardViewController
+            nextViewController.delegate = self
+        default :
+            break
         }
-    }
-    
-    /**
-     追加ボタン時のアクション
-     
-     - parameter sender: sender
-     */
-    @IBAction func addButtonAction(sender: AnyObject) {
-        //モデルを作成する
-        self.presenter.createNewBoard()
     }
 }
 
@@ -161,5 +160,16 @@ extension HomeViewController : HomePresenterEventHandler {
     func OnCreatedNewBoard(board: BoardInfo) {
         //新規作成終わったら移動
         self.performSegueWithIdentifier("HomeToBoard", sender: board)
+    }
+}
+
+extension HomeViewController : InfoBoardViewControllerDelegate {
+    func OnCancelAction() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func OnSaveAction(title: String, date: NSDate) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        self.presenter.createNewBoard(title, date: date)
     }
 }

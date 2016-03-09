@@ -34,6 +34,7 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
      */
     func setup( boardInfo: BoardInfo) {
         NSLog("setupForNew:"+boardInfo.title)
+        self.navigationItem.title = boardInfo.title
         presenter.eventHandler = self
         presenter.loadBoardBody(boardInfo)
     }

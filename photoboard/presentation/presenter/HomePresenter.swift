@@ -29,13 +29,13 @@ class HomePresenter {
             self.eventHandler?.OnLoadedBoards(task.boardInfoList)
         }
     }
-    
-    /**
-     新しいボードを作成する
-     */
-    func createNewBoard() {
+
+    func createNewBoard(title: String, date: NSDate) {
         let task = CreateNewBoardUseCase()
         TaskManager.startBackground(task) { (task) -> Void in
+            task.boardBody!.info.renameTitle(title)
+            task.boardBody!.info.updated(date)
+            //TODO save info
             self.eventHandler?.OnCreatedNewBoard(task.boardBody!.info)
         }
     }

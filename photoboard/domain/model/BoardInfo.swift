@@ -25,8 +25,8 @@ class BoardInfo: NSObject {
         super.init()
     }
     
-    func updated() {
-        updatedAt = NSDate()
+    func updated( date: NSDate ) {
+        updatedAt = date
     }
     
     func renameTitle( title: String ) {

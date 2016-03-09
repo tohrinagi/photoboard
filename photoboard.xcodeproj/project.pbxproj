@@ -59,6 +59,8 @@
 		E492FE661C3C1A7300BA9784 /* DraggableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E492FE651C3C1A7300BA9784 /* DraggableCollectionView.swift */; };
 		E4B64FD41C5F9E2C0091D9DC /* BoardInfoDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B64FD31C5F9E2C0091D9DC /* BoardInfoDataStore.swift */; };
 		E4B64FD81C5FA1300091D9DC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B64FD71C5FA1300091D9DC /* CoreDataManager.swift */; };
+		E4E0FE0C1C8C8B9200CD7E0D /* InfoBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E0FE0B1C8C8B9200CD7E0D /* InfoBoardViewController.swift */; };
+		E4E0FE0F1C9060B200CD7E0D /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E0FE0E1C9060B200CD7E0D /* DatePickerViewController.swift */; };
 		E4F1F48B1C678D1F006A06EF /* BoardInfoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4851C678D1F006A06EF /* BoardInfoEntity+CoreDataProperties.swift */; };
 		E4F1F48C1C678D1F006A06EF /* BoardInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4861C678D1F006A06EF /* BoardInfoEntity.swift */; };
 		E4F1F48D1C678D1F006A06EF /* BoardBodyEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F1F4871C678D1F006A06EF /* BoardBodyEntity+CoreDataProperties.swift */; };
@@ -152,6 +154,8 @@
 		E492FE651C3C1A7300BA9784 /* DraggableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableCollectionView.swift; sourceTree = "<group>"; };
 		E4B64FD31C5F9E2C0091D9DC /* BoardInfoDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoDataStore.swift; sourceTree = "<group>"; };
 		E4B64FD71C5FA1300091D9DC /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		E4E0FE0B1C8C8B9200CD7E0D /* InfoBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoBoardViewController.swift; sourceTree = "<group>"; };
+		E4E0FE0E1C9060B200CD7E0D /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		E4F1F4851C678D1F006A06EF /* BoardInfoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BoardInfoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E4F1F4861C678D1F006A06EF /* BoardInfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardInfoEntity.swift; sourceTree = "<group>"; };
 		E4F1F4871C678D1F006A06EF /* BoardBodyEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BoardBodyEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -280,6 +284,8 @@
 		E46D4DD41C37F93600A8E12A /* view */ = {
 			isa = PBXGroup;
 			children = (
+				E4E0FE0D1C90608D00CD7E0D /* DatePickerView */,
+				E4E0FE0A1C8C88C400CD7E0D /* InfoBoardView */,
 				E424B0B81C5C65CA00F47235 /* HomeView */,
 				E424B0B71C5C65C100F47235 /* BoardView */,
 				E400E37F1C435FD20042A08F /* DraggableCollectionView */,
@@ -390,6 +396,22 @@
 				E475EB4D1C74C118005E3F7A /* CoreDataStore.swift */,
 			);
 			path = dataStore;
+			sourceTree = "<group>";
+		};
+		E4E0FE0A1C8C88C400CD7E0D /* InfoBoardView */ = {
+			isa = PBXGroup;
+			children = (
+				E4E0FE0B1C8C8B9200CD7E0D /* InfoBoardViewController.swift */,
+			);
+			path = InfoBoardView;
+			sourceTree = "<group>";
+		};
+		E4E0FE0D1C90608D00CD7E0D /* DatePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				E4E0FE0E1C9060B200CD7E0D /* DatePickerViewController.swift */,
+			);
+			path = DatePickerView;
 			sourceTree = "<group>";
 		};
 		E4F1F4911C6A1653006A06EF /* data */ = {
@@ -710,6 +732,7 @@
 				E48BB2731C39444800CE518A /* BoardCollectionViewCell.swift in Sources */,
 				E48176001C64F4090005AF19 /* TaskManager.swift in Sources */,
 				E4F1F48F1C678D1F006A06EF /* BoardPhotoEntity+CoreDataProperties.swift in Sources */,
+				E4E0FE0F1C9060B200CD7E0D /* DatePickerViewController.swift in Sources */,
 				E4F1F4901C678D1F006A06EF /* BoardPhotoEntity.swift in Sources */,
 				E48FA0371C5D20FD00C88CB2 /* BoadPhoto.swift in Sources */,
 				E424B0BC1C5C6B8900F47235 /* HomeCollectionViewCell.swift in Sources */,
@@ -724,6 +747,7 @@
 				E4B64FD81C5FA1300091D9DC /* CoreDataManager.swift in Sources */,
 				E492FE661C3C1A7300BA9784 /* DraggableCollectionView.swift in Sources */,
 				E45B9B3A1C6C8D2700299141 /* CreateNewBoardUseCase.swift in Sources */,
+				E4E0FE0C1C8C8B9200CD7E0D /* InfoBoardViewController.swift in Sources */,
 				E46D4DCD1C37EA9000A8E12A /* CameraControllerFactory.swift in Sources */,
 				E48FA0331C5D208C00C88CB2 /* BoardInfo.swift in Sources */,
 				E475EB461C708A1C005E3F7A /* BoardBodyDataStore.swift in Sources */,

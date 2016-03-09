@@ -54,7 +54,7 @@ class BoardInfoMapperTestCase: XCTestCase {
         let model = mapper.ToModel(boardInfoEntity)
         
         model.renameTitle("BoardInfoMapperTestToEntity")
-        model.updated()
+        model.updated(NSDate())
         mapper.ToEntity(boardInfoEntity, model: model)
         
         XCTAssertEqual(boardInfoEntity.title, model.title)
