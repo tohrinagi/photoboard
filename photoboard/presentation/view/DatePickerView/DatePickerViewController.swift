@@ -11,12 +11,14 @@ import UIKit
 
 protocol DatePickerViewControllerDelegate {
     func OnDoneAction( date: NSDate )
+    func OnCancelAction( date: NSDate )
     func OnValueChanged( date: NSDate )
 }
 
 class DatePickerViewController: UIViewController {
     @IBOutlet private weak var datePicker: UIDatePicker!
     var delegate: DatePickerViewControllerDelegate? = nil
+    private var prevDate = NSDate()
     
     class func Create( storyboard: UIStoryboard ) -> DatePickerViewController {
         return storyboard.instantiateViewControllerWithIdentifier(
@@ -24,7 +26,11 @@ class DatePickerViewController: UIViewController {
     }
     
     func setDate( date: NSDate ) {
-        datePicker.setDate(date, animated: false)
+        prevDate = date
+    }
+    
+    override func viewDidLoad() {
+        datePicker.setDate(prevDate, animated: false)
     }
     
     @IBAction private func OnTodayAction(sender: AnyObject) {
@@ -34,6 +40,9 @@ class DatePickerViewController: UIViewController {
     
     @IBAction private func OnDoneAction(sender: AnyObject) {
         delegate?.OnDoneAction(datePicker.date)
+    }
+    @IBAction func OnCancelAction(sender: AnyObject) {
+        delegate?.OnCancelAction(prevDate)
     }
     
     @IBAction private func OnPickerValueChanged(sender: AnyObject) {

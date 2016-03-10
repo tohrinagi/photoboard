@@ -35,6 +35,7 @@ class BoardBodyDataRepository: BoardBodyRepository {
      */
     func create(boardInfo: BoardInfo, completion: (BoardBody) -> Void) {
         infoStore.search(boardInfo.id) { (infoEntity) -> Void in
+            self.infoMapper.ToEntity(infoEntity, model: boardInfo)
             self.bodyStore.create(infoEntity, completion: { (bodyEntity) -> Void in
                 self.boardBody = self.bodyMapper.ToModel(
                     infoEntity, bodyEntity: bodyEntity, photoEntities: [])

@@ -17,7 +17,7 @@ protocol InfoBoardViewControllerDelegate {
 class InfoBoardViewController: UITableViewController {
     var delegate: InfoBoardViewControllerDelegate? = nil
     
-    private var boardInfo: BoardInfo?
+    private var date = NSDate()
     @IBOutlet private weak var titleTextField: UITextField!
     @IBOutlet private weak var dateTextField: UITextField!
     @IBOutlet private weak var saveButton: UIBarButtonItem!
@@ -25,19 +25,25 @@ class InfoBoardViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         saveButton.enabled = false
+        updateDateString()
+        self.navigationItem.title = "New Board"
     }
     
-    func setBoardInfo( info: BoardInfo ) {
-        
-        self.boardInfo = info
-        if info.title.isEmpty {
-            self.navigationItem.title = "New Board"
-            self.titleTextField.text = String()
-        } else {
-            self.navigationItem.title = info.title
-            self.titleTextField.text = info.title
-        }
-        //TODO self.dateTextField.text = info.createdAt.
+    func setTitleString( title: String ) {
+        self.navigationItem.title = title
+        self.titleTextField.text = title
+    }
+    
+    func setDate( date: NSDate ) {
+        self.date = date
+        updateDateString()
+    }
+    
+    private func updateDateString() {
+        let formatter = NSDateFormatter()
+        formatter.locale = NSLocale(localeIdentifier: "ja_JP")
+        formatter.dateStyle = .LongStyle
+        dateTextField.text = formatter.stringFromDate(date)
     }
     
     @IBAction private func OnCancelAction(sender: AnyObject) {
@@ -46,9 +52,7 @@ class InfoBoardViewController: UITableViewController {
     
     @IBAction private func OnSaveAction(sender: AnyObject) {
         if let titleText = titleTextField.text {
-            if let dateText = dateTextField.text {
-                delegate?.OnSaveAction( titleText, date: NSDate())
-            }
+            delegate?.OnSaveAction( titleText, date: date)
         }
     }
 
@@ -66,9 +70,8 @@ extension InfoBoardViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
         let controller = DatePickerViewController.Create(self.storyboard!)
-        
         controller.delegate = self
-        // 撮影画面をモーダルビューとして表示する
+        controller.setDate(date)
         self.presentViewController(controller, animated: true, completion: nil)
         return false
     }
@@ -76,17 +79,19 @@ extension InfoBoardViewController: UITextFieldDelegate {
 
 extension InfoBoardViewController: DatePickerViewControllerDelegate {
     func OnDoneAction(date: NSDate) {
-        dateTextField.text = dateToString(date)
+        self.date = date
+        updateDateString()
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func OnCancelAction(date: NSDate) {
+        self.date = date
+        updateDateString()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func OnValueChanged(date: NSDate) {
-        dateTextField.text = dateToString(date)
-    }
-    
-    private func dateToString(date: NSDate) -> String {
-        let formatter = NSDateFormatter()
-        formatter.setLocalizedDateFormatFromTemplate("yyyy年 MM月 dd日")
-        return formatter.stringFromDate(date)
+        self.date = date
+        updateDateString()
     }
 }

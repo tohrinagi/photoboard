@@ -33,7 +33,7 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
      - parameter boardInfo: 読み込むinfo
      */
     func setup( boardInfo: BoardInfo) {
-        NSLog("setupForNew:"+boardInfo.title)
+        NSLog("setup:"+boardInfo.title)
         self.navigationItem.title = boardInfo.title
         presenter.eventHandler = self
         presenter.loadBoardBody(boardInfo)

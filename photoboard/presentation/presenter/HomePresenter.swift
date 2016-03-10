@@ -31,11 +31,8 @@ class HomePresenter {
     }
 
     func createNewBoard(title: String, date: NSDate) {
-        let task = CreateNewBoardUseCase()
+        let task = CreateNewBoardUseCase(title: title, date: date)
         TaskManager.startBackground(task) { (task) -> Void in
-            task.boardBody!.info.renameTitle(title)
-            task.boardBody!.info.updated(date)
-            //TODO save info
             self.eventHandler?.OnCreatedNewBoard(task.boardBody!.info)
         }
     }

@@ -135,7 +135,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IkU-1v-BET">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IkU-1v-BET">
                                                     <rect key="frame" x="20" y="0.0" width="55" height="43"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="55" id="Wxa-fa-7nO"/>
@@ -144,7 +144,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2016/3/1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PIL-Pg-CgG">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2016/3/1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PIL-Pg-CgG">
                                                     <rect key="frame" x="80" y="0.0" width="480" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -225,6 +225,11 @@
                                     <constraint firstAttribute="height" constant="44" id="fSt-cj-xvo"/>
                                 </constraints>
                                 <items>
+                                    <barButtonItem systemItem="cancel" id="My2-Ie-bNd">
+                                        <connections>
+                                            <action selector="OnCancelAction:" destination="OhW-qy-HBH" id="yof-lD-lQ5"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title="Tody" id="js3-td-Hud">
                                         <connections>
                                             <action selector="OnTodayAction:" destination="OhW-qy-HBH" id="RlP-FX-U5j"/>
