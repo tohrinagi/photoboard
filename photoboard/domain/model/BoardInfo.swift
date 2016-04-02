@@ -10,15 +10,17 @@ import Foundation
 
 /// ボードの付加情報
 class BoardInfo: NSObject {
-    private(set) var title: String
+    private(set) var title: String?
     private(set) var updatedAt: NSDate
     private(set) var createdAt: NSDate
     private(set) var row: Int
+    var headerPath: String?
     var id: String
     
-    init( id: String, title: String, row: Int, createdAt: NSDate, updatedAt: NSDate) {
+    init( id: String, title: String?, headerPath: String?, row: Int, createdAt: NSDate, updatedAt: NSDate) {
         self.id = id
         self.title = title
+        self.headerPath = headerPath
         self.row = row
         self.updatedAt = updatedAt
         self.createdAt = createdAt
@@ -31,5 +33,12 @@ class BoardInfo: NSObject {
     
     func renameTitle( title: String ) {
         self.title = title
+    }
+
+    func updatedString() -> String {
+        let formatter = NSDateFormatter()
+        formatter.locale = NSLocale(localeIdentifier: "ja_JP")
+        formatter.dateStyle = .LongStyle
+        return formatter.stringFromDate(updatedAt)
     }
 }

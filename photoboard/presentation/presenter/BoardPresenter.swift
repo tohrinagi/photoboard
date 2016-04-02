@@ -41,4 +41,12 @@ class BoardPresenter {
             self.eventHandler?.OnMovePhoto(from, to: to)
         }
     }
+
+    func setHeaderPhoto( boardBody: BoardBody, referenceUrl: String ) {
+        boardBody.info.headerPath = referenceUrl
+        let task = UpdateBoardBodyUseCase(boardBody: boardBody)
+        TaskManager.startBackground(task) { (task) in
+            //通知しない
+        }
+    }
 }

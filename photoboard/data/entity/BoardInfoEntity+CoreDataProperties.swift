@@ -15,6 +15,7 @@ import CoreData
 extension BoardInfoEntity {
 
     @NSManaged var createdAt: NSDate?
+    @NSManaged var headerPath: String?
     @NSManaged var row: NSNumber?
     @NSManaged var title: String?
     @NSManaged var updatedAt: NSDate?

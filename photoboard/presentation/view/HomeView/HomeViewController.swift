@@ -11,8 +11,7 @@ import UIKit
 /// 開始画面管理コントローラ
 class HomeViewController: UIViewController {
     private var presenter = PresenterContainer.sharedInstance.homePresenter
-    private var images: [UIImage] = []
-    private var boardInfoList = [BoardInfo]()
+    private var homeViewModel: HomeViewModel? = nil
     
     @IBOutlet weak private var homeCollectionView: HomeCollectionView!
     
@@ -82,7 +81,10 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
         let cell = homeCollectionView.dequeueReusableCellWithReuseIdentifier(
             "HomeCell", forIndexPath: indexPath) as! HomeCollectionViewCell
         
-        cell.imageView.image = images[indexPath.row]
+        //TODO ViewModelにする
+        cell.imageView.image = homeViewModel?.photo(indexPath)
+        cell.dateLabel.text = homeViewModel?.boardInfoList[indexPath.row].updatedString()
+        cell.titleLabel.text = homeViewModel?.boardInfoList[indexPath.row].title
         return cell
     }
     
@@ -96,7 +98,7 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
      */
     func collectionView(collectionView: UICollectionView,
         numberOfItemsInSection section: Int) -> Int {
-        return boardInfoList.count
+        return homeViewModel?.numberOfItems( section ) ?? 0
     }
     
     /**
@@ -111,10 +113,7 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
         toIndexPath destinationIndexPath: NSIndexPath) {
     
         //TODO モデルに入れ替え通知
-        let sourceImage = images.removeAtIndex(sourceIndexPath.row)
-        images.insert(sourceImage, atIndex: destinationIndexPath.row)
-        //swiftlint:disable:next line_length
-        print("srcSec:\(sourceIndexPath.section) srcRow:\(sourceIndexPath.row) -> dstSec:\(destinationIndexPath.section) dstRow:\(destinationIndexPath.row)")
+        homeViewModel?.movePhoto(sourceIndexPath, to: destinationIndexPath)
     }
     
     /**
@@ -136,7 +135,7 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
         collectionView: UICollectionView,
         didSelectItemAtIndexPath indexPath: NSIndexPath) {
         NSLog("selected Sec:\(indexPath.section) Row:\(indexPath.row)")
-        let board = boardInfoList[indexPath.row]
+        let board = homeViewModel?.boardInfoList[indexPath.row]
         self.performSegueWithIdentifier("HomeToBoard", sender: board)
     }
 }
@@ -144,17 +143,12 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
 extension HomeViewController : HomePresenterEventHandler {
     
     func OnLoadedBoards(boardInfoList: [BoardInfo]) {
-        //TODO
-        images = []
-        for _ in boardInfoList {
-            //let image = UIImage(named: item.)
-            if let image = UIImage(named: "cat.jpg") {
-                images.append(image)
-            }
+        homeViewModel = HomeViewModel(infoList: boardInfoList)
+        
+        homeViewModel?.generateImageAll {
+            //self.boardCollectionView?.reloadData()
+            self.homeCollectionView.reloadData()
         }
-        self.boardInfoList = boardInfoList
-        self.homeCollectionView.reloadData()
-        NSLog("OnLoadedBoards:\(images.count)")
     }
     
     func OnCreatedNewBoard(board: BoardInfo) {

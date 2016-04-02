@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hNW-w4-iCB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hNW-w4-iCB">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Home View Controller-->
@@ -31,18 +32,48 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S1Z-u0-sbE">
                                                     <rect key="frame" x="0.0" y="0.0" width="596" height="100"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gu2-Vw-KDG">
+                                                    <rect key="frame" x="169" y="79" width="419" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="419" id="Rpu-BZ-Twj"/>
+                                                        <constraint firstAttribute="height" constant="21" id="XdB-KB-cTl"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <size key="shadowOffset" width="1" height="1"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfL-n9-9sq">
+                                                    <rect key="frame" x="85" y="53" width="503" height="33"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="33" id="Lvg-sg-g5e"/>
+                                                        <constraint firstAttribute="width" constant="503" id="lym-6w-LdL"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <size key="shadowOffset" width="1" height="1"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="S1Z-u0-sbE" firstAttribute="leading" secondItem="SV1-gy-ffp" secondAttribute="leading" id="FZw-jj-hx8"/>
                                             <constraint firstAttribute="trailing" secondItem="S1Z-u0-sbE" secondAttribute="trailing" id="JOc-I0-Nfs"/>
+                                            <constraint firstItem="jfL-n9-9sq" firstAttribute="trailing" secondItem="SV1-gy-ffp" secondAttribute="trailingMargin" id="ZIv-u2-1M1"/>
                                             <constraint firstAttribute="bottom" secondItem="S1Z-u0-sbE" secondAttribute="bottom" id="aNj-nc-fwh"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="jfL-n9-9sq" secondAttribute="bottom" constant="6" id="bI8-ka-h1C"/>
+                                            <constraint firstItem="gu2-Vw-KDG" firstAttribute="trailing" secondItem="SV1-gy-ffp" secondAttribute="trailingMargin" id="c2h-rQ-MdE"/>
                                             <constraint firstItem="S1Z-u0-sbE" firstAttribute="top" secondItem="SV1-gy-ffp" secondAttribute="top" id="i04-rn-TqX"/>
+                                            <constraint firstItem="gu2-Vw-KDG" firstAttribute="bottom" secondItem="SV1-gy-ffp" secondAttribute="bottomMargin" constant="8" id="tRd-mY-Jgd"/>
                                         </constraints>
                                         <size key="customSize" width="596" height="100"/>
                                         <connections>
+                                            <outlet property="dateLabel" destination="gu2-Vw-KDG" id="4VL-hQ-ksj"/>
                                             <outlet property="imageView" destination="S1Z-u0-sbE" id="57E-JX-pxF"/>
+                                            <outlet property="titleLabel" destination="jfL-n9-9sq" id="uO0-ub-D0D"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

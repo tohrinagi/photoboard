@@ -19,7 +19,8 @@ class BoardInfoMapper: NSObject {
      - returns: model
      */
     func ToModel( info: BoardInfoEntity ) -> BoardInfo {
-        return BoardInfo(id: info.id, title: info.title!, row: Int(info.row!),
+        return BoardInfo(id: info.id, title: info.title,
+            headerPath: info.headerPath, row: Int(info.row!),
             createdAt: info.createdAt!, updatedAt: info.updatedAt!)
     }
     
@@ -46,6 +47,7 @@ class BoardInfoMapper: NSObject {
      */
     func ToEntity( entity: BoardInfoEntity, model: BoardInfo ) {
         entity.createdAt = model.createdAt
+        entity.headerPath = model.headerPath
         entity.row = model.row
         entity.title = model.title
         entity.updatedAt = model.updatedAt

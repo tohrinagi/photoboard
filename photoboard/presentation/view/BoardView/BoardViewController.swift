@@ -33,7 +33,7 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
      - parameter boardInfo: 読み込むinfo
      */
     func setup( boardInfo: BoardInfo) {
-        NSLog("setup:"+boardInfo.title)
+        NSLog("setup:"+boardInfo.title!)
         self.navigationItem.title = boardInfo.title
         presenter.eventHandler = self
         presenter.loadBoardBody(boardInfo)
@@ -57,9 +57,10 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
      */
     @IBAction func cameraTouchUpInsideHandler(sender: AnyObject) {
         guard !CameraControllerFactory.isAvailable(.Camera) else {
+            self.boardCollectionView?.reloadData()
             return
         }
-        
+  
         let cameraController = CameraControllerFactory.Generate(.Camera)
         cameraController.delegate = self
         // 撮影画面をモーダルビューとして表示する
@@ -80,7 +81,6 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
         // 撮影画面をモーダルビューとして表示する
         self.presentViewController(cameraController, animated: true, completion: nil)
     }
-    
 }
 
 extension BoardViewController : UIImagePickerControllerDelegate {
@@ -100,6 +100,8 @@ extension BoardViewController : UIImagePickerControllerDelegate {
             presenter.addPhoto(boardBody!,
                 referenceUrl: url.absoluteString,
                 section: 0, row: bodyViewModel!.numberOfItems(0))
+            self.presenter.setHeaderPhoto(self.boardBody!,
+                                          referenceUrl: url.absoluteString)
         } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             //Camera
             var localIdentifier: String? = nil
@@ -113,6 +115,8 @@ extension BoardViewController : UIImagePickerControllerDelegate {
                             self.presenter.addPhoto(self.boardBody!,
                                 referenceUrl: localIdentifier,
                                 section: 0, row: self.bodyViewModel!.numberOfItems(0))
+                            self.presenter.setHeaderPhoto(self.boardBody!,
+                                referenceUrl: localIdentifier)
                         }
                     }
             })
