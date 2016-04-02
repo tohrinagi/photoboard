@@ -17,6 +17,7 @@ class BoardBodyTestCase: XCTestCase {
     
     override func setUp() {
         info = BoardInfo(id: "testInfo", title: "Title",
+            headerPath: nil,
             row: 0, createdAt: NSDate(), updatedAt: NSDate())
         body = BoardBody(id: "testBody", info: info, photos: [])
         let photo1 = BoardPhoto(id: "testPhoto1", photoPath: "Path1", section: 0, row: 0)
