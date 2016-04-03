@@ -30,8 +30,8 @@ class HomePresenter {
         }
     }
 
-    func createNewBoard(title: String, date: NSDate) {
-        let task = CreateNewBoardUseCase(title: title, date: date)
+    func createNewBoard(title: String, date: NSDate, row: Int) {
+        let task = CreateNewBoardUseCase(title: title, date: date, row: row)
         TaskManager.startBackground(task) { (task) -> Void in
             self.eventHandler?.OnCreatedNewBoard(task.boardBody!.info)
         }

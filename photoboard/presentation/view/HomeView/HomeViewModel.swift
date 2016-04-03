@@ -21,12 +21,9 @@ class HomeViewModel {
     
     /**
      セクションのアイテム数を返す
-     
-     - parameter section: どのセクションか
-     
      - returns: アイテム数
      */
-    func numberOfItems( section: Int ) -> Int {
+    func numberOfItems() -> Int {
         return images.count
     }
     

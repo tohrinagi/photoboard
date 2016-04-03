@@ -98,7 +98,7 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
      */
     func collectionView(collectionView: UICollectionView,
         numberOfItemsInSection section: Int) -> Int {
-        return homeViewModel?.numberOfItems( section ) ?? 0
+        return homeViewModel?.numberOfItems() ?? 0
     }
     
     /**
@@ -164,6 +164,7 @@ extension HomeViewController : InfoBoardViewControllerDelegate {
     
     func OnSaveAction(title: String, date: NSDate) {
         self.dismissViewControllerAnimated(true, completion: nil)
-        self.presenter.createNewBoard(title, date: date)
+        let num = homeViewModel?.numberOfItems() ?? 0
+        self.presenter.createNewBoard(title, date: date, row: num)
     }
 }

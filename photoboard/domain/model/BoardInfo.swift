@@ -13,7 +13,7 @@ class BoardInfo: NSObject {
     private(set) var title: String?
     private(set) var updatedAt: NSDate
     private(set) var createdAt: NSDate
-    private(set) var row: Int
+    var row: Int
     var headerPath: String?
     var id: String
     
