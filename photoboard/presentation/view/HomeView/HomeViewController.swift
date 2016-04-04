@@ -81,10 +81,10 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
         let cell = homeCollectionView.dequeueReusableCellWithReuseIdentifier(
             "HomeCell", forIndexPath: indexPath) as! HomeCollectionViewCell
         
-        //TODO ViewModelにする
         cell.imageView.image = homeViewModel?.photo(indexPath)
-        cell.dateLabel.text = homeViewModel?.boardInfoList[indexPath.row].updatedString()
-        cell.titleLabel.text = homeViewModel?.boardInfoList[indexPath.row].title
+        cell.dateLabel.text = homeViewModel?.boardInfo(indexPath)?.updatedString()
+        cell.titleLabel.text = homeViewModel?.boardInfo(indexPath)?.title
+        print("[\(indexPath.row)]cell:" + cell.titleLabel.text!)
         return cell
     }
     
@@ -112,8 +112,9 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
         moveItemAtIndexPath sourceIndexPath: NSIndexPath,
         toIndexPath destinationIndexPath: NSIndexPath) {
     
-        //TODO モデルに入れ替え通知
         homeViewModel?.movePhoto(sourceIndexPath, to: destinationIndexPath)
+        presenter.updateBoardList(homeViewModel?.boardInfoList ?? [])
+        print("moveImteAtIndexPath")
     }
     
     /**
@@ -135,8 +136,9 @@ extension HomeViewController : DraggableCollectionDataSource, UICollectionViewDe
         collectionView: UICollectionView,
         didSelectItemAtIndexPath indexPath: NSIndexPath) {
         NSLog("selected Sec:\(indexPath.section) Row:\(indexPath.row)")
-        let board = homeViewModel?.boardInfoList[indexPath.row]
-        self.performSegueWithIdentifier("HomeToBoard", sender: board)
+        if let board = homeViewModel?.boardInfo(indexPath) {
+            self.performSegueWithIdentifier("HomeToBoard", sender: board)
+        }
     }
 }
 
@@ -146,7 +148,6 @@ extension HomeViewController : HomePresenterEventHandler {
         homeViewModel = HomeViewModel(infoList: boardInfoList)
         
         homeViewModel?.generateImageAll {
-            //self.boardCollectionView?.reloadData()
             self.homeCollectionView.reloadData()
         }
     }

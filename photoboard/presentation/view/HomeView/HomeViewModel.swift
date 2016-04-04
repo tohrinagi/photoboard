@@ -12,7 +12,7 @@ import Photos
 
 class HomeViewModel {
     private(set) var images: [UIImage]
-    private(set) var boardInfoList = [BoardInfo]()
+    private(set) var boardInfoList : [BoardInfo]
     
     init( infoList: [BoardInfo]) {
         self.boardInfoList = infoList
@@ -47,6 +47,29 @@ class HomeViewModel {
     func movePhoto(from: NSIndexPath, to: NSIndexPath) {
         let remove = images.removeAtIndex(from.row)
         images.insert(remove, atIndex: to.row)
+     
+        let formInfo = boardInfoList.removeAtIndex(from.row)
+        boardInfoList.insert(formInfo, atIndex: to.row)
+        
+        for (index, item) in boardInfoList.enumerate() {
+            item.row = index
+            print("move row:\(item.row) title\(item.title!)")
+        }
+    }
+    
+    /**
+     boardInfoを取得する
+     
+     - parameter indexPath: IndexPath
+     - returns: BoardInfo
+     */
+    func boardInfo(indexPath: NSIndexPath) -> BoardInfo? {
+        for item in boardInfoList {
+            if item.row == indexPath.row {
+                return item
+            }
+        }
+        return nil
     }
     
     /**

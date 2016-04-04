@@ -36,4 +36,10 @@ class HomePresenter {
             self.eventHandler?.OnCreatedNewBoard(task.boardBody!.info)
         }
     }
+    
+    func updateBoardList(boards: [BoardInfo]) {
+        let task = UpdateBoardInfoUseCase(boards: boards)
+        TaskManager.startBackground(task) { (task) -> Void in
+        }
+    }
 }
