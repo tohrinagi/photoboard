@@ -12,7 +12,7 @@ import XCTest
 class BoardInfoTestCase: XCTestCase {
     
     let info = BoardInfo(id: "testId",
-        title: "testTitle",headerPath: nil,  row: 1, createdAt: NSDate(), updatedAt: NSDate() )
+        title: "testTitle", headerPath: nil,  row: 1, createdAt: NSDate(), updatedAt: NSDate() )
 
     func testParams() {
         let date = info.updatedAt

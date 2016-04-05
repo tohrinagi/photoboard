@@ -71,12 +71,13 @@ class DraggableCollectionView: UICollectionView, UIGestureRecognizerDelegate {
      */
     private func setup() {
         longPressGestureRecognizer = UILongPressGestureRecognizer(
-            target: self, action:"updateLongPressGesture:")
+            target: self, action:#selector(DraggableCollectionView.updateLongPressGesture(_:)))
         longPressGestureRecognizer.delegate = self
         dragGestureRecognizer = UIPanGestureRecognizer(
-            target: self, action: "updatePanPressGesture:")
+            target: self, action: #selector(DraggableCollectionView.updatePanPressGesture(_:)))
         dragGestureRecognizer.delegate = self
-        scaleRecognizer = UIPinchGestureRecognizer(target: self, action: "updateScaleGesture:")
+        scaleRecognizer = UIPinchGestureRecognizer(
+            target: self, action: #selector(DraggableCollectionView.updateScaleGesture(_:)))
         scaleRecognizer.delegate = self
         
         self.addGestureRecognizer(longPressGestureRecognizer)
@@ -372,7 +373,7 @@ class DraggableCollectionView: UICollectionView, UIGestureRecognizerDelegate {
     private func setupScrollTimerInDirection(direction: ScrollDirection ) {
         scrollDirection = direction
         if timer == nil {
-            timer = CADisplayLink(target: self, selector: "moveScroll:")
+            timer = CADisplayLink(target: self, selector: #selector(DraggableCollectionView.moveScroll(_:)))
             timer?.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
         }
     }

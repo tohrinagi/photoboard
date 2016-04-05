@@ -17,7 +17,8 @@ class BoardInfo: NSObject {
     var headerPath: String?
     var id: String
     
-    init( id: String, title: String?, headerPath: String?, row: Int, createdAt: NSDate, updatedAt: NSDate) {
+    init( id: String, title: String?, headerPath: String?,
+          row: Int, createdAt: NSDate, updatedAt: NSDate) {
         self.id = id
         self.title = title
         self.headerPath = headerPath

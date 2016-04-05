@@ -61,7 +61,7 @@ class BoardCollectionViewLayout: UICollectionViewLayout {
             if numCell != 0 {
                 break
             }
-            sectionLength--
+            sectionLength -= 1
         }
         
         //一番長いROWに合わせる

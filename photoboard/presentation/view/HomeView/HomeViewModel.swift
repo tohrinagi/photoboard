@@ -12,7 +12,7 @@ import Photos
 
 class HomeViewModel {
     private(set) var images: [UIImage]
-    private(set) var boardInfoList : [BoardInfo]
+    private(set) var boardInfoList: [BoardInfo]
     
     init( infoList: [BoardInfo]) {
         self.boardInfoList = infoList
