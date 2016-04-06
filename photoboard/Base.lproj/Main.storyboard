@@ -383,7 +383,11 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Board Controller" id="qcK-6S-o6f" userLabel="Board Navigation Controller">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="RWN-Fn-n2y"/>
+                        <barButtonItem key="rightBarButtonItem" image="menu.png" id="RWN-Fn-n2y">
+                            <connections>
+                                <action selector="OnMenuAction:" destination="6KZ-WD-M2a" id="Wc4-68-tCv"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="boardCollectionView" destination="thq-Z3-R9f" id="W2Y-DO-ew6"/>
@@ -391,7 +395,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d2t-0M-S7T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1961" y="957"/>
+            <point key="canvasLocation" x="1868" y="956"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="F3U-pE-KHT">
@@ -432,6 +436,7 @@
     </scenes>
     <resources>
         <image name="camera.png" width="20" height="20"/>
+        <image name="menu.png" width="24" height="24"/>
         <image name="photo.png" width="20" height="20"/>
     </resources>
 </document>

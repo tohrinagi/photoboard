@@ -81,6 +81,8 @@ class BoardViewController: UIViewController, UINavigationControllerDelegate {
         // 撮影画面をモーダルビューとして表示する
         self.presentViewController(cameraController, animated: true, completion: nil)
     }
+    @IBAction func OnMenuAction(sender: AnyObject) {
+    }
 }
 
 extension BoardViewController : UIImagePickerControllerDelegate {
